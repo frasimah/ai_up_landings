@@ -3,12 +3,20 @@
 import { useState } from "react";
 import styles from "./CallCenterRoi.module.scss";
 
-// Section 09 — ROI-калькулятор. Ported from "Лендинг AI-UP.dc.html" §9 (renderVals).
-const ppi = (q: number) => (q < 6500 ? 75 : q < 14000 ? 71 : 66);
+// Section 09 — ROI-калькулятор.
+// Пакеты (финальные цены): 500 000 ₽ → 6 500 контактов (75 ₽/шт),
+// 1 000 000 ₽ → 14 000 (71 ₽/шт), 2 000 000 ₽ → 30 000 (66 ₽/шт).
+// Между пакетными точками цена за контакт интерполируется линейно и
+// округляется до рубля — в опорных точках даёт ровно 75/71/66.
+const ppi = (q: number) => {
+   if (q <= 6500) return 75;
+   if (q <= 14000) return Math.round(75 - ((q - 6500) / (14000 - 6500)) * 4);
+   return Math.round(71 - ((q - 14000) / (30000 - 14000)) * 5);
+};
 const fmt = (n: number) => Math.round(n).toLocaleString("ru-RU");
 
 function CallCenterRoi() {
-   const [contacts, setContacts] = useState(2000);
+   const [contacts, setContacts] = useState(6500);
    const [check, setCheck] = useState(60000);
    const [conv, setConv] = useState(6);
 
@@ -38,8 +46,8 @@ function CallCenterRoi() {
                         <span className={styles.label}>Контактов в месяц</span>
                         <span className={styles.value}>{contacts.toLocaleString("ru-RU")}</span>
                      </div>
-                     <input className={styles.range} type="range" min={100} max={30000} step={100} value={contacts} onChange={(e) => setContacts(+e.target.value)} />
-                     <div className={styles.ends}><span>100</span><span>30 000</span></div>
+                     <input className={styles.range} type="range" min={6500} max={30000} step={100} value={contacts} onChange={(e) => setContacts(+e.target.value)} />
+                     <div className={styles.ends}><span>6 500</span><span>30 000</span></div>
                   </div>
 
                   <div className={styles.control}>
