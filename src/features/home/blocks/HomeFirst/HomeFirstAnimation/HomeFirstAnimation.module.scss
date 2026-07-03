@@ -1,0 +1,193 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+
+.home_first_wrap_main {
+   flex: 1 1 auto;
+   position: relative;
+   z-index: 2;
+   min-height: fl(600, 450);
+
+   @include desktop {
+      min-height: 450;
+   }
+
+   @include tablet {
+      min-height: 450px;
+   }
+
+   &_center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: fl(240, 210);
+      height: fl(240, 210);
+      border-radius: 24px;
+      overflow: hidden;
+      z-index: 10;
+      backdrop-filter: blur(6px);
+
+      @include desktop {
+         width: 210px;
+         height: 210px;
+      }
+
+      @include tablet {
+         width: 120px;
+         height: 120px;
+         border-radius: 16px;
+      }
+
+      svg {
+         width: 100%;
+         height: 100%;
+         will-change: transform;
+         transform: translateZ(0);
+      }
+
+      &_out_circle {
+         animation: rotateCircle 7s linear infinite forwards;
+         transform-origin: 50% 50%;
+         will-change: transform;
+      }
+
+      &_inner_circle {
+         animation: rotateCircleR 7s linear infinite forwards;
+         transform-origin: 50% 50%;
+         will-change: transform;
+      }
+
+      @keyframes rotateCircle {
+         from {
+            transform: rotate(0deg) translateZ(0);
+         }
+
+         to {
+            transform: rotate(360deg) translateZ(0);
+         }
+      }
+
+      @keyframes rotateCircleR {
+         from {
+            transform: rotate(0deg) translateZ(0);
+         }
+
+         to {
+            transform: rotate(-360deg) translateZ(0);
+         }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+
+         &_out_circle,
+         &_inner_circle {
+            animation: none;
+         }
+      }
+   }
+
+   &_tag {
+      position: absolute;
+      height: auto;
+      pointer-events: none;
+      backface-visibility: hidden;
+      contain: paint;
+      will-change: transform, opacity;
+      transform: translate3d(0, 0, 0) scale(0.5);
+      transform-origin: 50% 50%;
+      opacity: 0;
+
+      svg,
+      img {
+         display: block;
+         width: 100%;
+         height: auto;
+      }
+   }
+
+   &_tag_1 {
+      top: 200px;
+      left: 124px;
+      width: 291px;
+
+      @include mobile {
+         width: 150px;
+      }
+   }
+
+   &_tag_2 {
+      top: 200px;
+      left: 460px;
+      width: 190px;
+
+      @include mobile {
+         width: 108px;
+      }
+   }
+
+   &_tag_3 {
+      top: 205px;
+      left: 1113px;
+      width: 216px;
+
+      @include mobile {
+         width: 120px;
+      }
+   }
+
+   &_tag_4 {
+      top: 358px;
+      right: 50px;
+      width: 296px;
+
+      @include mobile {
+         width: 120px;
+      }
+   }
+
+   &_tag_5 {
+      top: 371px;
+      left: 16px;
+      width: 328px;
+
+      @include mobile {
+         width: 150px;
+      }
+   }
+
+   &_tag_6 {
+      top: 325px;
+      left: 519px;
+      width: 316px;
+
+      @include mobile {
+         width: 150px;
+      }
+   }
+
+   &_tag_7 {
+      top: 400px;
+      right: 487px;
+      width: 322px;
+
+      @include mobile {
+         width: 120px;
+      }
+   }
+
+   &_tag_8 {
+      top: 469px;
+      left: 364px;
+      width: 341px;
+
+      @include mobile {
+         width: 150px;
+      }
+
+   }
+}

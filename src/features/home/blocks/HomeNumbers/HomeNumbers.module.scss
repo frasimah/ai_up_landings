@@ -1,0 +1,120 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_numbers {
+   padding-top: fl(100, 80);
+   padding-bottom: fl(200, 160);
+   background: #2B2B2B;
+   margin-top: fl(180, 140);
+
+   @include desktop {
+      padding-top: 80px;
+      padding-bottom: 160px;
+      margin-top: 140px;
+   }
+
+   @include tablet {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      margin-top: 60px;
+   }
+
+   &_wrap {
+
+
+      &_row {
+         row-gap: fl(40, 30);
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            row-gap: 30px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            row-gap: 7px;
+            margin-top: 24px;
+         }
+
+         .col {
+            @include tablet {
+               flex: 1 1 50%;
+            }
+
+            @include mobile {
+               flex: 1 1 100%;
+            }
+         }
+      }
+
+      &_item {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(10, 6);
+         padding: fl(40, 30);
+         border-radius: 14px;
+         background: #0169F9;
+         height: 100%;
+         justify-content: space-between;
+         will-change: transform, opacity, scale;
+
+         @include desktop {
+            padding: 30px;
+            row-gap: 6px;
+         }
+
+         @include tablet {
+            padding: 20px;
+            row-gap: 0px;
+         }
+
+         &_head {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+
+            @include tablet {
+               column-gap: 11px;
+            }
+
+            &_num {
+               @include h1;
+               color: $white;
+
+               @media screen and (max-width: 374px) {
+                  font-size: 26px;
+                  line-height: 28px;
+               }
+            }
+
+            &_icon {
+               display: flex;
+               width: fl(34, 28);
+               height: fl(40, 30);
+               flex-shrink: 0;
+
+               @include desktop {
+                  width: 28px;
+                  height: 30px;
+               }
+
+               @include tablet {
+                  width: 22px;
+                  height: 22px;
+               }
+
+               svg {
+                  width: 100%;
+                  height: 100%;
+               }
+            }
+         }
+
+         &_text {
+            @include mediumText;
+            color: $white;
+         }
+      }
+   }
+}

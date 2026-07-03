@@ -1,0 +1,61 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.referral_office {
+   @include mt;
+
+   &_wrap {
+
+      &_header {
+         margin-bottom: fl(60, 40);
+
+         @include desktop {
+            margin-bottom: 40px;
+         }
+
+         @include tablet {
+            margin-bottom: 24px;
+         }
+      }
+
+      &_left {
+         display: flex;
+         flex-direction: column;
+         row-gap: 50px;
+         justify-content: space-between;
+         height: 100%;
+
+         &_head {
+            display: flex;
+            flex-direction: column;
+            row-gap: 24px;
+
+            &_title {
+               @include h3;
+               color: $black;
+            }
+
+            &_list {
+               display: flex;
+               flex-wrap: wrap;
+               gap: fl(20, 14);
+
+               @include desktop {
+                  gap: 14px;
+               }
+
+               @include tablet {
+                  gap: 7px;
+               }
+            }
+         }
+
+         &_message {
+            @include largeText;
+            color: #9C9C9C;
+         }
+      }
+
+   }
+}

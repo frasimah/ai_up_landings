@@ -1,0 +1,15 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_layers {
+   margin-top: fl(180, 140);
+
+   @include desktop {
+      margin-top: 140px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+   }
+}

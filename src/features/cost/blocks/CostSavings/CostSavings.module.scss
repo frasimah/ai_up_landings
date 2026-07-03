@@ -1,0 +1,94 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_savings {
+   @include mt;
+
+   &_wrap {
+      &_list {
+         margin-top: fl(60, 40);
+         display: grid;
+         grid-template-columns: repeat(4, minmax(0, 1fr));
+         gap: fl(40, 30);
+
+         @include desktop {
+            margin-top: 40px;
+            gap: 30px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            grid-template-columns: 1fr;
+            gap: 7px;
+         }
+
+         &_it {
+            padding: fl(40, 30);
+            border: 1px dashed #b8b8b8;
+            border-radius: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            row-gap: fl(20, 16);
+
+            @include desktop {
+               padding: 30px;
+               row-gap: 16px;
+            }
+
+            @include tablet {
+               padding: 16px;
+               row-gap: 12px;
+            }
+
+            &_icon {
+               width: fl(60, 50);
+               height: fl(60, 50);
+               border-radius: 6px;
+               background: #0169f9;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+               flex-shrink: 0;
+
+               @include desktop {
+                  width: 50px;
+                  height: 50px;
+               }
+
+               @include tablet {
+                  width: 40px;
+                  height: 40px;
+               }
+            }
+
+            p {
+               @include largeText;
+               color: $black;
+
+               span {
+                  color: #0169f9;
+               }
+            }
+         }
+      }
+
+      &_desc {
+         margin-top: fl(40, 30);
+         text-align: center;
+         @include mediumText;
+         color: #8f8f8f;
+         font-weight: 500;
+
+         @include desktop {
+            margin-top: 30px;
+         }
+
+         @include tablet {
+            text-align: left;
+            margin-top: 24px;
+         }
+      }
+   }
+}

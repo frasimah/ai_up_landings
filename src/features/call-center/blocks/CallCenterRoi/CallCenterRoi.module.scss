@@ -1,0 +1,239 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 09 — ROI-калькулятор. Ported from "Лендинг AI-UP.dc.html" §9.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   overflow: hidden;
+   background: radial-gradient(ellipse 70% 90% at 18% 30%, #102447 0%, #070f24 55%, #050d22 100%);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head { text-align: center; margin-bottom: 56px; @include tablet { margin-bottom: 36px; } }
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+   margin-bottom: 18px;
+
+   span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 0 14px;
+}
+
+.lead {
+   margin: 0 auto;
+   max-width: 720px;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+   text-wrap: balance;
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: 1fr 480px;
+   gap: 40px;
+   align-items: stretch;
+
+   @media (max-width: 1100px) { grid-template-columns: 1fr; }
+}
+
+.controls {
+   border: 1px solid rgba(86, 150, 255, .18);
+   border-radius: 24px;
+   background: rgba(16, 40, 92, .28);
+   padding: 40px 42px;
+   display: flex;
+   flex-direction: column;
+   gap: 36px;
+
+   @include tablet { padding: 28px 24px; gap: 28px; }
+}
+
+.control {
+   .row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+   }
+   .label { font-size: 14px; line-height: 20px; color: rgba(255, 255, 255, .7); }
+   .value { font-family: var(--font-mono); font-size: 22px; font-weight: 500; color: #fff; }
+   .ends {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .35);
+   }
+}
+
+.range {
+   width: 100%;
+   -webkit-appearance: none;
+   appearance: none;
+   height: 4px;
+   border-radius: 4px;
+   background: rgba(255, 255, 255, .16);
+   outline: none;
+   accent-color: var(--blue);
+   cursor: pointer;
+
+   &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 4px 12px rgba(1, 105, 249, .5);
+      cursor: pointer;
+   }
+   &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 50%;
+      background: var(--blue);
+      cursor: pointer;
+   }
+}
+
+.subnote { margin: 0; font-size: 14px; line-height: 20px; color: rgba(255, 255, 255, .4); }
+
+.results {
+   position: relative;
+   overflow: hidden;
+   border-radius: 24px;
+   padding: 40px 42px;
+   display: flex;
+   flex-direction: column;
+   gap: 24px;
+   box-shadow: 0 30px 70px rgba(1, 105, 249, .16), inset 0 -90px 90px -60px rgba(1, 105, 249, .3);
+
+   // The existing border itself carries the highlight: same transparent-border +
+   // background-clip technique as the site's gradient-border buttons (see
+   // Button.module.scss), applied directly to the card so real content still
+   // paints normally on top — no overlay shape, just the fill + the ring.
+   border: 1px solid transparent;
+   background-origin: border-box;
+   background-clip: padding-box, border-box;
+   // NB: this fill must be fully opaque — a conic-gradient paints a full wedge
+   // from the centre outward (not just a ring), so any transparency here lets
+   // it bleed through the middle of the card instead of staying at the edge.
+   background-image:
+      linear-gradient(180deg, #10285c, #070f24),
+      conic-gradient(
+         from var(--roi-angle, 0deg),
+         rgba(86, 150, 255, .4) 0%,
+         rgba(86, 150, 255, .4) 84%,
+         rgba(140, 190, 255, .95) 92%,
+         rgba(1, 105, 249, 1) 96%,
+         rgba(140, 190, 255, .95) 100%
+      );
+   animation: roi-border-spin 6s linear infinite;
+
+   @include tablet { padding: 28px 24px; }
+}
+
+@property --roi-angle {
+   syntax: '<angle>';
+   inherits: false;
+   initial-value: 0deg;
+}
+
+@keyframes roi-border-spin {
+   to { --roi-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .results { animation: none; }
+}
+
+.roiRow {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   .roiLabel { font-size: 14px; line-height: 20px; color: rgba(255, 255, 255, .6); }
+   .roiBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(52, 199, 89, .16);
+      border: 1px solid rgba(52, 199, 89, .4);
+      font-family: var(--font-mono);
+      font-size: 22px;
+      font-weight: 500;
+      color: #34c759;
+   }
+}
+
+.rule { height: 1px; background: rgba(86, 150, 255, .2); }
+
+.revLabel { font-size: 14px; line-height: 20px; color: rgba(255, 255, 255, .55); margin-bottom: 6px; }
+.revValue { font-size: 46px; line-height: 1; font-weight: 600; color: #fff; letter-spacing: -.01em; @include tablet { font-size: 36px; } }
+
+.metrics { display: flex; gap: 14px; }
+
+.metric {
+   flex: 1;
+   border: 1px solid rgba(255, 255, 255, .1);
+   border-radius: 14px;
+   padding: 18px;
+
+   .metricLabel { font-size: 14px; line-height: 20px; color: rgba(255, 255, 255, .5); margin-bottom: 6px; }
+   .metricValue { font-size: 24px; font-weight: 600; color: #fff; }
+
+   &.profit {
+      border-color: rgba(52, 199, 89, .3);
+      background: rgba(52, 199, 89, .06);
+      .metricValue { color: #34c759; }
+   }
+}
+
+.cta {
+   @include mediumText;
+   margin-top: auto;
+   width: 100%;
+   padding: 16px;
+   border-radius: 14px;
+   border: none;
+   background: var(--blue);
+   color: #fff;
+   font-weight: 600;
+   cursor: pointer;
+   box-shadow: 0 14px 30px rgba(1, 105, 249, .34);
+   transition: all .3s;
+
+   @include hover { background: var(--blue-hover); }
+}

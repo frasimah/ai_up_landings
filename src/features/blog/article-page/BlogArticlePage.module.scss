@@ -1,0 +1,481 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.page {
+  width: 100%;
+  padding-bottom: fl(180, 140);
+
+  @include desktop {
+    padding-bottom: 140px;
+  }
+
+  @include tablet {
+    padding-bottom: 60px;
+  }
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  @include smallText;
+  padding: 0 0 18px;
+  border-bottom: 1px solid #eceff4;
+  color: $grey;
+}
+
+.breadcrumbLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #f5f8fd;
+  color: $blue;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+
+  @include hover {
+    background: #eaf1ff;
+    opacity: 1;
+  }
+}
+
+.breadcrumbSeparator {
+  color: #c5cad4;
+  user-select: none;
+}
+
+.breadcrumbCurrent {
+  min-width: 0;
+  max-width: 100%;
+  color: $dark-grey;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.layout {
+  display: flex;
+  gap: 28px;
+  padding: 28px 0 0;
+}
+
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  @include h1;
+  color: $black;
+  margin: 0;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid $bg-grey;
+}
+
+.authorAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $blue;
+  color: $white;
+  @include mediumText;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.authorInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.authorName {
+  @include mediumText;
+  color: $black;
+}
+
+.authorRole {
+  @include smallText;
+  color: $grey;
+  margin-top: 2px;
+}
+
+.authorRight {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.authorDate {
+  @include smallText;
+  color: $grey;
+}
+
+.authorTime {
+  color: $dark-grey;
+}
+
+.authorViews {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 3px;
+  @include smallText;
+  color: $grey;
+}
+
+.authorEye {
+  width: 12px;
+  height: 12px;
+  color: currentColor;
+}
+
+.contentShell {
+  margin-bottom: 0;
+}
+
+.share {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  margin-top: 32px;
+  border-top: 1px solid $bg-grey;
+  border-bottom: 1px solid $bg-grey;
+}
+
+.shareLabel {
+  @include smallText;
+  color: $grey;
+}
+
+.shareButton {
+  flex-shrink: 0;
+}
+
+.shareButtonContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.shareText {
+  color: inherit;
+}
+
+.related {
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid $bg-grey;
+}
+
+.relatedTitle {
+  @include h2;
+  color: $black;
+  margin: 0 0 16px;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.sidebarSticky {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarCta {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+}
+
+.sidebarCtaTitle {
+  @include mediumText;
+  color: $black;
+  line-height: 1.35;
+}
+
+.sidebarCtaSubtitle {
+  @include smallText;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.sidebarCtaProgress {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+.sidebarCtaProgressValue {
+  display: block;
+  width: 72%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
+}
+
+.sidebarCtaStatus {
+  color: #94a3b8;
+  font-family: "Gilroy", sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-top: 6px;
+}
+
+.sidebarCtaButton.sidebarCtaButton {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.sidebarBlock {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid #e8edf5;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 100%);
+  box-shadow: 0 14px 36px rgba(17, 40, 84, 0.06);
+
+  a {
+    display: block;
+    @include smallText;
+    margin-bottom: 10px;
+    color: $black;
+    line-height: 1.45;
+    text-decoration: none;
+    text-wrap: balance;
+    overflow-wrap: anywhere;
+    transition: color 0.2s ease;
+
+    @include hover {
+      color: $blue;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.sidebarHeading {
+  margin-bottom: 10px;
+  @include smallText;
+  color: #7d8798;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sidebarHeadingLight {
+  color: rgba($white, 0.78);
+}
+
+.sidebarAuthorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include smallText;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8edf5;
+  color: $black;
+}
+
+.sidebarAuthorAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $blue;
+  color: $white;
+  flex-shrink: 0;
+  font-size: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+.sidebarPopular {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #edf2f7;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  @include hover {
+    opacity: 1;
+    transform: translateX(2px);
+
+    .sidebarPopularTitle {
+      color: $blue;
+    }
+
+    .sidebarPopularMeta {
+      color: $dark-grey;
+    }
+  }
+}
+
+.sidebarPopularContent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebarPopularTitle {
+  @include smallText;
+  color: $black;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.sidebarPopularMeta {
+  @include smallText;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.sidebarPopularBlock {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .relatedGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebarSticky {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .sidebarBlock {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .author {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumbs {
+    gap: 6px;
+    padding-bottom: 14px;
+  }
+
+  .breadcrumbLink {
+    min-height: 28px;
+    padding: 3px 10px;
+  }
+
+  .breadcrumbCurrent {
+    // flex-basis: 100%;
+    padding-top: 2px;
+    white-space: normal;
+  }
+
+  .authorRight {
+    width: 100%;
+    text-align: left;
+  }
+
+  .authorViews {
+    justify-content: flex-start;
+  }
+
+  .share {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .shareButton {
+    justify-content: center;
+  }
+
+  .sidebarSticky {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarCta,
+  .sidebarBlock {
+    padding: 14px;
+    border-radius: 16px;
+  }
+}

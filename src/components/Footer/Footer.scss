@@ -1,0 +1,165 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.footer {
+   background: #2B2B2B;
+   position: relative;
+   overflow: hidden;
+   margin-top: -1px;
+
+   &_wrap {
+      border-top: 1px solid $dark-grey;
+      padding-top: fl(80, 60);
+      padding-bottom: fl(50, 40);
+      position: relative;
+      z-index: 2;
+
+      @include desktop {
+         padding-top: 60px;
+         padding-bottom: 40px;
+      }
+
+      @include tablet {
+         padding-top: 40px;
+         padding-bottom: 60px;
+      }
+
+      .row {
+         row-gap: 110px;
+
+         @include tablet {
+            row-gap: 40px;
+         }
+      }
+
+      &_logo {
+         display: inline-flex;
+         width: auto;
+         max-width: 100%;
+         height: fl(124, 104);
+         @include hoverBouce;
+
+         @include desktop {
+            height: 104px;
+         }
+
+         @include tablet {
+            height: 39px;
+         }
+
+         svg {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+         }
+      }
+
+      &_nav {
+         ul {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 calc(0px - fl(20, 15));
+            row-gap: fl(20, 12);
+
+            @include desktop {
+               row-gap: 12px;
+               margin: 0 -15px;
+            }
+
+            @include tablet {
+               margin: 0 -3.5px;
+            }
+
+            li {
+               display: flex;
+               padding: 0 fl(20, 15);
+               width: 100%;
+               max-width: 50%;
+
+               @include desktop {
+                  padding: 0 15px
+               }
+
+               @include tablet {
+                  padding: 0 3.5px
+               }
+
+               a {
+                  @include mediumText;
+                  color: $white;
+
+                  @include hoverBouce;
+               }
+            }
+         }
+      }
+
+      &_text {
+         @include h3;
+         color: $white;
+      }
+
+      &_links {
+         display: flex;
+         column-gap: fl(40, 30);
+         align-items: flex-end;
+         height: 100%;
+
+         @include desktop {
+            column-gap: 30px;
+            justify-content: space-between;
+         }
+
+         @include tablet {
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            row-gap: 12px;
+         }
+
+         &_it {
+            display: inline-flex;
+            @include smallText;
+            color: $dark-grey;
+            @include hoverBouce;
+
+            @include hover {
+               color: $white;
+            }
+         }
+      }
+
+      .btn {
+         @include mobile {
+            margin-top: -16px;
+         }
+      }
+   }
+
+   &-bg {
+
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
+
+      @include mobile {
+         height: auto;
+      }
+
+      img,
+      picture {
+         width: 100%;
+         height: auto;
+         max-height: unset;
+      }
+   }
+}

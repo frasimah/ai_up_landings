@@ -1,0 +1,103 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.how_work_regions {
+   margin-top: 0px;
+
+   &_wrap {
+      &_main {
+         margin-top: fl(60, 40);
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(40, 30);
+
+         @include desktop {
+            row-gap: 30px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            row-gap: 16px
+         }
+
+         &_title {
+            @include h3;
+            color: $white;
+            flex-shrink: 0;
+         }
+
+         &_list {
+            row-gap: 7px;
+
+            &_it {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               padding: 0 0 0 fl(40, 30);
+               border: 1px dashed #9C9C9C;
+               border-radius: 14px;
+               column-gap: fl(20, 14);
+               height: 100%;
+
+               @include desktop {
+                  padding-left: 30px;
+                  column-gap: 14px;
+               }
+
+               @include tablet {
+                  padding-left: 19px;
+                  border-radius: 10px;
+                  column-gap: 12px;
+               }
+
+               &_name {
+                  @include largeText;
+                  color: $white;
+                  flex-shrink: 0;
+
+                  @include mobile {
+                     flex-shrink: unset;
+                  }
+               }
+
+               &_img {
+                  display: flex;
+                  width: 100%;
+                  max-width: fl(290, 180);
+                  height: auto;
+
+                  @include desktop {
+                     max-width: 180px;
+                  }
+
+                  @include mobile {
+                     max-width: 180px;
+                  }
+
+                  svg {
+                     width: 100%;
+                     height: auto;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+
+.how_work_regions_wrap_main_list_it_img_1 {
+   fill: #777;
+   stroke: #777;
+}
+
+.how_work_regions_wrap_main_list_it_img_2 {
+   fill: #777;
+   stroke: #777;
+}
+
+.how_work_regions_wrap_main_list_it_img_3 {
+   fill: #777;
+   stroke: #777;
+}

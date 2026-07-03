@@ -1,0 +1,183 @@
+@use "@/scss/media"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/variables"as *;
+
+.stickyRoot {
+   width: 100%;
+
+   @media (max-width: 1199px) {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      pointer-events: none;
+      visibility: hidden;
+      transition: visibility 0s linear .72s;
+   }
+}
+
+.stickyRootOpen {
+   @media (max-width: 1199px) {
+      pointer-events: auto;
+      visibility: visible;
+      transition-delay: 0s;
+   }
+}
+
+.mobileToggle {
+   display: none;
+
+   @media (max-width: 1199px) {
+      position: fixed;
+      left: 16px;
+      bottom: 16px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 14px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: $blue;
+      box-shadow: 0 16px 36px rgba(1, 105, 249, 0.28);
+      @include smallText;
+      color: $white;
+      cursor: pointer;
+      transition: transform .5s ease, box-shadow .5s ease, opacity .5s ease;
+
+      &:focus-visible {
+         outline: 2px solid $white;
+         outline-offset: 3px;
+      }
+
+      @include hover {
+         transform: translateY(-2px);
+         box-shadow: 0 20px 40px rgba(1, 105, 249, 0.34);
+      }
+   }
+
+   @include mobile {
+      right: 16px;
+      left: 16px;
+      max-width: calc(100% - 100px);
+   }
+}
+
+.mobileToggleHidden {
+   @media (max-width: 1199px) {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition-duration: .56s;
+   }
+}
+
+.mobileBackdrop {
+   display: none;
+
+   @media (max-width: 1199px) {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: rgba(8, 8, 8, 0.5);
+      opacity: 0;
+      transition: opacity .62s ease;
+      cursor: pointer;
+   }
+
+   .stickyRootOpen & {
+      opacity: 1;
+   }
+}
+
+.mobileDialog {
+   width: 100%;
+
+   @media (max-width: 1199px) {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      padding: 24px 20px 28px;
+      background: $white;
+
+      overflow: hidden;
+      transform: translateY(100%);
+      transition: transform .72s cubic-bezier(0.22, 1, 0.36, 1), opacity .62s ease;
+   }
+
+   .stickyRootOpen & {
+
+      transform: translateY(0);
+   }
+
+   @include mobile {
+      padding: 20px 16px 24px;
+   }
+}
+
+.mobileDialogHeader {
+   display: none;
+
+   @media (max-width: 1199px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+   }
+}
+
+.mobileDialogTitle {
+   margin: 0;
+   font-size: 18px;
+   font-weight: 600;
+   line-height: 1.2;
+   color: $black;
+}
+
+.mobileClose {
+   display: none;
+
+   @media (max-width: 1199px) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(8, 8, 8, 0.08);
+      border-radius: 50%;
+      background: $white;
+      color: $black;
+      cursor: pointer;
+      transition: background-color .42s ease, border-color .42s ease, transform .42s ease;
+
+      svg {
+         display: block;
+         width: 20px;
+         height: 20px;
+      }
+
+      &:focus-visible {
+         outline: 2px solid $blue;
+         outline-offset: 2px;
+      }
+   }
+}
+
+.mobileDialogBody {
+   width: 100%;
+
+   @media (max-width: 1199px) {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 4px;
+   }
+}

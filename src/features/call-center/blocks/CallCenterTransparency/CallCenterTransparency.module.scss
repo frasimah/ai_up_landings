@@ -1,0 +1,88 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 07 — Прозрачность. Centered heading + dashboard mockup on grid navy backdrop.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   overflow: hidden;
+   background: radial-gradient(ellipse 65% 60% at 50% 70%, #0e2249 0%, #070f24 55%, #050d22 100%);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.grid {
+   position: absolute;
+   inset: 0;
+   background-image:
+      linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+   background-size: 56px 56px;
+   mask-image: radial-gradient(ellipse 70% 75% at 50% 60%, #000 35%, transparent 80%);
+   pointer-events: none;
+}
+
+.inner {
+   position: relative;
+   z-index: 1;
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 auto 24px;
+   max-width: 880px;
+   text-align: center;
+
+   @include tablet { br { display: none; } }
+}
+
+.subtitle {
+   margin: 0 auto 56px;
+   max-width: 760px;
+   text-align: center;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+
+   @include tablet { font-size: 17px; line-height: 24px; margin-bottom: 36px; }
+}
+
+.shot {
+   position: relative;
+   max-width: 1100px;
+   margin: 0 auto;
+   border-radius: 18px;
+   opacity: 0;
+   transform: translateY(40px);
+   transition: opacity .9s var(--ease-smooth, ease), transform .9s var(--ease-smooth, ease);
+
+   &::after {
+      content: "";
+      position: absolute;
+      inset: -40px;
+      z-index: -1;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(20, 104, 226, .35), transparent 70%);
+      pointer-events: none;
+   }
+
+   img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+   }
+}
+
+.shotShown {
+   opacity: 1;
+   transform: translateY(0);
+}

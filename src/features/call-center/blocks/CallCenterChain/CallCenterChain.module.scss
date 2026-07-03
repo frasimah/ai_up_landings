@@ -1,0 +1,217 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 12 — диаграмма «Обычная / Наша цепочка». Figma title 3357:20573 + dashed row 3357:20637
+// + «Наша цепочка» curve frame (vector 3428:565, natural 1237.82×781.567).
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 110px 0 120px;
+   overflow: hidden;
+   background: radial-gradient(ellipse 90% 60% at 50% 30%, #0c1d40 0%, #070f24 50%, #050d22 100%);
+   color: #fff;
+
+   @include tablet { padding: 64px 0 72px; }
+}
+
+.inner {
+   max-width: 1400px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head {
+   max-width: 900px;
+   margin: 0 auto 56px;
+   text-align: center;
+
+   @include tablet { margin-bottom: 32px; }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 0 24px;
+}
+
+.subtitle {
+   margin: 0;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+// «Обычная цепочка» — dashed 3-box row (flow, centered)
+.normalChain {
+   max-width: 1370px;
+   margin: 0 auto;
+}
+
+.rowLabel {
+   display: block;
+   margin-bottom: 16px;
+   font-size: 24px;
+   line-height: 34px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, .5);
+
+   @include tablet { font-size: 18px; line-height: 24px; margin-bottom: 12px; }
+}
+
+.row {
+   display: flex;
+   align-items: stretch;
+   gap: 40px;
+
+   @include tablet { flex-direction: column; gap: 12px; }
+}
+
+.box {
+   flex: 1 0 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   padding: 40px;
+   border: 1px dashed #686d7c;
+   border-radius: 10px;
+   font-size: 24px;
+   line-height: 32px;
+   font-weight: 500;
+   color: #fff;
+   text-align: center;
+
+   @include tablet { padding: 22px; font-size: 18px; line-height: 24px; }
+}
+
+.arrow {
+   flex-shrink: 0;
+   display: flex;
+   align-items: center;
+
+   @include tablet { transform: rotate(90deg); justify-content: center; }
+}
+
+// «Наша цепочка» — curve stage at natural Figma width, scaled-to-fit
+.stageWrap {
+   position: relative;
+   width: 100%;
+   margin-top: 48px;
+   overflow: hidden;
+
+   @include tablet { margin-top: 28px; }
+
+   // The scaled-down curve becomes an unreadable void on phones — hide it.
+   @media (max-width: 760px) { display: none; }
+}
+
+// Mobile-only compact «наша цепочка» (2 steps), mirrors .normalChain.
+.ourChainMobile {
+   display: none;
+
+   @media (max-width: 760px) {
+      display: block;
+      max-width: 1370px;
+      margin: 24px auto 0;
+   }
+}
+
+.rowLabelOur { color: #12bbff; }
+
+.boxStep {
+   margin-bottom: 6px;
+   font-size: 14px;
+   line-height: 18px;
+   font-weight: 500;
+   text-transform: uppercase;
+   color: #12bbff;
+}
+
+.boxOur {
+   gap: 0;
+   border-color: rgba(18, 187, 255, .5);
+}
+
+.stage {
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform-origin: top center;
+   width: 1237.82px;
+   height: 875.567px;
+}
+
+.curveLabel {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   text-align: center;
+   font-size: 24px;
+   line-height: 34px;
+   font-weight: 500;
+   color: #12bbff;
+}
+
+.curves {
+   position: absolute;
+   left: 0;
+   pointer-events: none;
+}
+
+.glow {
+   filter: blur(11px);
+}
+
+// Scroll-scrubbed draw: one normalized dash, offset animated 1 → 0 by GSAP.
+.draw {
+   stroke-dasharray: 1;
+   stroke-dashoffset: 1;
+}
+
+.badge {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   will-change: transform, opacity;
+}
+
+.badgeStep {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-size: 14px;
+   line-height: 18px;
+   font-weight: 500;
+   text-transform: uppercase;
+   color: #12bbff;
+}
+
+.badgeDot {
+   width: 8px;
+   height: 8px;
+   border-radius: 50%;
+   background: #12bbff;
+   flex-shrink: 0;
+}
+
+.badgeName {
+   @include h3;
+   margin: 0;
+}
+
+.caption {
+   max-width: 587px;
+   margin: 16px 0 0;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .5);
+
+   @include tablet { font-size: 16px; line-height: 22px; }
+}

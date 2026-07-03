@@ -1,0 +1,321 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_calculator {
+
+   margin-top: fl(180, 140);
+
+   @include desktop {
+      margin-top: 140px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+   }
+
+   &_head {
+      padding-bottom: fl(60, 40);
+
+      @include desktop {
+         padding-bottom: 20px;
+      }
+
+      @include tablet {}
+   }
+
+   &_wrap {
+      display: flex;
+      border-radius: 14px;
+      background: #2B2B2B;
+      padding: fl(100, 70) fl(60, 50);
+      position: relative;
+      column-gap: fl(140, 62);
+      align-items: center;
+      user-select: none;
+
+      @include desktop {
+         padding: 70px 50px;
+         column-gap: 62px;
+      }
+
+      @include tablet {
+         flex-wrap: wrap;
+         border-radius: unset;
+         padding: 60px 0;
+         row-gap: 40px;
+         margin-left: -16px;
+         margin-right: -16px;
+         padding-left: 16px;
+         padding-right: 16px;
+      }
+
+      &_col_left {
+         width: 100%;
+         max-width: fl(900, 720);
+         z-index: 1;
+
+         @include desktop {
+            max-width: 720px;
+         }
+
+         @include tablet {
+            max-width: 100%;
+         }
+      }
+
+      &_col_right {
+         width: 100%;
+         max-width: fl(586, 440);
+         z-index: 2;
+
+         @include desktop {
+            max-width: 440px;
+         }
+
+         @include tablet {
+            max-width: 100%;
+         }
+      }
+
+      &_bg {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         opacity: .3;
+
+         @include mobile {
+            display: none;
+         }
+
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+   }
+
+   &_left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      row-gap: fl(120, 80);
+      height: 100%;
+
+      @include desktop {
+         row-gap: 80;
+      }
+
+      @include tablet {
+         row-gap: 0;
+      }
+
+      &_slider {
+         width: 100%;
+         height: fl(104, 65);
+         position: unset;
+         margin-top: 40px;
+
+         @include desktop {
+            min-height: 68px;
+         }
+
+         @include tablet {
+            margin-top: 50px;
+            order: 4;
+         }
+      }
+
+      &_btn {
+         @include tablet {
+            margin-top: 24px;
+         }
+      }
+   }
+
+   &_right {
+      display: flex;
+      flex-direction: column;
+      border-radius: 10px;
+      overflow: hidden;
+
+      &_top {
+         padding: fl(40, 30);
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(10px);
+
+         @include desktop {
+            padding: 30px;
+         }
+
+         @include tablet {
+            padding: 20px;
+         }
+      }
+
+      &_count {
+         @include h3;
+         color: $white;
+      }
+
+      &_list {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(14, 10);
+         margin-top: fl(30, 24);
+
+         @include desktop {
+            row-gap: 10px;
+            margin-top: 24px;
+         }
+
+         @include tablet {
+            row-gap: 6px;
+         }
+
+         &_it {
+            display: inline-flex;
+            align-items: center;
+            text-align: center;
+            column-gap: fl(20, 14);
+            padding: fl(19, 15);
+            border-radius: fl(14, 10);
+            border: 1px solid $dark-grey;
+
+            @include desktop {
+               border-radius: 10px;
+               column-gap: 14px;
+               padding: 15px;
+            }
+
+            @include tablet {
+               padding: 11px;
+            }
+
+            span {
+               @include mediumText;
+               color: $white;
+            }
+         }
+      }
+
+      &_total {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: fl(20, 16) fl(40, 30);
+         background: #0169F9;
+
+         @include desktop {
+            padding: 16px 30px
+         }
+
+         @include tablet {
+            padding: 12px 20px
+         }
+
+         &_title {
+            @include mediumText;
+            color: $white;
+         }
+
+         &_cost {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+
+            &_numbers {
+               @include h3;
+               color: $white;
+            }
+
+            &_sale {
+               display: inline-flex;
+               justify-content: center;
+               align-items: center;
+               text-align: center;
+               height: fl(32, 30);
+               padding: 0 10px;
+               border-radius: 30px;
+               background: $white;
+               min-width: fl(55, 48);
+
+               @include desktop {
+                  height: 30px;
+                  min-width: 48px;
+               }
+
+               @include tablet {
+                  height: 28px;
+               }
+
+
+               @include smallText;
+               color: #0169F9;
+               font-weight: 500;
+            }
+         }
+      }
+   }
+
+   &_cloud {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      column-gap: 10px;
+      padding: 10px 20px 10px 13px;
+      border-radius: 50px;
+      background: $white;
+      box-shadow: 0 -4px 40px 0 rgba(0, 0, 0, 0.04);
+      right: 40px;
+      top: 0;
+      transform: translateY(-50%);
+
+      @include desktop {
+         padding: 8px 16px 8px 11px
+      }
+
+      @include tablet {
+         position: unset;
+         width: max-content;
+         padding: 10px 16px 10px 12px;
+         column-gap: 10px;
+         margin-top: 30px;
+         transform: unset;
+      }
+
+      @include mobile {
+         width: 100%;
+         max-width: 100%;
+         border-radius: 20px
+      }
+
+      @include largeText;
+      color: $black;
+
+      &_icon {
+         display: flex;
+         width: 28px;
+         height: 28px;
+         flex-shrink: 0;
+
+         @include desktop {
+            width: 24px;
+            height: 24px;
+         }
+
+         @include tablet {
+            width: 20px;
+            height: 20px;
+         }
+
+         svg {
+            width: 100%;
+            height: 100%;
+         }
+      }
+   }
+}

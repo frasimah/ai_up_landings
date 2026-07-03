@@ -1,0 +1,228 @@
+@use "../../scss/mixins" as *;
+
+.banner {
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 2;
+   width: 100%;
+   max-height: 0;
+   opacity: 0;
+   overflow: hidden;
+   pointer-events: none;
+   transform: translate3d(0, -8px, 0);
+   visibility: hidden;
+   will-change: max-height, opacity, transform;
+   background: #0169f9;
+}
+
+.bannerEntering,
+.bannerVisible,
+.bannerExiting {
+   max-height: var(--banner-height, 0px);
+   visibility: visible;
+}
+
+.bannerEntering {
+   transition: max-height 0.46s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bannerVisible {
+   opacity: 1;
+   pointer-events: auto;
+   transform: translate3d(0, 0, 0);
+   transition:
+      max-height 0.46s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.32s ease 0.18s,
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.18s,
+      visibility 0s linear;
+}
+
+.bannerExiting {
+   transition:
+      opacity 0.22s ease,
+      transform 0.28s cubic-bezier(0.4, 0, 1, 1),
+      visibility 0s linear 0.28s;
+}
+
+.bannerCard {
+   position: relative;
+   display: grid;
+   grid-template-columns: 24px minmax(0, 1fr) 24px;
+   align-items: center;
+   column-gap: 12px;
+   min-height: 32px;
+   padding: 6px 20px;
+}
+
+.bannerLogo {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 24px;
+   height: 24px;
+
+   svg {
+      width: 100%;
+      height: 100%;
+   }
+}
+
+.bannerBody {
+   position: relative;
+   z-index: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 20px;
+   min-width: 0;
+   text-align: center;
+}
+
+.bannerText {
+   user-select: none;
+   pointer-events: none;
+}
+
+.bannerText,
+.bannerLink,
+.bannerSeparator {
+   position: relative;
+   z-index: 1;
+   @include smallText;
+}
+
+.bannerText,
+.bannerSeparator {
+   font-weight: 500;
+}
+
+.bannerText {
+   min-width: 0;
+}
+
+.bannerLink {
+   text-decoration: underline;
+   text-decoration-thickness: 1px;
+   text-underline-offset: 4px;
+   text-decoration-color: inherit;
+   transition: 0.4s;
+}
+
+.bannerLink:hover {
+   text-decoration-color: transparent;
+}
+
+.bannerClose {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 24px;
+   height: 24px;
+   padding: 0;
+   border: 0;
+   background: transparent;
+   color: #fff;
+   flex-shrink: 0;
+   cursor: pointer;
+   transition: background-color 0.2s ease, opacity 0.2s ease;
+
+   svg {
+      width: 100%;
+      height: 100%;
+   }
+
+   .desktop {
+      display: flex;
+   }
+
+   .mobile {
+      display: none;
+   }
+}
+
+.bannerClose:hover {
+   background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1200px) {
+   .bannerCard {
+      grid-template-columns: 20px minmax(0, 1fr) 20px;
+      column-gap: 10px;
+      padding: 8px 10px;
+   }
+
+   .bannerLogo {
+      width: 20px;
+      height: 20px;
+   }
+
+   .bannerBody {
+      gap: 6px;
+      flex-wrap: wrap;
+   }
+
+   .bannerClose {
+      width: 20px;
+      height: 20px;
+   }
+}
+
+@media (max-width: 640px) {
+   .bannerCard {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      column-gap: 8px;
+      padding: 10px 0;
+   }
+
+   .bannerLogo {
+      width: 14px;
+      height: 14px;
+   }
+
+   .bannerClose {
+      width: 10px;
+      height: 10px;
+
+      .desktop {
+         display: none;
+      }
+
+      .mobile {
+         display: flex;
+      }
+   }
+
+   .bannerSeparator,
+   .bannerLink {
+      display: none;
+   }
+
+   // .bannerText {
+   //    display: block;
+   //    user-select: auto;
+   //    pointer-events: all;
+   //    text-decoration: underline;
+   //    text-decoration-thickness: 1px;
+   //    text-underline-offset: 3px;
+   //    text-decoration-color: inherit;
+   //    transition: 0.4s;
+   // }
+
+   // .bannerText:hover {
+   //    text-decoration-color: transparent;
+   // }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .bannerEntering,
+   .bannerVisible,
+   .bannerExiting,
+   .bannerLink,
+   .bannerText,
+   .bannerClose {
+      transition: none;
+   }
+}

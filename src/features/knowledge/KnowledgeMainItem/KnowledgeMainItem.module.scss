@@ -1,0 +1,165 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.item {
+   min-width: 0;
+}
+
+.card {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   height: 100%;
+   min-height: 196px;
+   padding: fl(40, 20);
+   border: 1px solid #e2e8f0;
+   border-radius: 14px;
+   background: #fff;
+   color: inherit;
+   text-decoration: none;
+   transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+
+   @include desktop {
+      padding: 20px;
+   }
+
+   @include tablet {
+      padding: 16px;
+      border-radius: 8px;
+      min-height: 160px;
+   }
+
+   &:hover {
+      border-color: #2563eb;
+      background: #f8fafc;
+   }
+
+   &:focus-visible {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+   }
+
+   &[data-variant="primary"] {
+      border-color: #bfdbfe;
+   }
+
+   &[data-variant="primary"]:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+   }
+
+   &[data-variant="danger"] {
+      border-color: #fecaca;
+   }
+
+   &[data-variant="danger"]:hover {
+      border-color: #dc2626;
+      background: #fef2f2;
+   }
+}
+
+.top {
+   display: flex;
+   gap: 20px;
+
+   @include desktop {
+      gap: 16px;
+   }
+
+   @include tablet {
+      gap: 12px;
+   }
+}
+
+.icon {
+   display: flex;
+   flex-shrink: 0;
+   align-items: center;
+   justify-content: center;
+   width: fl(50, 40);
+   height: fl(50, 40);
+   border-radius: 8px;
+   background: var(--knowledge-icon-bg, #0f172a);
+
+   @include desktop {
+      width: 40px;
+      height: 40px;
+   }
+
+   @include tablet {
+      width: 32px;
+      height: 32px;
+      border-radius: 4px;
+   }
+
+   svg {
+      width: 16px;
+      height: 16px;
+   }
+}
+
+.customIcon {
+   display: block;
+   width: 16px;
+   height: 16px;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: contain;
+}
+
+.title {
+   display: flex;
+   align-items: center;
+
+   @include largeText;
+   color: $black;
+}
+
+// .description {
+//    display: -webkit-box;
+//    margin: 0;
+//    overflow: hidden;
+//    color: #94a3b8;
+//    font-size: 12px;
+//    line-height: 1.4;
+//    -webkit-box-orient: vertical;
+//    -webkit-line-clamp: 4;
+// }
+
+.bottom {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 12px;
+   margin-top: auto;
+}
+
+.count {
+   @include mediumText;
+   color: $grey;
+}
+
+.arrow {
+   flex-shrink: 0;
+   color: $grey;
+   transition: color 0.15s ease;
+}
+
+.card:hover .arrow,
+.card:focus-visible .arrow {
+   color: #2563eb;
+}
+
+.card[data-variant="danger"]:hover .arrow,
+.card[data-variant="danger"]:focus-visible .arrow {
+   color: #dc2626;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+   .card,
+   .arrow {
+      transition: none;
+   }
+}

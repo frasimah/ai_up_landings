@@ -1,0 +1,65 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_get_wrap_main_sw_it_animate_3 {
+   display: flex;
+   flex-direction: column;
+   row-gap: fl(18, 14);
+   margin: 0 calc(0px - fl(40, 30));
+   overflow: hidden;
+   padding-bottom: 1px;
+
+   @include desktop {
+      row-gap: 14px;
+      margin: 0 -30px;
+   }
+
+   @include tablet {
+      row-gap: 12px;
+   }
+
+   &_row {
+      display: flex;
+      column-gap: fl(10, 8);
+      width: max-content;
+      white-space: nowrap;
+      will-change: transform;
+      transform: translateZ(0);
+      width: 100%;
+
+      @include desktop {
+         column-gap: 8px;
+      }
+
+      @include tablet {
+         column-gap: 6px;
+      }
+   }
+
+   span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 10px;
+      border: 1px dashed $grey;
+      padding: fl(9, 8) fl(10, 9);
+      flex-shrink: 0;
+      position: relative;
+      min-width: 35px;
+
+      @include desktop {
+         padding: 8px 9px
+      }
+
+      @include tablet {
+         padding: 7px 8px;
+         min-width: 32px;
+      }
+
+      @include mediumText;
+      color: $grey;
+      font-weight: 300;
+   }
+}

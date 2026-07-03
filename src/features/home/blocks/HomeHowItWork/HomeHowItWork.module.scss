@@ -1,0 +1,308 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.how_it_work {
+   margin-top: fl(180, 140) !important;
+
+   @include desktop {
+      margin-top: 140px !important;
+   }
+
+   @include tablet {
+      margin-top: 60px !important;
+   }
+
+   &_wrap {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(60, 40);
+
+      @include desktop {
+         row-gap: 40px;
+      }
+
+      @include tablet {
+         row-gap: 24px;
+      }
+
+      &_header {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+
+         button,
+         a {
+            margin-top: fl(24, 20) !important;
+
+            @include desktop {
+               margin-top: 20px !important;
+            }
+         }
+      }
+
+      &_cards {
+
+         @include tablet {
+            row-gap: 80px;
+         }
+
+         &_left {
+            padding-top: 29.5%;
+            z-index: 2;
+
+            @include tablet {
+               padding-top: unset;
+            }
+
+            &_line {
+               display: flex;
+               position: absolute;
+               right: calc(0px - fl(40, 30));
+               bottom: 100%;
+               width: 63%;
+               height: auto;
+               user-select: none;
+               pointer-events: none;
+
+               @include desktop {
+                  right: -30px;
+               }
+
+               @include tablet {
+                  display: none;
+               }
+
+               svg {
+                  width: 100%;
+                  height: auto;
+               }
+            }
+
+            &_line_mobile {
+               display: none;
+
+               @include tablet {
+                  display: flex;
+                  width: 40px;
+                  height: 80px;
+                  position: absolute;
+                  bottom: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+
+                  svg {
+                     width: 100%;
+                     height: 100%;
+                  }
+               }
+            }
+         }
+
+         &_right {
+            padding-top: 10.3%;
+
+            @include tablet {
+               padding: unset;
+            }
+
+            &_line {
+               display: flex;
+               position: absolute;
+               top: 100%;
+               right: 50%;
+               user-select: none;
+               pointer-events: none;
+               width: 283%;
+
+               @include tablet {
+                  display: none;
+               }
+
+               svg {
+                  width: 100%;
+                  height: auto;
+               }
+            }
+
+            &_line_mobile {
+               display: none;
+
+               @include tablet {
+                  display: flex;
+                  width: 40px;
+                  height: 80px;
+                  position: absolute;
+                  bottom: 100%;
+                  left: 50%;
+                  transform: translateX(-50%);
+
+                  svg {
+                     width: 100%;
+                     height: 100%;
+                  }
+               }
+            }
+         }
+
+         &_small {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            row-gap: fl(20, 16);
+            padding: fl(40, 30) fl(40, 24);
+            border-radius: 14px;
+            background: $bg-grey;
+            position: relative;
+
+            @include desktop {
+               row-gap: 16px;
+               padding: 30px 24px;
+            }
+
+            @include tablet {
+               flex-direction: row;
+               justify-content: flex-start;
+               column-gap: 24px;
+               padding: 16px;
+            }
+
+            @include mobile {
+               border-radius: 10px;
+            }
+
+            &_icon {
+               display: flex;
+               flex-shrink: 0;
+               width: fl(72, 56);
+               height: fl(72, 56);
+
+               @include desktop {
+                  width: 56px;
+                  height: 56px;
+               }
+
+               svg {
+                  @include svgDefault
+               }
+            }
+
+            &_title {
+               @include h3;
+               color: $black;
+               text-align: center;
+
+               @include tablet {
+                  text-align: left;
+               }
+            }
+         }
+
+         &_big {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(30, 15);
+            position: relative;
+            padding: fl(20, 15);
+            border-radius: 14px;
+            background: $bg-grey;
+            z-index: 3;
+
+            @include desktop {
+               row-gap: 15px;
+               padding: 15px;
+            }
+
+            @include tablet {
+               padding: 16px;
+               row-gap: 10px;
+            }
+
+            @include mobile {
+               border-radius: 10px;
+            }
+
+            &_head {
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               column-gap: fl(20, 14);
+               position: relative;
+               padding: fl(20, 10) 20px 0 20px;
+               width: 100%;
+
+               @include desktop {
+                  padding: 10px 20px 0 20px;
+                  column-gap: 14px;
+               }
+
+               @include tablet {
+                  padding: 0;
+                  justify-content: flex-start;
+                  align-items: flex-start
+               }
+
+               &_num {
+                  @include h4;
+                  color: $black;
+                  position: absolute;
+                  left: fl(20, 15);
+
+                  @include desktop {
+                     left: 15px;
+                     top: 12px;
+                  }
+
+                  @include tablet {
+                     position: unset;
+                     transform: translateY(1px);
+                  }
+               }
+
+               &_title {
+                  @include h3;
+                  color: $black;
+                  padding: 0 30px;
+                  text-align: center;
+                  text-wrap: balance;
+
+                  @include tablet {
+                     text-align: left;
+                     padding: 0;
+                  }
+               }
+            }
+
+            &_video {
+               display: block;
+               width: 100%;
+               height: auto;
+               background: #D9D9D9;
+               border-radius: 10px;
+               overflow: hidden;
+               aspect-ratio: 43/24;
+
+               video {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+               }
+            }
+         }
+
+         &_text {
+            display: none;
+
+            @include tablet {
+               display: block;
+               @include mediumText;
+               color: $grey;
+               margin-top: -56px;
+            }
+         }
+      }
+   }
+}

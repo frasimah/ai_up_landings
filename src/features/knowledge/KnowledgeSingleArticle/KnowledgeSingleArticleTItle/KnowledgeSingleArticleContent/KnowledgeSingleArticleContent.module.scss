@@ -1,0 +1,325 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.knowledge_single_article_content {
+   margin-top: fl(50, 40);
+   margin-bottom: fl(180, 140);
+
+   @include desktop {
+      margin-top: 40px;
+      margin-bottom: 140px;
+   }
+
+   @include tablet {
+      margin-top: 30px;
+      margin-bottom: 60px;
+   }
+
+   >* {
+      &:first-child {
+         margin-top: 0px !important;
+      }
+
+      &:last-child {
+         margin-bottom: 0px !important;
+      }
+   }
+
+   strong {
+      font-weight: 500;
+   }
+
+   >h2 {
+      @include h2;
+      color: $black;
+      margin: fl(50, 40) 0 fl(40, 32) 0;
+
+      @include desktop {
+         margin-top: 40px;
+         margin-bottom: 32px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+         margin-bottom: 12px;
+      }
+   }
+
+   >h3 {
+      @include h3;
+      color: $black;
+      margin: fl(32, 24) 0 fl(16, 12) 0;
+
+      @include desktop {
+         margin-top: 24px;
+         margin-bottom: 12px;
+      }
+
+      @include tablet {
+         margin-top: 12px;
+         margin-bottom: 6px;
+      }
+   }
+
+   >h4 {
+      @include largeText;
+      color: $black;
+      margin: fl(24, 16) 0 fl(12, 8) 0;
+
+      @include desktop {
+         margin-top: 16px;
+         margin-bottom: 8px;
+      }
+
+      @include tablet {
+         margin-top: 12px;
+         margin-bottom: 6px;
+      }
+   }
+
+   figure {
+      width: 100%;
+      height: auto;
+      margin: fl(24, 16) 0 fl(50, 40) 0;
+
+      @include desktop {
+         margin-top: 16px;
+         margin-bottom: 40px;
+      }
+
+      @include tablet {
+         margin-top: 12px;
+         margin-bottom: 30px;
+      }
+
+      img {
+         width: 100%;
+         height: auto;
+      }
+
+      figcaption {
+         @include smallText;
+         color: #9C9C9C;
+         margin-top: 12px;
+      }
+   }
+
+   >p {
+      @include mediumText;
+      color: $black;
+      margin: fl(24, 16) 0;
+
+      @include desktop {
+         margin: 16px 0;
+      }
+
+      @include tablet {
+         margin: 12px 0
+      }
+
+      a {
+         @include mediumText;
+         color: #0169F9;
+         text-decoration: underline;
+         text-decoration-thickness: 2px;
+         text-underline-offset: 4px;
+         transition: .4s;
+
+         @include hover {
+            opacity: .6;
+         }
+      }
+   }
+
+   a {
+      @include mediumText;
+      color: #0169F9;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      transition: .4s;
+
+      @include hover {
+         opacity: .6;
+      }
+   }
+
+   blockquote {
+      padding: 40px fl(50, 40);
+      background: #0169F9;
+      border-radius: 14px;
+      @include h3;
+      color: $white;
+      margin: fl(32, 24) 0;
+
+      @include desktop {
+         margin: 24px 0;
+         padding: 40px;
+      }
+
+      @include tablet {
+         margin: 12px 0;
+         padding: 24px;
+         border-radius: 10px;
+      }
+   }
+
+   table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      table-layout: fixed;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: fl(24, 16) 0;
+
+      @include desktop {
+         margin: 16px 0;
+      }
+
+      @include tablet {
+         margin: 12px 0
+      }
+
+      tr {
+
+         th {
+            @include mediumText;
+            font-weight: 500;
+            color: $black;
+            text-align: left;
+            padding: 16px 24px;
+            background: #E6F1FF;
+            border: 1px solid $white;
+
+            @include tablet {
+               font-size: 12px !important;
+               line-height: 18px !important;
+            }
+         }
+
+         td {
+            @include smallText;
+            font-weight: 500;
+            color: $black;
+            padding: 12px 20px;
+            background: #F6F6F6;
+            text-align: left;
+            border: 1px solid $white;
+
+            @include tablet {
+               font-size: 12px !important;
+               line-height: 18px !important;
+            }
+         }
+      }
+   }
+
+   ul {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(5, 2);
+      margin: 12px 0 fl(24, 16) 0;
+
+      @include desktop {
+         margin: 8px 0 16px 0;
+         row-gap: 2px;
+      }
+
+      @include tablet {
+         margin: 8px 0 12px 0;
+         row-gap: 2px;
+      }
+
+      li {
+         display: flex;
+         @include mediumText;
+         color: $black;
+         position: relative;
+
+         &::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: $blue;
+            margin-top: fl(10, 8);
+            margin-right: fl(12, 9);
+            flex-shrink: 0;
+
+            @include desktop {
+               margin-right: 9px;
+               margin-top: 8px;
+            }
+
+            @include tablet {
+               margin-top: 6px;
+            }
+         }
+      }
+   }
+
+   ol {
+      padding: 0;
+      list-style: none;
+      counter-reset: item;
+
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(7, 4);
+      margin: 12px 0 fl(24, 16) 0;
+
+      @include desktop {
+         margin: 8px 0 16px 0;
+         row-gap: 4px;
+      }
+
+      @include tablet {
+         margin: 8px 0 12px 0;
+         row-gap: 4px;
+      }
+
+      li {
+         display: flex;
+         counter-increment: item;
+         @include mediumText;
+         color: $black;
+
+         &::before {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            content: counter(item);
+            width: fl(26, 22);
+            height: fl(26, 22);
+            border-radius: 50%;
+            background: #0169F9;
+            flex-shrink: 0;
+            margin-right: 12px;
+            margin-top: 1px;
+
+            color: #FFF;
+
+            font-size: fl(15, 12);
+            font-weight: 500;
+            line-height: fl(24, 22);
+
+            @include desktop {
+               width: 22px;
+               height: 22px;
+               font-size: 12px;
+               line-height: 22px;
+               margin-top: 0px;
+            }
+
+            @include tablet {
+               margin-right: 8px;
+            }
+         }
+      }
+   }
+}

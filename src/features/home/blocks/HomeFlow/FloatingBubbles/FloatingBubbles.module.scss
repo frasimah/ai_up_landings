@@ -1,0 +1,133 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.bubble {
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+   position: relative;
+   z-index: 1;
+
+   &_item {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: absolute;
+      padding: fl(10, 6) fl(20, 16) fl(12, 8) fl(20, 16);
+      border-radius: 50px;
+      will-change: transform, opacity;
+      transform: translate3d(0, 0, 0) scale(0.64);
+      opacity: 0;
+
+      @include desktop {
+         padding: 6px 16px 8px 16px;
+      }
+
+      @include mobile {
+         padding: 6px 14px;
+      }
+
+      &:nth-child(1) {
+         top: 35%;
+         left: 35%;
+
+         @include mobile {
+            top: 15%;
+            left: 15%;
+         }
+      }
+
+      &:nth-child(2) {
+         top: 20%;
+         left: 65%;
+
+         @include mobile {
+            top: 10%;
+            left: 65%;
+         }
+      }
+
+      &:nth-child(3) {
+         top: 55%;
+         left: 60%;
+
+         @include mobile {
+            top: 58%;
+            left: 70%;
+         }
+      }
+
+      &:nth-child(4) {
+         top: 70%;
+         left: 25%;
+
+         @include mobile {
+            top: 57%;
+            left: 18%;
+         }
+      }
+
+      &_icon {
+         display: flex;
+         width: fl(30, 26);
+         height: fl(30, 26);
+         flex-shrink: 0;
+         position: absolute;
+         right: 0;
+         top: 0;
+         transform: translateY(-50%);
+
+         @include desktop {
+            width: 26px;
+            height: 26px;
+         }
+
+         @include mobile {
+            width: 24px;
+            height: 24px;
+         }
+
+         svg {
+            width: 100%;
+            height: 100%;
+         }
+      }
+
+      &_title {
+         @include h3;
+         
+         font-weight: 400;
+         color: $white;
+      }
+
+      &_percent {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         color: #34C759;
+         
+         font-size: fl(18, 14);
+         font-weight: 400;
+         line-height: fl(24, 18);
+
+         padding: 3px 8px;
+         border-radius: 50px;
+         background: $white;
+
+         position: absolute;
+         left: calc(0px - fl(6, 1));
+         bottom: 0;
+         transform: translateY(50%);
+
+         @include desktop {
+            left: -1px;
+            font-size: 14px;
+            line-height: 18px;
+            bottom: -5px;
+         }
+      }
+   }
+}

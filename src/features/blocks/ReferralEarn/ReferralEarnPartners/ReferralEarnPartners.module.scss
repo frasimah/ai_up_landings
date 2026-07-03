@@ -1,0 +1,7 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.referral_earn_partners {
+   @include mt;
+}

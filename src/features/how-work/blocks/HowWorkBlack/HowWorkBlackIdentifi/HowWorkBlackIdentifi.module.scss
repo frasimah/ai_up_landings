@@ -1,0 +1,242 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.how_work_identify {
+   margin-top: fl(180, 120);
+   position: relative;
+
+   @include desktop {
+      margin-top: 120px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+   }
+
+   &_wrap {}
+}
+
+.call_center_cost_slider {
+   margin-top: fl(60, 40);
+
+   @include desktop {
+      margin-top: 40px;
+   }
+
+   @include tablet {
+      margin-top: 24px;
+   }
+
+   .call_center_cost_sw {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0px;
+      overflow: visible;
+
+      &_it {
+         display: flex;
+         justify-content: flex-start;
+         align-items: center;
+         padding: fl(40, 30);
+         border-radius: 14px;
+         background: rgba(255, 255, 255, 0.06);
+         @include h3;
+         color: $white;
+         max-width: fl(460, 360);
+         height: auto;
+         backdrop-filter: blur(6px);
+         will-change: transform, opacity;
+         transform: translateZ(0);
+
+         @include desktop {
+            padding: 30px;
+            max-width: 360px;
+         }
+
+         @include tablet {
+            padding: 20px;
+            max-width: 310px;
+            border-radius: 10px;
+            backdrop-filter: unset;
+         }
+      }
+   }
+
+   &_controls {
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+      margin-top: fl(30, 20);
+
+      @include desktop {
+         margin-top: 20px;
+      }
+
+      @include tablet {
+         display: none;
+      }
+
+      &_prev:global(.swiper-button-prev) {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         width: fl(50, 40);
+         height: fl(50, 40);
+         flex-shrink: 0;
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(10px);
+         color: $white;
+         border-radius: 14px;
+         cursor: pointer;
+         position: unset;
+         margin: 0;
+         padding: 0;
+
+         @include desktop {
+            width: 40px;
+            height: 40px;
+         }
+
+         @include hoverBouce;
+
+         svg {
+            @include svgDefault;
+
+            path {
+               stroke: currentColor;
+            }
+         }
+      }
+
+      &_next:global(.swiper-button-next) {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         width: fl(50, 40);
+         height: fl(50, 40);
+         flex-shrink: 0;
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(10px);
+         color: $white;
+         border-radius: 14px;
+         cursor: pointer;
+         position: unset;
+         margin: 0;
+         padding: 0;
+
+         @include desktop {
+            width: 40px;
+            height: 40px;
+         }
+
+         @include hoverBouce;
+
+         svg {
+            @include svgDefault;
+
+            path {
+               stroke: currentColor;
+            }
+         }
+      }
+
+      &_prev:global(.swiper-button-lock) {
+         display: none;
+
+         @include desktop {
+            width: 40px;
+            height: 40px;
+         }
+
+         @include hoverBouce;
+
+         svg {
+            @include svgDefault;
+
+            path {
+               stroke: currentColor;
+            }
+         }
+      }
+
+      &_next:global(.swiper-button-lock) {
+         display: none;
+      }
+   }
+
+   &_pagination {
+      display: none;
+
+      @include tablet {
+         display: flex;
+         justify-content: center;
+         width: 100%;
+         align-items: center;
+         position: unset;
+         margin-top: 16px;
+         column-gap: 6px;
+      }
+
+      :global(.swiper-pagination-bullet) {
+         width: 4px;
+         height: 4px;
+         border-radius: 50%;
+         background: #FFF;
+         opacity: .3;
+         margin: 0 !important;
+         transition: opacity .4s;
+      }
+
+      :global(.swiper-pagination-bullet-active) {
+         width: 6px;
+         height: 6px;
+         background: #FFF;
+         opacity: 1;
+      }
+   }
+
+   &_message {
+      display: none;
+
+      @include tablet {
+         display: block;
+         margin-top: 16px;
+         @include mediumText;
+         color: #777;
+      }
+   }
+
+   &_text {
+      @include mediumText;
+      color: #777;
+      max-width: fl(900, 700);
+      text-align: center;
+      position: absolute;
+      bottom: calc(0px - fl(40, 30));
+      left: 50%;
+      transform: translateX(-50%);
+
+      @include desktop {
+         bottom: -30px;
+         max-width: 700px;
+      }
+
+      @include tablet {
+         position: unset;
+         left: unset;
+         transform: unset;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 16px;
+      }
+
+      @include mobile {
+         margin-left: unset;
+         margin-right: unset;
+         text-align: left;
+      }
+   }
+}

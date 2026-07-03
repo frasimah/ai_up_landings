@@ -1,0 +1,67 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.referral_money {
+   @include mt;
+
+   &_wrap {
+      &_header {}
+
+      &_main {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(40, 30);
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            row-gap: 30px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            row-gap: 12px;
+            margin-top: 24px;
+         }
+
+         &_title {
+            @include h3;
+            color: $black;
+         }
+
+         &_row {
+            row-gap: 7px;
+         }
+      }
+
+      &_bottom {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: 100%;
+         row-gap: fl(24, 20);
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            margin-top: 40px;
+            row-gap: 20px;
+         }
+
+         @include tablet {
+            margin-top: 12px;
+            row-gap: 24px;
+            align-items: flex-start
+         }
+
+         &_text {
+            @include largeText;
+            color: #9C9C9C;
+         }
+
+         &_btn {
+            position: relative;
+            z-index: 3;
+         }
+      }
+   }
+}

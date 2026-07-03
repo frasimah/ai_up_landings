@@ -1,0 +1,123 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_work {
+   @include mt;
+
+   &_wrap {
+      &_row {
+         margin-top: fl(60, 40);
+         align-items: flex-start;
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            row-gap: 24px;
+         }
+      }
+
+      &_info {
+         display: flex;
+         flex-direction: column;
+
+         >* {
+            &:first-child {
+               margin-top: 0px;
+            }
+         }
+
+         &_text {
+            @include largeText;
+            color: $black;
+            margin-top: fl(24, 16);
+            max-width: 700px;
+
+            @include desktop {
+               margin-top: 16px;
+            }
+         }
+
+         &_chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            padding: fl(10, 8) fl(16, 14);
+            border-radius: 50px;
+            background: #ebebeb;
+            @include mediumText;
+            color: $black;
+            margin-top: fl(16, 12);
+
+            @include desktop {
+               margin-top: 12px;
+            }
+
+            @include tablet {
+               padding: 10px 20px;
+            }
+         }
+
+         &_include {
+            display: flex;
+            flex-direction: column;
+            row-gap: 8px;
+            margin-top: fl(24, 16);
+
+            @include desktop {
+               margin-top: 16px;
+            }
+
+            p {
+               @include largeText;
+               color: $black;
+            }
+
+            ul {
+               margin: 0;
+               padding-left: 25px;
+               list-style-type: disc;
+
+               @include tablet {
+                  padding-left: 20px;
+               }
+
+               li {
+                  @include largeText;
+                  color: $black;
+               }
+            }
+         }
+
+         &_btn {
+            margin-top: fl(40, 30);
+
+            @include desktop {
+               margin-top: 30px;
+            }
+
+            @include tablet {
+               margin-top: 24px;
+            }
+         }
+      }
+
+      &_media {
+         width: 100%;
+         max-width: 100%;
+         height: auto;
+         border-radius: 14px;
+         background: #2b2b2b;
+
+         img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+         }
+      }
+   }
+}

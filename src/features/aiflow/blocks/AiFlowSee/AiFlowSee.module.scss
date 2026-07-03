@@ -1,0 +1,70 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_see {
+   @include mt;
+   padding-top: fl(100, 80);
+   padding-bottom: fl(160, 120);
+   background: #2B2B2B;
+
+   @include desktop {
+      padding-top: 80px;
+      padding-bottom: 120px;
+   }
+
+   @include tablet {
+      padding: 60px 0;
+   }
+
+   &_wrap {
+      &_head {
+
+         &_left {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(40, 30);
+            justify-content: space-between;
+            height: 100%;
+
+            @include desktop {
+               row-gap: 30px;
+            }
+
+            @include tablet {
+               row-gap: 24px;
+               height: auto;
+            }
+
+            &_message {
+               @include mediumText;
+               color: #777;
+
+               @include tablet {
+                  margin-top: -8px;
+               }
+            }
+         }
+
+         &_img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 14px;
+            height: auto;
+            overflow: hidden;
+
+            @include tablet {
+               display: none;
+            }
+
+            img {
+               width: 100%;
+               height: auto;
+            }
+         }
+
+      }
+   }
+
+
+}

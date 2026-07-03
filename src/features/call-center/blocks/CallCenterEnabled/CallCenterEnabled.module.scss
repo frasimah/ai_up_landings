@@ -1,0 +1,144 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 08b — Когда нужен КЦ. Ported from "Лендинг AI-UP.dc.html" §8b.
+// Checklist checkboxes fill in sequence (stagger 220 + i*420ms) on scroll-in.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   background: var(--navy-900);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head {
+   text-align: center;
+   margin-bottom: 56px;
+
+   @include tablet { margin-bottom: 36px; }
+}
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+   margin-bottom: 18px;
+
+   span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 0 14px;
+}
+
+.lead {
+   margin: 0 auto;
+   max-width: 720px;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 18px 40px;
+   max-width: 980px;
+   margin: 0 auto;
+
+   @media (max-width: 760px) { gap: 10px; } // keep 2 columns on phones (no single-column «простыня»)
+}
+
+.item {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   padding: 18px 22px;
+   border: 1px solid rgba(255, 255, 255, .08);
+   border-radius: 14px;
+   background: rgba(255, 255, 255, .025);
+   font-size: 16px;
+   line-height: 24px;
+   color: rgba(255, 255, 255, .82);
+
+   &.wide { grid-column: 1 / -1; }
+
+   @media (max-width: 760px) {
+      align-items: flex-start; // text wraps to 2+ lines in the narrow column
+      gap: 10px;
+      padding: 14px;
+      font-size: 14px;
+      line-height: 20px;
+   }
+}
+
+.chk {
+   flex-shrink: 0;
+   width: 30px;
+   height: 30px;
+   border-radius: 8px;
+
+   @media (max-width: 760px) { width: 24px; height: 24px; border-radius: 6px; }
+   border: 1px solid rgba(86, 150, 255, .4);
+   background: rgba(255, 255, 255, .04);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: background .4s var(--ease-smooth), border-color .4s var(--ease-smooth);
+
+   svg { opacity: 0; transition: opacity .4s var(--ease-smooth); }
+
+   &.on {
+      background: var(--blue);
+      border-color: var(--blue);
+      svg { opacity: 1; }
+   }
+}
+
+.cta {
+   display: flex;
+   justify-content: center;
+   margin-top: 44px;
+}
+
+.ctaBtn {
+   @include mediumText;
+   display: inline-flex;
+   align-items: center;
+   gap: fl(10, 8);
+   padding: fl(18, 14) fl(22, 18);
+   border-radius: fl(20, 14);
+   border: none;
+   background: var(--blue);
+   color: #fff;
+   font-weight: 600;
+   cursor: pointer;
+   box-shadow: 0 16px 36px rgba(1, 105, 249, .34);
+   transition: all .3s var(--ease-bounce);
+
+   @include desktop { padding: 14px 18px; border-radius: 14px; }
+   @include tablet { padding: 10px 16px; border-radius: 10px; gap: 8px; }
+
+   @include hover { background: var(--blue-hover); transform: translateY(-2px); }
+}

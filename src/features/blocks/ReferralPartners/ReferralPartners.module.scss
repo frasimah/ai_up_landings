@@ -1,0 +1,93 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.referral_partners {
+   @include mt;
+
+   &_wrap {
+
+      &_head {
+         margin-bottom: fl(60, 40);
+
+         @include desktop {
+            margin-bottom: 40px;
+         }
+
+         @include tablet {
+            margin-bottom: 24px;
+         }
+      }
+
+      &_left {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(50, 30);
+         justify-content: space-between;
+         height: 100%;
+
+         @include desktop {
+            row-gap: 30px;
+         }
+
+         @include tablet {
+            row-gap: 16px;
+            margin-bottom: 24px;
+            height: auto;
+         }
+
+         &_head {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(40, 30);
+
+            @include desktop {
+               row-gap: 30px;
+            }
+
+            @include tablet {
+               row-gap: 16px;
+            }
+
+            &_list {
+               display: flex;
+               flex-wrap: wrap;
+               gap: fl(20, 14);
+
+               @include desktop {
+                  gap: 14px;
+               }
+
+               @include tablet {
+                  gap: 7px;
+               }
+            }
+
+            &_text {
+               display: flex;
+               flex-direction: column;
+               row-gap: 32px;
+               @include largeText;
+               color: $black;
+
+               @include desktop {
+                  row-gap: 24px;
+               }
+
+               @include tablet {
+                  row-gap: 12px;
+               }
+            }
+         }
+
+         &_message {
+            @include largeText;
+            color: #9C9C9C;
+         }
+      }
+   }
+
+   &_anim_item {
+      will-change: transform, opacity;
+   }
+}

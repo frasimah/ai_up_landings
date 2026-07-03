@@ -1,0 +1,96 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_security {
+   margin-top: fl(180, 140);
+   padding: fl(120, 100) 0;
+   background: #2B2B2B;
+   position: relative;
+
+   @include desktop {
+      margin-top: 140px;
+      padding: 100px 0;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+      padding: 60px 0;
+   }
+
+   &_wrap {
+      display: flex;
+      flex-direction: column;
+   }
+
+   &_head {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      row-gap: fl(20, 16);
+      position: relative;
+      z-index: 1;
+
+      @include desktop {
+         row-gap: 16px;
+      }
+
+      @include tablet {
+         row-gap: 12px;
+         align-items: flex-start;
+         justify-content: flex-start;
+      }
+
+      &_icon {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         width: fl(38, 28);
+         height: fl(39, 30);
+         flex-shrink: 0;
+
+         @include desktop {
+            width: 28px;
+            height: 30px;
+         }
+
+         svg {
+            @include svgDefault;
+         }
+      }
+   }
+
+   &_slider {
+      margin-top: fl(60, 40);
+      z-index: 1;
+
+      @include desktop {
+         margin-top: 40px;
+      }
+
+      @include tablet {
+         margin-top: 16px;
+      }
+   }
+
+   &_bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: .3;
+
+      @include mobile {
+         display: none;
+      }
+
+      img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+      }
+   }
+}

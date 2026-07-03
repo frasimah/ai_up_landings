@@ -1,0 +1,20 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+
+.sidebarCol {
+  align-self: flex-start;
+  min-width: 0;
+  position: sticky;
+  top: 120px;
+
+  @include tablet {
+    margin-bottom: 24px;
+    position: unset;
+  }
+}
+
+.sidebarSticky {
+  width: 100%;
+}

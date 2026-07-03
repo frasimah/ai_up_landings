@@ -1,0 +1,87 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_black {
+   @include mt;
+   padding: fl(100, 80) 0;
+   background: #2B2B2B;
+
+   @include desktop {
+      padding: 80px 0;
+   }
+
+   @include tablet {
+      padding: 60px 0;
+   }
+
+   &_bottom {
+
+      @include mt;
+
+      &_title {
+         @include h3;
+         color: #FFF;
+         margin-bottom: fl(40, 30);
+
+         @include desktop {
+            margin-bottom: 30px;
+         }
+
+         @include tablet {
+            margin-bottom: 16px;
+         }
+      }
+
+      &_mobile_adapt {
+         display: none;
+
+         @media (max-width: 1199px) {
+            display: block;
+            margin-top: 7px;
+            background: #F6F6F6;
+            border-radius: 4px;
+            padding: 20px;
+            @include h3;
+            color: $black;
+         }
+      }
+   }
+
+   .ai_flow_do_wrap_text {
+      margin-top: fl(60, 40);
+      @include largeText;
+      text-align: center;
+      color: $grey;
+      max-width: fl(1200, 900);
+      margin-left: auto;
+      margin-right: auto;
+
+      @include desktop {
+         margin-top: 40px;
+         max-width: 900px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+         text-align: left;
+         margin-left: unset;
+         margin-right: unset;
+      }
+   }
+
+   .ai_flow_do_wrap_btn {
+      display: flex;
+      justify-content: center;
+      margin-top: fl(40, 30);
+
+      @include desktop {
+         margin-top: 30px;
+      }
+
+      @include tablet {
+         margin-top: 16px;
+         justify-content: flex-start;
+      }
+   }
+}

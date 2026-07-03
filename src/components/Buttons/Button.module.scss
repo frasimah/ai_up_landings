@@ -1,0 +1,147 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.button {
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+
+   @include mediumText;
+
+   text-align: center;
+   column-gap: fl(14, 10);
+   cursor: pointer;
+
+   padding: fl(18, 14) fl(22, 18);
+
+   // важно для градиентного бордера
+   border: 2px solid transparent;
+   border-radius: fl(20, 14);
+
+   position: relative;
+
+   // магия градиентного border
+   background-origin: border-box;
+   background-clip: padding-box, border-box;
+
+   color: $white;
+
+   @include hoverBouce;
+
+   @include desktop {
+      padding: 14px 18px;
+      border-radius: 14px;
+      column-gap: 10px;
+   }
+
+   @include tablet {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border-width: 1px;
+      column-gap: 8px;
+   }
+
+   // ==========================
+   // 🔵 BLUE BUTTON
+   // ==========================
+   &--blue {
+      background-image:
+         // фон кнопки
+         linear-gradient($blue, $blue),
+
+         // градиентная рамка
+         linear-gradient(93deg,
+            #75ACF9 0%,
+            rgba(117, 172, 249, .0) 100.52%,
+            #4C84D4 100%);
+   }
+
+   // ==========================
+   // ⚫ BLACK BUTTON
+   // ==========================
+   &--black {
+      background-image:
+         // фон кнопки
+         linear-gradient(#2C2C2E, #2C2C2E),
+
+         // градиентная рамка
+         linear-gradient(93deg,
+            #858586 0%,
+            #3E3E3F 100.52%,
+            #676769 100%);
+   }
+
+   // ==========================
+   // ⚪ WHITE BUTTON
+   // ==========================
+   &--white {
+      color: #0169F9;
+
+      background-image:
+         // фон кнопки
+         linear-gradient(#fff, #fff),
+
+         // рамка (можно любую)
+         linear-gradient(93deg,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0.4) 53.52%,
+            #ffffff 100%);
+   }
+
+   // ==========================
+   // ICON STYLES
+   // ==========================
+   .icon {
+      display: flex;
+      width: fl(12, 10);
+      height: fl(12, 10);
+      flex-shrink: 0;
+
+      @include desktop {
+         width: 10px;
+         height: 10px;
+         transform: translateY(1px);
+      }
+
+      @include mobile {
+         width: 8px;
+         height: 8px;
+         transform: translateY(1px);
+      }
+
+      svg {
+         fill: currentColor;
+         stroke: currentColor;
+
+         @include svgDefault;
+
+         path {
+            fill: inherit;
+            stroke: inherit;
+         }
+      }
+   }
+}
+
+.button--noBorder {
+   border: 2px solid transparent;
+   background-clip: padding-box !important;
+
+   @include tablet {
+      border: 1px solid transparent;
+   }
+
+   // оставляем только первый слой (фон кнопки)
+   &.button--blue {
+      background: $blue !important;
+   }
+
+   &.button--black {
+      background: #2C2C2E !important;
+   }
+
+   &.button--white {
+      background: #fff !important;
+   }
+}

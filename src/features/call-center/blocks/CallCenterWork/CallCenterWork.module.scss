@@ -1,0 +1,249 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 04 — Работа КЦ / Orbit. 3D carousel ported from "4 оператора - orbit.dc.html".
+
+.section {
+   position: relative;
+   width: 100%;
+   height: 1080px;
+   overflow: hidden;
+   background: var(--bg-section-navy);
+   font-family: $gilroy;
+   color: #fff;
+
+   @media (max-width: 1200px) { height: auto; padding: 80px 0 90px; }
+}
+
+.glow {
+   position: absolute;
+   left: 50%;
+   top: 56%;
+   transform: translate(-50%, -50%);
+   width: 1100px;
+   height: 560px;
+   background: var(--glow-ambient);
+   filter: blur(44px);
+   pointer-events: none;
+}
+
+.head {
+   position: absolute;
+   top: 84px;
+   left: 0;
+   right: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-align: center;
+   gap: 18px;
+   padding: 0 80px;
+   z-index: 6;
+
+   @media (max-width: 1200px) { position: static; padding: 0 16px; gap: 14px; margin-bottom: 40px; }
+}
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+
+   span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0;
+   max-width: 1000px;
+   text-wrap: balance;
+}
+
+.lead {
+   margin: 0;
+   max-width: 840px;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+   text-wrap: balance;
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+// 3D orbit stage
+.stage {
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 392px;
+   height: 540px;
+   perspective: 1900px;
+   transform-style: preserve-3d;
+   z-index: 5;
+   cursor: grab;
+   touch-action: pan-y;
+
+   @media (max-width: 1200px) { position: static; height: 560px; }
+}
+
+.card {
+   position: absolute;
+   left: 50%;
+   top: 18px;
+   width: 392px;
+   height: 470px;
+   padding: 34px 32px;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+   border-radius: 18px;
+   background: linear-gradient(180deg, var(--navy-panel-solid-top) 0%, var(--navy-panel-solid) 100%);
+   border: 1px solid rgba(255, 255, 255, .10);
+   box-shadow: 0 30px 70px rgba(0, 0, 0, .5);
+   will-change: transform, opacity;
+   backface-visibility: hidden;
+   -webkit-backface-visibility: hidden;
+
+   @media (max-width: 460px) { width: 340px; }
+}
+
+.cardTitle { margin: 0; font-size: 24px; line-height: 30px; font-weight: 500; color: #fff; }
+.cardText { margin: 0; font-size: 16px; line-height: 23px; color: rgba(255, 255, 255, .6); }
+
+.chips { margin-top: auto; position: relative; }
+
+.chip {
+   position: absolute;
+   display: inline-flex;
+   align-items: center;
+   gap: 9px;
+   padding: 8px 14px;
+   border-radius: 999px;
+   background: rgba(255, 255, 255, .05);
+   border: 1px solid rgba(255, 255, 255, .08);
+   font-size: 13px;
+   color: rgba(255, 255, 255, .78);
+   white-space: nowrap;
+
+   span { width: 6px; height: 6px; border-radius: 50%; background: rgba(1, 105, 249, .7); }
+
+   &.primary {
+      padding: 9px 15px;
+      background: rgba(255, 255, 255, .07);
+      border-color: rgba(255, 255, 255, .10);
+      font-size: 14px;
+      color: #fff;
+      span { width: 7px; height: 7px; background: var(--blue); }
+   }
+}
+
+.operators {
+   margin-top: auto;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 12px;
+}
+
+.opLogo {
+   height: 58px;
+   border-radius: 12px;
+   background: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0 14px;
+
+   img { width: auto; object-fit: contain; }
+}
+
+.opText {
+   height: 58px;
+   border-radius: 12px;
+   background: rgba(255, 255, 255, .06);
+   border: 1px solid rgba(255, 255, 255, .10);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 10px;
+   padding: 0 14px;
+
+   .opMark {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: #00b956;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+   }
+   .opName { font-size: 16px; font-weight: 600; color: #fff; }
+}
+
+.gauge {
+   margin-top: auto;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 18px;
+}
+.gaugeRing { position: relative; width: 150px; height: 150px; }
+.gaugeLabel {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 2px;
+   span:first-child { font-size: 30px; font-weight: 700; color: #34c759; line-height: 1; }
+   span:last-child { font-size: 12px; color: rgba(255, 255, 255, .5); }
+}
+.gaugeLegend {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   div { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255, 255, 255, .72); }
+   span { width: 7px; height: 7px; border-radius: 50%; }
+}
+
+.controls {
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 946px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 16px;
+   z-index: 7;
+
+   @media (max-width: 1200px) { position: static; margin-top: 32px; }
+}
+
+.navBtn {
+   width: 54px;
+   height: 54px;
+   border-radius: 50%;
+   background: rgba(255, 255, 255, .05);
+   border: 1px solid rgba(255, 255, 255, .14);
+   color: #fff;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   transition: all .25s var(--ease-smooth);
+
+   @include hover {
+      background: rgba(1, 105, 249, .18);
+      border-color: rgba(1, 105, 249, .6);
+   }
+}

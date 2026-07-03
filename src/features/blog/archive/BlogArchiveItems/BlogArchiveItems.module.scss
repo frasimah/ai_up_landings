@@ -1,0 +1,21 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.blog_archive_wrap_tags_list {
+   margin-top: fl(40, 30);
+   margin-bottom: fl(300, 220);
+   row-gap: fl(80, 60);
+
+   @include desktop {
+      margin-top: 30px;
+      row-gap: 60px;
+      margin-bottom: 220px;
+   }
+
+   @include tablet {
+      margin-top: 24px;
+      row-gap: 24px;
+      margin-bottom: 120px;
+   }
+}

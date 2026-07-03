@@ -1,0 +1,313 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_partner {
+   margin-top: fl(120, 100);
+
+   @include desktop {
+      margin-top: 100px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+   }
+
+   &_wrap {}
+
+   &_title {
+      @include h3;
+      color: $black;
+      margin-bottom: fl(40, 30);
+
+      @include desktop {
+         margin-bottom: 30px;
+      }
+
+      @include tablet {
+         margin-bottom: 24px;
+      }
+   }
+
+   &_left {
+      display: flex;
+      flex-direction: column;
+      padding: fl(40, 24);
+      background: $white;
+      border-radius: 14px;
+      border: 1px dashed $dark-grey;
+      row-gap: fl(40, 24);
+      justify-content: space-between;
+      height: 100%;
+
+      @include desktop {
+         padding: 24px;
+         row-gap: 24px
+      }
+
+      @include tablet {
+         padding: 20px;
+         row-gap: 16px;
+         border-radius: 10px
+      }
+
+      &_title {
+         @include largeText;
+         color: $black;
+      }
+
+      &_block {
+         display: flex;
+         flex-direction: column;
+
+         &_head {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: fl(8, 10) 10px;
+            border-radius: 14px 14px 0 0;
+            background: #D1E4FF;
+
+            color: #0169F9;
+            font-family: "Gilroy", sans-serif;
+            font-size: fl(18, 14);
+            font-weight: 500;
+            line-height: normal;
+            text-align: center;
+
+            @include desktop {
+               padding: 6px 10px;
+               font-size: 14px;
+               line-height: 20px;
+            }
+
+            @include tablet {
+               padding: 10px;
+               justify-content: flex-start;
+            }
+         }
+
+         &_content {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(10, 6);
+            padding: fl(24, 16);
+            border-radius: 0 0 14px 14px;
+            background: #FFF;
+            box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.02), 0 4px 160px 0 rgba(0, 0, 0, 0.08);
+
+            @include desktop {
+               padding: 16px;
+               row-gap: 6px;
+            }
+
+            @include tablet {
+               row-gap: 10px;
+            }
+
+            &_title {
+               color: #0169F9;
+               font-family: "Gilroy", sans-serif;
+               font-size: fl(18, 14);
+               font-weight: 500;
+               line-height: normal;
+
+               @include desktop {
+                  font-size: 14px;
+                  line-height: 20px;
+               }
+
+            }
+
+            &_message {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               column-gap: 10px;
+               color: #0169F9;
+               font-family: "Gilroy", sans-serif;
+               font-size: fl(18, 14);
+               font-weight: 500;
+               line-height: normal;
+
+               padding: fl(7, 5) fl(7, 5) fl(7, 5) fl(15, 12);
+               border-radius: 14px;
+               border: 1px solid #0169F9;
+
+               @include desktop {
+                  padding: 5px 5px 5px 12px;
+                  font-size: 14px;
+                  line-height: 20px;
+               }
+
+               @include tablet {
+                  font-size: 12px;
+                  line-height: 18px;
+                  max-width: max-content;
+               }
+
+               @include mobile {
+                  font-size: 14px;
+                  line-height: 20px;
+
+               }
+
+
+               span {
+                  overflow: hidden;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+
+                  @include tablet {
+                     overflow: hidden;
+                     display: -webkit-box;
+                     -webkit-line-clamp: 2;
+                     -webkit-box-orient: vertical;
+                  }
+
+                  @include mobile {
+                     overflow: hidden;
+                     display: -webkit-box;
+                     -webkit-line-clamp: 1;
+                     -webkit-box-orient: vertical;
+                  }
+               }
+
+
+               &_icon {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-shrink: 0;
+                  width: fl(30, 27);
+                  height: fl(30, 27);
+
+                  @include desktop {
+                     width: 27px;
+                     height: 27px;
+                  }
+
+                  @include tablet {
+                     width: 30px;
+                     height: 30px;
+                  }
+
+                  svg {
+                     @include svgDefault;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   &_right {
+      display: flex;
+      column-gap: 30px;
+      padding: fl(40, 30);
+      border: 1px dashed $dark-grey;
+      border-radius: 14px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      @include desktop {
+         padding: 30px;
+      }
+
+      @include tablet {
+         padding: 19px;
+         row-gap: 16px;
+         border-radius: 10px;
+      }
+
+      @include mobile {
+         margin-top: 7px;
+      }
+
+      &_content {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(40, 24);
+         justify-content: space-between;
+         width: 100%;
+         max-width: 42.516%;
+
+         @include desktop {
+            row-gap: 24px
+         }
+
+         @include tablet {
+            max-width: 100%;
+            row-gap: 16px
+         }
+
+         &_title {
+            @include largeText;
+            color: $black;
+         }
+
+         &_list {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(20, 12);
+
+            @include desktop {
+               row-gap: 12px;
+            }
+
+            @include tablet {
+               row-gap: 10px;
+            }
+
+            &_it {
+               display: flex;
+               align-items: center;
+               column-gap: fl(12, 10);
+
+               @include desktop {
+                  column-gap: 10px;
+               }
+
+               @include tablet {
+                  column-gap: 12px;
+               }
+
+               &_text {
+                  @include mediumText;
+                  color: $black;
+                  text-wrap: balance;
+               }
+            }
+         }
+      }
+
+
+   }
+
+   &_btn {
+      margin-top: fl(50, 30);
+
+      @include desktop {
+         margin-top: 30px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+      }
+   }
+
+   &_last_text {
+      margin-top: fl(50, 30);
+      @include mediumText;
+      color: $dark-grey;
+
+      @include desktop {
+         margin-top: 30px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+      }
+   }
+}

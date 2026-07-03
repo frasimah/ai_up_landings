@@ -1,0 +1,137 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.call_center_inside {
+   @include mt;
+
+   &_wrap {
+
+      &_title {
+         margin-bottom: fl(60, 40);
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-bottom: 24px;
+         }
+      }
+
+      &_left {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(40, 30);
+         height: 100%;
+         justify-content: space-between;
+         width: 100%;
+         max-width: 100%;
+
+         @include desktop {
+            row-gap: 30px;
+         }
+
+         @include tablet {
+            row-gap: 16px;
+         }
+
+         &_head {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(30, 20);
+
+            @include desktop {
+               row-gap: 20px
+            }
+
+            @include tablet {
+               row-gap: 12px
+            }
+
+            &_title {
+               @include largeText;
+               color: $black
+            }
+
+            &_list {
+               display: flex;
+               flex-wrap: wrap;
+               gap: fl(20, 14);
+
+               @include desktop {
+                  gap: 14px;
+               }
+
+               @include tablet {
+                  gap: 7px;
+               }
+
+               &_it {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  column-gap: 10px;
+                  padding: 10px 20px fl(12, 10) fl(13, 10);
+                  border-radius: 50px;
+                  background: #F6F6F6;
+                  @include largeText;
+                  color: $black;
+                  will-change: transform,
+                 opacity;
+
+                  @include desktop {
+                     padding: 10px 20px 10px 10px;
+                  }
+
+                  &_icon {
+                     display: flex;
+                     flex-shrink: 0;
+                     width: fl(28, 24);
+                     height: fl(28, 24);
+
+                     @include desktop {
+                        width: 24px;
+                        height: 24px;
+                     }
+
+                     @include tablet {
+                        width: 22px;
+                        height: 22px;
+                     }
+
+                     svg {
+                        width: 100%;
+                        height: 100%;
+                     }
+                  }
+               }
+            }
+         }
+
+         &_message {
+            @include largeText;
+            color: #9C9C9C;
+         }
+      }
+
+      &_img {
+         display: block;
+         width: 100%;
+         height: auto;
+         border-radius: 14px;
+         overflow: hidden;
+
+         @include tablet {
+            margin-top: 24px;
+         }
+
+         img {
+            width: 100%;
+            height: auto;
+         }
+      }
+   }
+
+
+}

@@ -1,0 +1,26 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.big_border_item {
+   display: flex;
+   align-items: center;
+   column-gap: fl(20, 16);
+   @include h3;
+   color: $black;
+   padding: fl(39, 29);
+   border: 1px dashed #777;
+   border-radius: 10px;
+   height: 100%;
+
+   @include desktop {
+      column-gap: 16px;
+      padding: 29px;
+   }
+
+   @include tablet {
+      padding: 15px;
+      column-gap: 12px;
+      border-radius: 6px;
+   }
+}

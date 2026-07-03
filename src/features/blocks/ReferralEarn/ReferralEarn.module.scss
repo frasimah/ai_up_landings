@@ -1,0 +1,71 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.referral_earn {
+   @include mt;
+   padding: fl(100, 60) 0;
+   background: #2B2B2B;
+
+   @include desktop {
+      padding: 80px 0;
+   }
+
+   @include tablet {
+      padding: 60px 0;
+   }
+
+   &_wrap {
+      &_head {
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+         }
+
+         &_text {
+            @include largeText;
+            color: $white;
+         }
+
+         &_item {
+            width: 100%;
+            height: auto;
+            margin-top: fl(60, 40);
+
+            @include desktop {
+               margin-top: 40px;
+            }
+
+            @include tablet {
+               margin-top: 24px;
+            }
+
+            svg {
+               width: 100%;
+               height: auto;
+            }
+
+            &_desktop {
+
+               @media screen and (max-width: 550px) {
+                  display: none;
+               }
+            }
+
+            &_mobile {
+               display: none;
+
+
+               @media screen and (max-width: 550px) {
+                  display: block;
+               }
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,41 @@
+<svg width="507" height="360" viewBox="0 0 507 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern id="call-center-ai-dots-sm" x="0" y="0" width="11.11" height="11.11" patternUnits="userSpaceOnUse">
+<circle cx="5.555" cy="5.555" r="0.42" fill="#E9E9E9"/>
+</pattern>
+<pattern id="call-center-ai-dots-md" x="0" y="0" width="11.11" height="11.11" patternUnits="userSpaceOnUse">
+<circle cx="5.555" cy="5.555" r="0.8" fill="#E9E9E9"/>
+</pattern>
+<pattern id="call-center-ai-dots-lg" x="0" y="0" width="11.11" height="11.11" patternUnits="userSpaceOnUse">
+<circle cx="5.555" cy="5.555" r="1.28" fill="#E9E9E9"/>
+</pattern>
+<pattern id="call-center-ai-dots-xl" x="0" y="0" width="11.11" height="11.11" patternUnits="userSpaceOnUse">
+<circle cx="5.555" cy="5.555" r="1.88" fill="#E9E9E9"/>
+</pattern>
+<radialGradient id="call-center-ai-fade-md" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(253.5 180) rotate(90) scale(170 120)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="call-center-ai-fade-lg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(253.5 180) rotate(90) scale(132 92)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="call-center-ai-fade-xl" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(253.5 180) rotate(90) scale(94 66)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</radialGradient>
+<mask id="call-center-ai-mask-md" maskUnits="userSpaceOnUse" x="0" y="0" width="507" height="360">
+<rect width="507" height="360" fill="url(#call-center-ai-fade-md)"/>
+</mask>
+<mask id="call-center-ai-mask-lg" maskUnits="userSpaceOnUse" x="0" y="0" width="507" height="360">
+<rect width="507" height="360" fill="url(#call-center-ai-fade-lg)"/>
+</mask>
+<mask id="call-center-ai-mask-xl" maskUnits="userSpaceOnUse" x="0" y="0" width="507" height="360">
+<rect width="507" height="360" fill="url(#call-center-ai-fade-xl)"/>
+</mask>
+</defs>
+<rect width="507" height="360" fill="url(#call-center-ai-dots-sm)" opacity="0.56"/>
+<rect width="507" height="360" fill="url(#call-center-ai-dots-md)" opacity="0.72" mask="url(#call-center-ai-mask-md)"/>
+<rect width="507" height="360" fill="url(#call-center-ai-dots-lg)" opacity="0.88" mask="url(#call-center-ai-mask-lg)"/>
+<rect width="507" height="360" fill="url(#call-center-ai-dots-xl)" mask="url(#call-center-ai-mask-xl)"/>
+</svg>

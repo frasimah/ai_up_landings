@@ -1,0 +1,134 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_first {
+   padding-top: fl(300, 192);
+   position: relative;
+   overflow-x: clip;
+
+   @include desktop {
+      padding-top: 192px;
+   }
+
+   @include tablet {
+      padding-top: 96px;
+   }
+
+   &_wrap {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: fl(1214, 900);
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+
+      @include desktop {
+         max-width: 900px;
+      }
+
+      @include tablet {
+         align-items: flex-start;
+         justify-content: flex-start;
+         margin-left: unset;
+         margin-right: unset;
+      }
+
+      &_message {
+         display: flex;
+         align-items: center;
+         padding: fl(13, 10) 20px fl(13, 10) fl(13, 10);
+         column-gap: 10px;
+         border-radius: 50px;
+         background: #F6F6F6;
+
+         @include largeText;
+         font-weight: 500;
+         color: $black;
+
+         @include desktop {
+            padding: 10px 20px 10px 10px;
+            border-radius: 20px;
+         }
+
+         @include mobile {
+            align-items: flex-start;
+         }
+
+         &_icon {
+            display: flex;
+            width: fl(28, 24);
+            height: fl(28, 24);
+            flex-shrink: 0;
+
+            @include desktop {
+               width: 24px;
+               height: 24px;
+            }
+
+            @include tablet {
+               width: 21px;
+               height: 21px;
+            }
+
+            @include mobile {
+               transform: translateY(1px);
+            }
+
+            svg {
+               width: 100%;
+               height: 100%;
+            }
+         }
+      }
+
+      &_header {
+         margin-top: 24px;
+         max-width: 1200px;
+         text-wrap: balance;
+
+         >* {
+            text-align: center;
+
+            @include mobile {
+               text-align: left;
+            }
+         }
+      }
+
+      &_btn {
+         margin-top: fl(24, 20);
+
+         @include desktop {
+            margin-top: 20px;
+         }
+
+         @include tablet {
+            margin-top: 16px;
+         }
+      }
+   }
+
+   &_bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+      z-index: -1;
+
+      @include tablet {
+         display: none;
+      }
+
+      img,
+      svg {
+         display: block;
+         width: 100%;
+         height: auto;
+      }
+   }
+}

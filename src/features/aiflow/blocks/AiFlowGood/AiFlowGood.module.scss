@@ -1,0 +1,121 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_good {
+   @include mt;
+
+   &_wrap {
+
+      @include mobile {
+         row-gap: 7px;
+      }
+
+      &_title {
+         max-width: 520px;
+         margin-left: auto;
+         margin-right: auto;
+         text-align: center;
+         margin-bottom: fl(60, 40);
+         text-wrap: balance;
+
+         @include desktop {
+            margin-bottom: 40px;
+         }
+
+         @include tablet {
+            margin-left: unset;
+            margin-right: unset;
+            text-align: left;
+            margin-bottom: 17px;
+         }
+      }
+
+      &_item {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         row-gap: fl(140, 100);
+         padding: fl(40, 30);
+         border-radius: 14px;
+         background: var(--Background-grey, #F6F6F6);
+         height: 100%;
+
+         @include desktop {
+            padding: 30px;
+            row-gap: 100px;
+         }
+
+         @include tablet {
+            padding: 16px;
+            border-radius: 8px;
+            row-gap: 24px;
+         }
+
+         &_head {
+            display: flex;
+            align-items: center;
+            column-gap: 20px;
+            @include h3;
+
+            @include desktop {
+               column-gap: 16px;
+            }
+
+            @include tablet {
+               column-gap: 12px;
+            }
+
+            &_icon {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               flex-shrink: 0;
+               width: fl(40, 30);
+               height: fl(40, 30);
+
+               @include desktop {
+                  width: 30px;
+                  height: 30px;
+               }
+
+               svg {
+                  width: 100%;
+                  height: 100%;
+               }
+            }
+         }
+
+         &_list {
+            display: flex;
+            flex-direction: column;
+            list-style-type: disc;
+            padding-left: 25px;
+
+            li {
+               @include largeText;
+               color: $black;
+            }
+         }
+      }
+
+      &_last {
+         margin-top: fl(40, 30);
+         text-align: center;
+         max-width: 900px;
+         margin-left: auto;
+         margin-right: auto;
+         @include largeText;
+         color: $grey;
+
+         @include desktop {
+            margin-top: 30px;
+         }
+
+         @include tablet {
+            margin-top: 17px;
+            text-align: left;
+         }
+      }
+   }
+}

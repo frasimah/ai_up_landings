@@ -1,0 +1,546 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// AI-UP Hero — dark blueprint (ported from эталон "Hero AI-UP.dc.html").
+// The .dc.html's own <header> is intentionally omitted — the app's global
+// fixed HeaderOther floats over this section.
+
+// Keyframes are :global so inline-style references (ll-drift / ll-flow on the
+// SVG paths and cards) and scoped classes can both use them by literal name.
+:global {
+   @keyframes ll-fade-up {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+   }
+   @keyframes ll-flow { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -240; } }
+   @keyframes ll-flow2 { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 240; } }
+   @keyframes ll-scan {
+      0% { transform: translateY(-10px); opacity: 0; }
+      12% { opacity: .9; }
+      88% { opacity: .9; }
+      100% { transform: translateY(112px); opacity: 0; }
+   }
+   @keyframes ll-docscan {
+      0% { top: 14px; opacity: 0; }
+      12% { opacity: 1; }
+      88% { opacity: 1; }
+      100% { top: 78px; opacity: 0; }
+   }
+   @keyframes ll-node {
+      0%, 100% { opacity: 0; transform: scale(.5); }
+      50% { opacity: 1; transform: scale(1.1); }
+   }
+   @keyframes ll-caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+   @keyframes ll-drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+   }
+   @keyframes ll-fill {
+      0% { width: 18%; }
+      50% { width: 86%; }
+      100% { width: 18%; }
+   }
+}
+
+.hero {
+   position: relative;
+   width: 100%;
+   height: 100vh;
+   height: 100svh;
+   min-height: 720px;
+   box-sizing: border-box;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   // clear the global fixed header so the centred content (NEW badge) isn't covered
+   padding-top: 96px;
+   background: var(--bg-hero-navy);
+   font-family: $gilroy;
+   color: #fff;
+
+   @include tablet { padding-top: 80px; }
+   // Mobile fills the height and pins the badge to the top, so it must clear
+   // the full fixed header *incl.* the promo top-banner (~112px), not just the
+   // header bar. (Desktop/tablet keep the smaller value since their content
+   // stays vertically centred, well clear of the header either way.)
+   @include mobile { padding-top: 108px; }
+
+   @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+   }
+}
+
+// blueprint grid masked to centre
+.grid {
+   position: absolute;
+   inset: 0;
+   background-image: var(--grid-blueprint);
+   background-size: var(--grid-blueprint-size);
+   -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 42%, #000 35%, transparent 82%);
+   mask-image: radial-gradient(ellipse 75% 70% at 50% 42%, #000 35%, transparent 82%);
+   pointer-events: none;
+}
+
+// ambient nodes / plus marks / connector svg — hidden on small screens
+.amb {
+   position: absolute;
+   @include tablet { display: none; }
+}
+@media (max-width: 880px) {
+   .amb { display: none; }
+}
+
+// Cursor-parallax layers: --mx/--my are set by CallCenterFirst.tsx (lerped
+// toward the pointer position, range -1..1). Two depths so the composition
+// has some dimensionality instead of drifting as one flat plane.
+.parallaxNear,
+.parallaxFar {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+}
+
+.parallaxNear {
+   transform: translate(calc(var(--mx, 0) * 22px), calc(var(--my, 0) * 16px));
+}
+
+.parallaxFar {
+   transform: translate(calc(var(--mx, 0) * 10px), calc(var(--my, 0) * 7px));
+}
+
+.node {
+   width: 9px;
+   height: 9px;
+   background: var(--tech-blue-600);
+   box-shadow: var(--glow-node);
+   animation: ll-node 3.2s ease-in-out infinite;
+}
+
+.plus {
+   color: rgba(86, 150, 255, .4);
+   font-size: 18px;
+}
+
+.connectors {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   opacity: .7;
+   pointer-events: none;
+}
+
+// floating module cards. Ported from the homepage hero's approach: don't hide
+// them on small screens, shrink them and let the section's own overflow:hidden
+// clip whatever pokes past the edge — same partial-peek feel as the homepage.
+.hcard {
+   position: absolute;
+   z-index: 1;
+
+   @media (max-width: 1024px) {
+      transform: scale(.5);
+   }
+
+   // Mobile hero is a clean text layout per the approved design — the centre
+   // is deliberately left empty for animation, so the floating cards are
+   // dropped entirely rather than squeezed in.
+   @include mobile {
+      display: none;
+   }
+}
+
+.hcardScan { left: 2%; top: 14%; }
+.hcardCrm { left: 2.5%; bottom: 9%; }
+.hcardSources { right: 2%; top: 14%; }
+.hcardEnrich { right: 2.5%; bottom: 9%; }
+
+// Empty in-flow spacer (flex: 1) that opens the centre gap the design reserves
+// for animation: it absorbs all leftover height so the badge + note sit at the
+// top and the title + subtitle + buttons group is pushed to the bottom.
+.mobileStage {
+   display: none;
+
+   @include mobile {
+      display: block;
+      position: relative;
+      order: 2;
+      flex: 1;
+      min-height: 160px;
+   }
+}
+
+// Ambient blueprint pattern (pulsing nodes, plus marks, flowing connector
+// lines) that fills the reserved centre gap on mobile — the same background
+// motion as desktop, concentrated in the empty stage instead of scattered
+// behind the text. Rendered only inside .mobileStage, which is itself
+// mobile-only, so no extra breakpoint gating is needed here.
+.mobileAmb {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   pointer-events: none;
+
+   .node, .plus { position: absolute; }
+}
+
+.mobileConnectors {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   opacity: .8;
+}
+
+// Centred "Источники" card — the same doc-scan card used on desktop
+// (.hcardSources), but shown centred in the mobile stage instead of a corner
+// (desktop's .hcard is hidden entirely on mobile, so this is a standalone
+// copy rather than reusing that absolute-positioned component). Visual style
+// duplicated from .hcard .card/.tag since those are scoped to .hcard only.
+.mobileSourceCard {
+   position: relative;
+   z-index: 1;
+   width: 172px;
+   padding: 18px;
+   border: 1px solid var(--navy-border);
+   border-radius: var(--radius-module);
+   background: var(--glass-module-fill);
+   overflow: hidden;
+}
+
+.mobileSourceTag {
+   margin-top: 14px;
+   padding: 8px 12px;
+   border: 1px solid rgba(86, 150, 255, .3);
+   border-radius: 12px;
+   text-align: center;
+   font-family: var(--font-mono);
+   font-size: 12px;
+   letter-spacing: var(--label-tracking-tight);
+   color: var(--tech-blue-400);
+}
+
+.hcard {
+   .card {
+      position: relative;
+      border: 1px solid var(--navy-border);
+      border-radius: var(--radius-module);
+      background: var(--glass-module-fill);
+      overflow: hidden;
+   }
+
+   .tag {
+      margin-top: 16px;
+      padding: 10px 14px;
+      border: 1px solid rgba(86, 150, 255, .3);
+      border-radius: 12px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: var(--label-tracking-tight);
+      color: var(--tech-blue-400);
+   }
+}
+
+.scanline {
+   position: absolute;
+   left: 0;
+   right: 0;
+   top: 0;
+   height: 2px;
+   background: linear-gradient(90deg, transparent, var(--tech-blue-500), transparent);
+   animation: ll-scan 3.6s ease-in-out infinite;
+}
+
+.iconCircle {
+   width: 54px;
+   height: 54px;
+   border-radius: 50%;
+   border: 1px solid rgba(86, 150, 255, .4);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.crmBox {
+   width: 46px;
+   height: 46px;
+   border-radius: 12px;
+   border: 1px solid rgba(86, 150, 255, .4);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: var(--font-mono);
+   font-size: 11px;
+   font-weight: 700;
+   color: var(--tech-blue-400);
+}
+
+.docPanel {
+   position: relative;
+   height: 96px;
+   border: 1px solid var(--navy-line-strong);
+   border-radius: 12px;
+   padding: 16px;
+   overflow: hidden;
+}
+.docLine { border-radius: 4px; margin-bottom: 11px; }
+.docScan {
+   position: absolute;
+   left: 8px;
+   right: 8px;
+   height: 14px;
+   border-radius: 6px;
+   background: linear-gradient(180deg, rgba(57, 160, 255, .35), transparent);
+   box-shadow: 0 0 14px rgba(57, 160, 255, .6);
+   animation: ll-docscan 3.4s ease-in-out infinite;
+}
+
+.enrichBar {
+   height: 6px;
+   border-radius: 4px;
+   background: rgba(86, 150, 255, .18);
+   overflow: hidden;
+   .enrichFill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--tech-blue-600), #7fd0ff);
+      animation: ll-fill 3.2s ease-in-out infinite;
+   }
+}
+
+// centred content
+.content {
+   position: relative;
+   z-index: 4;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   padding: 16px 24px 44px;
+
+   // Mobile: fill the hero height so the flexible .mobileStage can split the
+   // stack into a top group (badge + note) and a bottom group (title +
+   // subtitle + buttons). Left-aligned per the design; badge + note opt back
+   // into centring individually.
+   @include mobile {
+      flex: 1;
+      align-items: stretch;
+      justify-content: flex-start;
+      text-align: left;
+      padding: 16px 20px 32px;
+   }
+}
+
+.enter { animation: ll-fade-up .7s var(--ease-smooth) both; }
+
+.badge {
+   display: inline-flex;
+   align-items: center;
+   gap: 10px;
+   padding: 8px 16px 8px 10px;
+   border-radius: 999px;
+   background: rgba(31, 143, 255, .12);
+   border: 1px solid rgba(86, 150, 255, .3);
+   font-size: 14px;
+   color: var(--tech-blue-300);
+   margin-bottom: 34px;
+   animation-delay: .05s;
+
+   .badgeCheck {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--tech-blue-400, #56a0ff);
+      color: #fff;
+      flex-shrink: 0;
+   }
+
+   @include tablet { margin-bottom: 24px; }
+
+   // Smaller, so it reads as a compact top tag rather than a second headline —
+   // stays in-flow as the first item of the centred stack (simplest way to
+   // keep it clear of the module cards now shown alongside it on mobile).
+   @include mobile {
+      order: 0;
+      align-self: center;
+      padding: 6px 12px 6px 7px;
+      gap: 6px;
+      font-size: 11px;
+      margin-bottom: 0;
+      white-space: nowrap;
+
+      .badgeCheck { width: 16px; height: 16px; }
+      svg { width: 10px; height: 8px; }
+   }
+}
+
+.title {
+   margin: 0;
+   max-width: 1060px;
+   font-size: 52px;
+   line-height: 56px;
+   font-weight: 500;
+   letter-spacing: -.02em;
+   color: #fff;
+   text-wrap: balance;
+   animation-delay: .12s;
+
+   span { color: var(--tech-blue-400); }
+
+   @include desktop { font-size: 46px; line-height: 50px; }
+   @include tablet { font-size: 36px; line-height: 42px; }
+   @include mobile { order: 3; font-size: 28px; line-height: 34px; }
+}
+
+// Rotating single-line slider (3 short value props cycled one at a time)
+// instead of one long run-on sentence. Fixed height = 2 lines at the slide's
+// own line-height, so a slide is free to wrap once without clipping while the
+// box itself never resizes/jumps as slides change.
+.subtitle {
+   position: relative;
+   margin: 26px 0 0;
+   // Slides are absolutely stacked, so the container has no in-flow content to
+   // size it — take the full content width (capped) explicitly, or it collapses
+   // to 0 under .content's `align-items: center` and the text gets clipped.
+   width: 100%;
+   max-width: 780px;
+   overflow: hidden;
+   height: 56px;
+   animation-delay: .19s;
+
+   @include tablet { height: 48px; margin-top: 18px; }
+   @include mobile { order: 4; }
+}
+
+// Soft cross-dissolve between phrases: every slide is stacked in the same spot,
+// only the active one is visible. A long, eased opacity + blur fade (never a
+// hard slide) so phrases melt into one another instead of jumping — and because
+// the outgoing fade-out and incoming fade-in overlap, the line is never fully
+// blank mid-transition. The blur softens the brief moment both are semi-visible
+// into a gentle focus-pull rather than sharp double text.
+.subtitleSlide {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 0;
+   font-size: 20px;
+   line-height: 28px;
+   font-weight: 400;
+   color: rgba(255, 255, 255, .66);
+   text-wrap: balance;
+   text-align: center;
+   opacity: 0;
+   filter: blur(7px);
+   transition: opacity 1.2s var(--ease-smooth, ease), filter 1.2s var(--ease-smooth, ease);
+   pointer-events: none;
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+   @include mobile { justify-content: flex-start; text-align: left; }
+}
+
+.subtitleSlideActive {
+   opacity: 1;
+   filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .subtitleSlide { transition: none; }
+}
+
+.actions {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   margin-top: 42px;
+   animation-delay: .26s;
+
+   // Side by side per the design. row-reverse keeps the DOM order (primary
+   // «Заказать звонок» first, for tab/emphasis order) but paints the ghost
+   // «Написать в Telegram» on the left and the blue CTA on the right, as drawn.
+   @include mobile {
+      order: 5;
+      flex-direction: row-reverse;
+      align-items: stretch;
+      gap: 12px;
+      margin-top: 28px;
+
+      > button { flex: 1; min-width: 0; }
+   }
+}
+
+// Same scalable button size as the rest of the site (see components/Buttons/Button.module.scss,
+// used by the header's «Войти» / «Создать аккаунт») — was a flat 17px/34px/18px with zero
+// responsive scaling, which is why it towered over everything else on mobile.
+.btnPrimary {
+   @include mediumText;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: fl(10, 8);
+   padding: fl(18, 14) fl(22, 18);
+   border-radius: fl(20, 14);
+   border: none;
+   background: var(--blue);
+   color: #fff;
+   font-weight: 600;
+   cursor: pointer;
+   box-shadow: var(--glow-cta);
+   transition: all .3s var(--ease-bounce);
+
+   @include desktop { padding: 14px 18px; border-radius: 14px; }
+   @include tablet { padding: 10px 16px; border-radius: 10px; gap: 8px; }
+
+   @include hover {
+      background: var(--blue-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 44px rgba(1, 105, 249, .5);
+   }
+}
+
+.btnGhost {
+   @include mediumText;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: fl(18, 14) fl(22, 18);
+   border-radius: fl(20, 14);
+   border: 1px solid rgba(255, 255, 255, .22);
+   background: rgba(255, 255, 255, .05);
+   color: #fff;
+   font-weight: 600;
+   cursor: pointer;
+   transition: all .3s var(--ease-smooth);
+
+   @include desktop { padding: 14px 18px; border-radius: 14px; }
+   @include tablet { padding: 10px 16px; border-radius: 10px; border-width: 1px; }
+
+   @include hover {
+      background: rgba(255, 255, 255, .1);
+      border-color: rgba(255, 255, 255, .4);
+   }
+}
+
+.note {
+   margin: 30px 0 0;
+   font-size: 16px;
+   line-height: 22px;
+   color: rgba(255, 255, 255, .4);
+   text-wrap: balance;
+   animation-delay: .33s;
+
+   @include tablet { margin-top: 22px; font-size: 14px; }
+
+   // Design places this line directly under the badge (top group), centred,
+   // above the animation gap — not at the very bottom like on desktop.
+   @include mobile { order: 1; margin-top: 14px; text-align: center; }
+}

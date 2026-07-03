@@ -1,0 +1,93 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 03 — Боли. Ported from "Лендинг AI-UP.dc.html" §3. Dark surface, 2×2 cards, no animation.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   background: var(--navy-900);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 0 56px;
+   text-align: center;
+
+   @include tablet { margin-bottom: 36px; }
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 24px;
+
+   @media (max-width: 920px) { grid-template-columns: 1fr; }
+}
+
+.card {
+   display: flex;
+   gap: 20px;
+   align-items: flex-start;
+   border: 1px solid rgba(255, 255, 255, .08);
+   border-radius: 18px;
+   background: rgba(255, 255, 255, .025);
+   padding: 30px 32px;
+
+   @include tablet { padding: 22px 24px; gap: 16px; }
+}
+
+.mark {
+   flex-shrink: 0;
+   width: 42px;
+   height: 42px;
+   border-radius: 11px;
+   background: rgba(215, 45, 30, .14);
+   border: 1px solid rgba(215, 45, 30, .35);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: #ff6b5a;
+   font-size: 22px;
+   line-height: 1;
+}
+
+.cardTitle {
+   margin: 0 0 8px;
+   font-size: 24px;
+   line-height: 30px;
+   font-weight: 500;
+   color: #fff;
+}
+
+.cardText {
+   margin: 0;
+   font-size: 16px;
+   line-height: 24px;
+   color: rgba(255, 255, 255, .6);
+}
+
+.note {
+   margin: 48px auto 0;
+   max-width: 820px;
+   text-align: center;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .5);
+   text-wrap: balance;
+
+   @include tablet { font-size: 17px; line-height: 24px; margin-top: 32px; }
+}

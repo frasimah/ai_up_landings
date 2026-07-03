@@ -1,0 +1,66 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_reg_wrap_frame {
+   display: flex;
+   align-items: center;
+   column-gap: fl(20, 16);
+   position: absolute;
+   bottom: 40px;
+   right: 40px;
+   padding: fl(24, 16) fl(30, 16);
+   border-radius: 14px;
+   background: rgba(52, 199, 89, 0.60);
+   box-shadow: 0 4px 100px 0 rgba(0, 0, 0, 0.10);
+   backdrop-filter: blur(25px);
+   z-index: 3;
+   transform: translateZ(0) scale(0.5);
+   will-change: transform, opacity, scale;
+   opacity: 0;
+
+   @include desktop {
+      column-gap: 16px;
+      padding: 16px;
+   }
+
+   @include tablet {
+      display: none;
+   }
+
+   &_icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+      width: fl(40, 30);
+      height: fl(40, 30);
+
+      @include desktop {
+         width: 30px;
+         height: 30px;
+      }
+
+      svg {
+         @include svgDefault;
+      }
+   }
+
+   &_content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 2px;
+
+      @include desktop {
+         row-gap: 0
+      }
+
+      &_title {
+         @include largeText;
+      }
+
+      &_text {
+         @include mediumText;
+      }
+   }
+}

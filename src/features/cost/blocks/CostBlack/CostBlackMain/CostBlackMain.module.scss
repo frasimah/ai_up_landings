@@ -1,0 +1,187 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_main {
+   width: 100%;
+
+   &_wrap {
+      &_top {
+         display: flex;
+         flex-direction: column;
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+         }
+
+         &_chat {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(40, 30);
+            max-width: 1220px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+
+            @include desktop {
+               row-gap: 30px;
+            }
+
+            @include tablet {
+               row-gap: 20px;
+            }
+
+            &_item {
+               display: flex;
+               align-items: center;
+               width: fit-content;
+               max-width: max-content;
+               padding: fl(20, 16) fl(30, 24);
+               border-radius: 40px;
+               position: relative;
+               @include h2;
+
+               @include desktop {
+                  padding: 16px 24px;
+               }
+
+               @include tablet {
+                  max-width: 100%;
+                  @include h3;
+                  padding: 20px;
+                  border-radius: 20px;
+               }
+
+               &:nth-child(1),
+               &:nth-child(3) {
+                  background: #fff;
+                  color: #2b2b2b;
+                  margin-right: auto;
+
+                  &::after {
+                     content: '';
+                     display: block;
+                     width: 40px;
+                     height: 40px;
+                     position: absolute;
+                     left: 0;
+                     bottom: 0;
+                     background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M7.27%2012.35C6.54%2016.59%202.42%2020%200%2020C9.31%2020%2015.27%2016.94%2016.73%2015.06L24%2017.17L12%2012.35L8%200V2.82V5.65V6.35C8%207.76%208%2010.59%207.27%2012.35Z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E");
+                     background-repeat: no-repeat;
+                     background-size: 100% 100%;
+
+                     @include tablet {
+                        left: -8px;
+                        bottom: -8px;
+                     }
+                  }
+               }
+
+               &:nth-child(2) {
+                  background: #0169f9;
+                  color: #fff;
+                  margin-left: auto;
+
+                  &::after {
+                     content: '';
+                     display: block;
+                     width: 40px;
+                     height: 40px;
+                     position: absolute;
+                     right: 0;
+                     bottom: 0;
+                     background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2224%22%20height%3D%2220%22%20viewBox%3D%220%200%2024%2020%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M16.73%2012.35C17.46%2016.59%2021.58%2020%2024%2020C14.69%2020%208.73%2016.94%207.27%2015.06L0%2017.17L12%2012.35L16%200V2.82V5.65V6.35C16%207.76%2016%2010.59%2016.73%2012.35Z%22%20fill%3D%22%230169F9%22%2F%3E%3C%2Fsvg%3E");
+                     background-repeat: no-repeat;
+                     background-size: 100% 100%;
+
+                     @include tablet {
+                        right: -8px;
+                        bottom: -8px;
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      &_bot {
+         margin-top: fl(120, 80);
+         display: flex;
+
+         @include desktop {
+            margin-top: 80px;
+         }
+
+         @include tablet {
+            flex-direction: column;
+            width: 100%;
+            margin-top: 50px;
+         }
+
+         &_item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 33.33333333%;
+            padding: fl(40, 30);
+            border: 1px dashed rgba(255, 255, 255, 0.18);
+            border-radius: 10px;
+            @include h3;
+            color: $white;
+
+            @include desktop {
+               padding: 30px;
+            }
+
+            @include tablet {
+               padding: 16px;
+               max-width: 100%;
+            }
+         }
+
+         &_arrow {
+            display: flex;
+            width: fl(23, 20);
+            height: fl(20, 17);
+            flex-shrink: 0;
+            margin: 0 fl(40, 30);
+            margin-top: auto;
+            margin-bottom: auto;
+
+            @include desktop {
+               margin: auto 30px;
+               width: 20px;
+               height: 17px;
+            }
+
+            @include tablet {
+               margin: 7px auto;
+            }
+
+            svg {
+               width: 100%;
+               height: 100%;
+
+               &.cost_main_wrap_bot_arrow_desktop {
+                  @include tablet {
+                     display: none;
+                  }
+               }
+
+               &.cost_main_wrap_bot_arrow_tablet {
+                  display: none;
+
+                  @include tablet {
+                     display: flex;
+                  }
+               }
+            }
+         }
+      }
+   }
+}

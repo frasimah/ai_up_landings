@@ -1,0 +1,65 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_call {
+   margin-top: fl(180, 140);
+   background: #2B2B2B;
+   padding-top: 100px;
+   padding-bottom: fl(200, 140);
+   overflow: hidden;
+
+   @include desktop {
+      margin-top: 140px;
+      padding-bottom: 140px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+      padding-top: 60px;
+      padding-bottom: 60px;
+   }
+
+   &_wrap {
+      &_left {
+         &_message {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: fl(50, 40);
+            padding: fl(9, 7) fl(19, 17) fl(11, 9) fl(19, 17);
+
+            border-radius: fl(14, 10);
+            border: 1px dashed $grey;
+
+            @include h4;
+            color: $grey;
+
+            @include desktop {
+               margin-top: 40px;
+               padding: 8px 17px 8px 17px;
+               border-radius: 10px;
+            }
+
+            @include tablet {
+               margin-top: 12px;
+               padding: 8px 13px 8px 7px;
+            }
+         }
+      }
+
+      &_btn {
+         margin-top: 8px;
+
+         @include tablet {
+            margin-top: 32px;
+         }
+      }
+
+   }
+
+   &_over {
+      overflow: hidden;
+   }
+}

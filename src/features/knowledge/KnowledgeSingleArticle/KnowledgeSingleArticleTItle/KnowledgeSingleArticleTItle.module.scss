@@ -1,0 +1,83 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.knowledge_single_article_head {
+   display: flex;
+   flex-direction: column;
+   gap: 0;
+}
+
+.knowledge_single_article_breadcrumbs {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px;
+   margin-bottom: fl(24, 16);
+}
+
+.knowledge_single_article_breadcrumb_item {
+   @include mediumText;
+   color: #707070;
+
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+
+   &:not(:last-child)::after {
+      content: "/";
+      color: #9C9C9C;
+   }
+
+   a {
+      color: inherit;
+      text-decoration: none;
+   }
+}
+
+.knowledge_single_article_title {
+   @include h1;
+   color: $black;
+   margin-bottom: 16px;
+}
+
+.knowledge_single_article_subtitle {
+   @include h2;
+   color: $black;
+   margin: fl(50, 40) 0 fl(20, 16) 0;
+
+   @include desktop {
+      margin-top: 40px;
+      margin-bottom: 16px;
+   }
+
+   @include tablet {
+      margin-top: 30px;
+      margin-bottom: 12px;
+   }
+}
+
+.knowledge_single_article_meta {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 8px 0;
+   margin: 0;
+}
+
+.knowledge_single_article_meta_item {
+   @include mediumText;
+   color: #707070;
+
+   &:not(:last-child) {
+      &::after {
+         content: "·";
+         margin: 0 10px;
+         color: #9C9C9C;
+      }
+   }
+}
+
+.knowledge_single_article_reviewer {
+   @include mediumText;
+   color: $black;
+   margin: 8px 0 0 0;
+}

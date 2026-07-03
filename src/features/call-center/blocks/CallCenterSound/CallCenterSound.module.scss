@@ -1,0 +1,134 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 08d — Звучание. Ported from "Лендинг AI-UP.dc.html" §8d. Cosmetic waveform players.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   background: var(--navy-900);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head { margin-bottom: 56px; @include tablet { margin-bottom: 36px; } }
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+   margin-bottom: 18px;
+
+   span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0;
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 24px;
+
+   @media (max-width: 760px) { grid-template-columns: 1fr; }
+}
+
+.card {
+   border: 1px solid rgba(255, 255, 255, .08);
+   border-radius: 18px;
+   background: rgba(255, 255, 255, .025);
+   padding: 28px 30px;
+
+   @include tablet { padding: 22px 24px; }
+}
+
+.tag {
+   font-family: var(--font-mono);
+   font-size: 13px;
+   letter-spacing: var(--label-tracking-tight);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+   margin-bottom: 10px;
+}
+
+.cardTitle {
+   @include h3;
+   margin: 0 0 22px;
+}
+
+.player {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+}
+
+.playBtn {
+   flex-shrink: 0;
+   width: 48px;
+   height: 48px;
+   border-radius: 50%;
+   border: none;
+   background: var(--blue);
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   box-shadow: 0 8px 20px rgba(1, 105, 249, .4);
+   transition: background .25s;
+
+   @include hover { background: var(--blue-hover); }
+}
+
+.wave {
+   flex: 1;
+   display: grid;
+   grid-auto-flow: column;
+   grid-auto-columns: 1fr;
+   align-items: center;
+   gap: 3px;
+   height: 48px;
+   min-width: 0;
+}
+
+.bar {
+   display: block;
+   width: 100%;
+   border-radius: 2px;
+   background: rgba(255, 255, 255, .2);
+   transition: background .12s linear;
+
+   &.on { background: var(--tech-blue-400); }
+}
+
+.time {
+   flex-shrink: 0;
+   min-width: 42px;
+   text-align: right;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   color: rgba(255, 255, 255, .6);
+}
+
+.note {
+   margin: 36px 0 0;
+   font-size: 15px;
+   color: rgba(255, 255, 255, .4);
+}

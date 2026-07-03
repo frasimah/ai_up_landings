@@ -1,0 +1,44 @@
+.skeletonButton {
+   position: relative;
+   overflow: hidden;
+   pointer-events: none;
+   user-select: none;
+   color: transparent !important;
+}
+
+.skeletonButton::after {
+   content: "";
+   position: absolute;
+   inset: 0;
+   border-radius: inherit;
+   background: linear-gradient(
+      110deg,
+      rgba(255, 255, 255, 0) 20%,
+      rgba(255, 255, 255, 0.18) 48%,
+      rgba(255, 255, 255, 0.34) 52%,
+      rgba(255, 255, 255, 0) 80%
+   );
+   transform: translateX(-120%);
+   animation: headerAuthSkeletonShimmer 1.4s ease-in-out infinite;
+}
+
+.skeletonButtonText {
+   opacity: 0;
+}
+
+@keyframes headerAuthSkeletonShimmer {
+   from {
+      transform: translateX(-120%);
+   }
+
+   to {
+      transform: translateX(120%);
+   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .skeletonButton::after {
+      animation: none;
+      transform: translateX(0);
+   }
+}

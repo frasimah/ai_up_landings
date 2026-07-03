@@ -1,0 +1,239 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_crm {
+   margin-top: fl(180, 140);
+
+   @include desktop {
+      margin-top: 140px;
+   }
+
+   @include tablet {
+      margin-top: 60px;
+   }
+
+   &_wrap {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(60, 40);
+
+      @include desktop {
+         row-gap: 40px;
+      }
+
+      @include tablet {
+         row-gap: 24px;
+      }
+   }
+
+   &_content {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      grid-column-gap: fl(40, 30);
+      grid-row-gap: fl(30, 20);
+      align-items: stretch;
+
+      @include desktop {
+         grid-column-gap: 30px;
+         grid-row-gap: 20px;
+      }
+
+      @include tablet {
+         grid-column-gap: unset;
+         grid-row-gap: unset;
+         display: flex;
+         flex-wrap: wrap;
+         gap: 7px;
+      }
+
+      &_item {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         background: red;
+         padding: fl(40, 30);
+         border-radius: 14px;
+         background: $bg-grey;
+         row-gap: fl(20, 16);
+         width: 100%;
+         max-width: 100%;
+
+         @include desktop {
+            row-gap: 16px;
+            padding: 30px;
+         }
+
+         @include tablet {
+            row-gap: 16px;
+            padding: 16px;
+            flex: 1 1 calc(50% - 3.5px);
+            border-radius: 8px;
+         }
+
+
+         &_check {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: fl(34, 28);
+            height: fl(34, 28);
+            flex-shrink: 0;
+            border: 1px solid $blue;
+            border-radius: 6px;
+            overflow: hidden;
+            background: $blue;
+
+            @include desktop {
+               width: 28px;
+               height: 28px;
+            }
+
+            @include tablet {
+               width: 22px;
+               height: 22px;
+            }
+
+            svg {
+               @include svgDefault;
+            }
+         }
+
+         &_title {
+            @include h3;
+            color: $black;
+         }
+
+         &_list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            gap: 10px;
+            width: 100%;
+
+            @include desktop {
+               gap: 6px;
+               align-items: flex-end;
+               flex: 1 1 auto;
+               align-content: flex-end;
+            }
+
+            @include tablet {
+               margin-top: 0px;
+            }
+
+            &_it {
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               flex: 1 1 calc(50% - 5px);
+               border-radius: 14px;
+               background: $white;
+               height: fl(90, 60);
+               overflow: hidden;
+               padding: fl(16, 12);
+
+
+               @include desktop {
+                  height: 60px;
+                  padding: 12px;
+               }
+
+               img {
+                  max-width: 100%;
+                  max-height: 100%;
+
+                  @include desktop {
+                     transform: scale(0.8);
+                  }
+               }
+            }
+         }
+
+         &:nth-child(1) {
+            grid-area: 1 / 1 / 2 / 4;
+         }
+
+         &:nth-child(2) {
+            grid-area: 2 / 1 / 3 / 4;
+         }
+
+         &:nth-child(3) {
+            grid-area: 1 / 4 / 3 / 10;
+            padding: 0;
+         }
+
+         &:nth-child(4) {
+            grid-area: 1 / 10 / 3 / 13;
+
+            @include desktop {
+               aspect-ratio: 161/216;
+            }
+
+            @include tablet {
+               aspect-ratio: unset;
+            }
+         }
+      }
+
+      &_center {
+         background: #C2D1F6;
+         background-image:
+            radial-gradient(42% 58% at 14% 100%, rgba(194, 209, 246, 0.98) 0%, rgba(194, 209, 246, 0.82) 34%, rgba(194, 209, 246, 0.36) 56%, rgba(194, 209, 246, 0.12) 68%, rgba(194, 209, 246, 0) 80%),
+            radial-gradient(42% 58% at 50% 92%, rgba(246, 240, 228, 0.98) 0%, rgba(246, 240, 228, 0.84) 34%, rgba(246, 240, 228, 0.42) 56%, rgba(246, 240, 228, 0.14) 68%, rgba(246, 240, 228, 0) 80%),
+            radial-gradient(42% 58% at 86% 100%, rgba(255, 207, 149, 0.95) 0%, rgba(255, 207, 149, 0.78) 34%, rgba(255, 207, 149, 0.36) 56%, rgba(255, 207, 149, 0.12) 68%, rgba(255, 207, 149, 0) 80%);
+         overflow: hidden;
+         position: relative;
+         flex: 1 1 100%;
+
+         &_img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 4;
+
+            img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+            }
+         }
+
+         &_circle {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            border-radius: 609.446px;
+            filter: blur(191.75669860839844px);
+            position: absolute;
+            width: 609.446px;
+            height: 609.446px;
+            aspect-ratio: 1/1;
+            user-select: none;
+            pointer-events: none;
+            bottom: 0;
+         }
+
+         &_circle_1 {
+            background: #C2D1F6;
+            z-index: 3;
+            left: -206px;
+         }
+
+         &_circle_2 {
+            background: #F6F0E4;
+            z-index: 2;
+            left: 60px;
+         }
+
+         &_circle_3 {
+            background: #FFCF95;
+            z-index: 1;
+            right: -205px;
+         }
+      }
+   }
+}

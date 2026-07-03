@@ -1,0 +1,236 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_percent {
+   margin-top: fl(150, 140);
+   position: relative;
+   overflow: hidden;
+
+   @include desktop {
+      margin-top: 140px;
+   }
+
+   @include tablet {
+      margin-top: 40px;
+   }
+
+   &_wrap {
+      align-items: center;
+
+      @include mobile {
+         row-gap: 40px;
+      }
+   }
+
+   &_left {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(20, 10);
+
+      @include desktop {
+         row-gap: 10px;
+      }
+
+      @include mobile {
+         justify-content: center;
+         align-items: center;
+      }
+
+      &_main {
+         color: #0169F9;
+         font-family: "Gilroy", sans-serif;
+         font-size: fl(200, 160);
+         font-weight: 500;
+         line-height: fl(204, 160);
+
+         @include desktop {
+            font-size: 160px;
+            line-height: 160px;
+         }
+
+         @include tablet {
+            font-size: 100px;
+            line-height: 100px;
+         }
+      }
+
+      &_text {
+         @include h3;
+         color: $black;
+         max-width: 330px;
+
+         &_icon {
+            display: inline-flex;
+            width: fl(23, 17);
+            height: fl(23, 17);
+            margin-right: fl(8, 6);
+            transform: translateY(fl(3, 2));
+
+            @include desktop {
+               width: 17px;
+               height: 17px;
+               margin-right: 6px;
+               transform: translateY(2px);
+            }
+
+            @include tablet {
+               width: 16px;
+               height: 16px;
+            }
+
+            svg {
+               width: 100%;
+               height: 100%;
+            }
+         }
+
+      }
+   }
+
+   &_right {
+      @include flex-center;
+      position: relative;
+      aspect-ratio: 1/1;
+      width: 100%;
+      height: auto;
+
+      &_items {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(90, 70);
+
+         @include desktop {
+            row-gap: 70px;
+         }
+
+         @include tablet {
+            row-gap: 40px;
+         }
+
+         @include mobile {
+            row-gap: 24px;
+         }
+
+         &_it {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(20, 10);
+            align-items: center;
+            justify-content: center;
+            max-width: 270px;
+            opacity: .3;
+
+            @include desktop {
+               row-gap: 10px
+            }
+
+            @include tablet {
+               row-gap: 6px;
+               max-width: 240px;
+            }
+
+            @include mobile {
+               row-gap: 0px;
+            }
+
+            &_num {
+               @include h1;
+               color: $blue;
+               text-align: center;
+            }
+
+            &_text {
+               @include mediumText;
+               text-align: center;
+               color: $black;
+               text-wrap: balance;
+            }
+         }
+      }
+
+      &_circle {
+         display: flex;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: 100%;
+         height: 100%;
+         user-select: none;
+         pointer-events: none;
+
+         svg {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(0);
+            transition: unset;
+            transform-origin: 50% 50%;
+            will-change: transform;
+
+            &:last-child {
+               transform: unset;
+               top: 0;
+               left: 0;
+
+               @include tablet {
+                  path {
+                     transform: scaleY(0.6);
+                  }
+               }
+            }
+
+            path {
+               transition: unset;
+            }
+         }
+      }
+   }
+
+   &_bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+
+      svg {
+         width: 100%;
+         height: auto;
+      }
+   }
+}
+
+
+.odometer {
+   display: inline-flex;
+   align-items: flex-end;
+   gap: 6px;
+}
+
+.odometerCol {
+   position: relative;
+   overflow: hidden;
+   height: 1em; // подстраивается под font-size
+   width: 0.62em;
+}
+
+.odometerDigits {
+   display: block;
+   will-change: transform;
+}
+
+.odometerDigit {
+   display: block;
+   line-height: 1em;
+}
+
+.odometerSuffix {
+   line-height: 1em;
+}

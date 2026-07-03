@@ -1,0 +1,374 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 10 — Кейсы. Two case cards. Tokens from Figma 3407:520:
+// card bg #09122c / border #0c2554 / r14 / p40; stat box bg #222a41 / r10 / p24.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 110px 0 120px;
+   overflow: hidden;
+   background: radial-gradient(ellipse 80% 70% at 50% 20%, #0c1d40 0%, #070f24 55%, #050d22 100%);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1320px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head {
+   margin: 0 auto 48px;
+   text-align: center;
+
+   @include tablet { margin-bottom: 32px; }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 auto 18px;
+   max-width: 860px;
+}
+
+.subtitle {
+   margin: 0 auto;
+   max-width: 820px;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+// Mobile switcher above the slider (hidden on tablet/desktop).
+.tabs {
+   display: none;
+
+   @media (max-width: 768px) {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      margin: 0 auto 20px;
+      width: max-content;
+      max-width: 100%;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+   }
+}
+
+.tab {
+   padding: 10px 18px;
+   border: none;
+   border-radius: 10px;
+   background: transparent;
+   color: rgba(255, 255, 255, .6);
+   font-family: inherit;
+   font-size: 15px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: background .25s ease, color .25s ease;
+}
+
+.tabOn {
+   background: var(--blue, #0169f9);
+   color: #fff;
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 24px;
+
+   @media (max-width: 980px) { grid-template-columns: 1fr; }
+}
+
+.card {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 40px;
+   padding: 40px;
+   border-radius: 14px;
+   background: #09122c;
+   border: 1px solid #0c2554;
+   overflow: hidden;
+   opacity: 0;
+   transform: translateY(30px);
+   transition: opacity .7s var(--ease-smooth, ease), transform .7s var(--ease-smooth, ease);
+
+   @include tablet { padding: 28px 22px; gap: 28px; }
+
+   // Phones: only the active case is shown; tabs swap it (no scrolling, no jump).
+   @media (max-width: 768px) { display: none; }
+}
+
+.cardActive {
+   @media (max-width: 768px) { display: flex; }
+}
+
+.in {
+   opacity: 1;
+   transform: translateY(0);
+}
+
+.cardGrid {
+   position: absolute;
+   inset: 0;
+   background-image:
+      linear-gradient(rgba(120, 165, 255, .05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120, 165, 255, .05) 1px, transparent 1px);
+   background-size: 60px 60px;
+   mask-image: radial-gradient(ellipse 90% 80% at 70% 0%, #000 0%, transparent 70%);
+   pointer-events: none;
+}
+
+.cardTop {
+   position: relative;
+   display: flex;
+   gap: 24px;
+   align-items: flex-start;
+   justify-content: space-between;
+
+   // Stack on phones so the title gets full width and the render sits below it.
+   @media (max-width: 600px) {
+      flex-direction: column;
+      gap: 20px;
+   }
+}
+
+.cardHeadText {
+   display: flex;
+   flex-direction: column;
+   gap: 22px;
+   min-width: 0;
+}
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   font-family: var(--font-mono, "Geist Mono", monospace);
+   font-weight: 300;
+   font-size: 18px;
+   line-height: 24px;
+   color: rgba(255, 255, 255, .4);
+}
+
+.eyebrowDot {
+   width: 8px;
+   height: 8px;
+   border-radius: 2px;
+   background: #fff;
+   flex-shrink: 0;
+}
+
+.cardTitle {
+   @include h3;
+   margin: 0;
+   letter-spacing: -.01em;
+}
+
+.render {
+   flex-shrink: 0;
+   height: 140px;
+   object-fit: contain;
+   filter: drop-shadow(0 10px 30px rgba(20, 104, 226, .35));
+}
+
+.stats {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.statRow {
+   display: flex;
+   gap: 20px;
+
+   @media (max-width: 480px) { flex-direction: column; }
+}
+
+.statBox {
+   flex: 1 0 0;
+   min-width: 0;
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   justify-content: center;
+   padding: 24px;
+   border-radius: 10px;
+   background: #222a41;
+}
+
+.statFull {
+   flex-basis: 100%;
+}
+
+.statValue {
+   font-size: 24px;
+   line-height: 30px;
+   font-weight: 600;
+   color: #fff;
+
+   @include tablet { font-size: 20px; line-height: 26px; }
+}
+
+.statLabel {
+   font-size: 18px;
+   line-height: 24px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, .55);
+
+   @include tablet { font-size: 16px; line-height: 22px; }
+}
+
+.quoteRow {
+   position: relative;
+   display: flex;
+   gap: 30px;
+   align-items: flex-end;
+   margin-top: auto;
+
+   // Single column on phones: quote → horizontal rule → author row.
+   @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+   }
+}
+
+.quote {
+   @include largeText;
+   margin: 0;
+   flex: 1 1 auto;
+   color: #fff;
+}
+
+.divider {
+   align-self: stretch;
+   width: 1px;
+   background: rgba(255, 255, 255, .14);
+   flex-shrink: 0;
+
+   @media (max-width: 600px) {
+      align-self: auto;
+      width: 100%;
+      height: 1px;
+   }
+}
+
+.person {
+   display: flex;
+   flex-direction: column;
+   gap: 18px;
+   width: 190px;
+   flex-shrink: 0;
+
+   @media (max-width: 600px) {
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+      width: auto;
+   }
+}
+
+.avatar {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   overflow: hidden;
+   background: #fff;
+   flex-shrink: 0;
+
+   img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+   }
+}
+
+.author {
+   font-size: 16px;
+   line-height: 22px;
+   font-weight: 500;
+   color: rgba(255, 255, 255, .6);
+}
+
+.nav {
+   display: flex;
+   gap: 10px;
+   justify-content: center;
+   margin-top: 40px;
+
+   @media (max-width: 768px) { display: none; } // switcher on top replaces these
+}
+
+.navArrow {
+   width: 60px;
+   height: 60px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-radius: 50%;
+   border: 1px solid rgba(255, 255, 255, .14);
+   background: #0a1126;
+   cursor: pointer;
+   transition: background .2s ease, border-color .2s ease;
+
+   &:hover {
+      background: #111c3c;
+      border-color: rgba(255, 255, 255, .28);
+   }
+}
+
+.blogBtn {
+   display: block;
+   margin: 32px auto 0;
+
+   @media (max-width: 768px) { display: none; }
+   padding: 17px 22px 19px;
+   border-radius: 20px;
+   border: 2px solid #fff;
+   background: transparent;
+   color: #fff;
+   font-size: 20px;
+   line-height: 28px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: background .2s ease, color .2s ease;
+
+   &:hover {
+      background: #fff;
+      color: #080808;
+   }
+}
+
+.readBtn {
+   align-self: flex-start;
+   padding: 17px 22px 19px;
+
+   @media (max-width: 768px) { display: none; }
+   border-radius: 20px;
+   border: 1px solid #fff;
+   background: transparent;
+   color: #fff;
+   font-size: 20px;
+   line-height: 28px;
+   font-weight: 500;
+   cursor: pointer;
+   transition: background .2s ease, color .2s ease;
+
+   &:hover {
+      background: #fff;
+      color: #080808;
+   }
+}

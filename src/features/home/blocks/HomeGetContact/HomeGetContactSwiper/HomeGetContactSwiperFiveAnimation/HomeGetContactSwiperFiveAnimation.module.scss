@@ -1,0 +1,54 @@
+@use '@/scss/mixins'as *;
+
+.scriptCode.scriptCode {
+   display: inline-block;
+   width: 19ch;
+   max-width: 100%;
+   flex: 0 0 auto;
+
+
+   text-align: center;
+   white-space: pre;
+   overflow-wrap: normal;
+   word-break: normal;
+   hyphens: manual;
+   contain: layout paint;
+   @include largeText;
+   font-weight: 300 !important;
+}
+
+.scriptCode.scriptCodeGrey {
+   color: #777;
+}
+
+.scriptCode.scriptCodeBlue {
+   color: #0169F9;
+}
+
+.scriptCodeLine.scriptCodeLine {
+   display: block;
+   width: 100%;
+   max-width: none;
+   margin-top: 0;
+   flex: 0 0 auto;
+   color: inherit;
+   font: inherit;
+   line-height: inherit;
+   text-align: inherit;
+   white-space: inherit;
+   overflow-wrap: normal;
+   word-break: normal;
+   hyphens: manual;
+}
+
+// @media screen and (max-width: 767px) {
+//    .scriptCode.scriptCode {
+//       font-size: 18px;
+//    }
+// }
+
+// @media screen and (max-width: 360px) {
+//    .scriptCode.scriptCode {
+//       font-size: 16px;
+//    }
+// }

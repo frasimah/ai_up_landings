@@ -1,0 +1,106 @@
+// AI-UP — Dark-Tech landing token layer.
+// Ported from design_handoff_aiup_landing/tokens (colors.css + dark-tech.css + spacing.css).
+// These CSS custom properties power the dark Figma redesign of the call-center landing.
+// They sit on top of the existing SCSS $variables — same accent (#0169F9), extended for
+// the deep-navy blueprint aesthetic (navy surfaces, glow system, tech-blue data lines).
+
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&display=swap');
+
+:root {
+   // ---- Base neutrals ----
+   --black: #080808;
+   --white: #ffffff;
+   --ink-900: #19191b;
+   --ink-800: #2b2b2b;
+   --ink-700: #2c2c2e;
+   --ink-600: #363636;
+   --ink-500: #383838;
+   --bg-grey: #f6f6f6;
+   --grey: #9c9c9c;
+   --dark-grey: #777777;
+
+   // ---- Accent ----
+   --blue: #0169f9;
+   --blue-hover: #1f7dff;
+   --blue-rim-start: #75acf9;
+   --blue-rim-end: #4c84d4;
+   --blue-tint: #e6f1ff;
+   --red: #d72d1e;
+   --green: #34c759;
+
+   // ---- Navy surfaces (deep -> near-black) ----
+   --navy-900: #050d22;
+   --navy-850: #070f24;
+   --navy-800: #0a1c47;
+   --navy-700: #0e2b5c;
+   --navy-panel: rgba(16, 40, 92, 0.3);
+   --navy-panel-solid: #161619;
+   --navy-panel-solid-top: #212127;
+
+   // ---- Tech-blues ----
+   --tech-blue-300: #9fcbff;
+   --tech-blue-400: #56b8ff;
+   --tech-blue-500: #39a0ff;
+   --tech-blue-600: #1f8fff;
+
+   // ---- Hairlines & borders on navy ----
+   --navy-line: rgba(86, 150, 255, 0.06);
+   --navy-line-strong: rgba(86, 150, 255, 0.18);
+   --navy-border: rgba(86, 150, 255, 0.22);
+   --navy-border-glow: rgba(1, 105, 249, 0.5);
+   --hairline-on-navy: rgba(255, 255, 255, 0.08);
+
+   // ---- Text on navy ----
+   --text-on-navy: #ffffff;
+   --text-on-navy-muted: rgba(255, 255, 255, 0.62);
+   --text-on-navy-faint: rgba(255, 255, 255, 0.4);
+
+   // ---- Glow system (the signature) ----
+   --glow-orb: radial-gradient(ellipse 50% 55% at 50% 55%, rgba(1, 105, 249, 0.34) 0%, rgba(1, 105, 249, 0.1) 45%, transparent 68%);
+   --glow-ambient: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(1, 105, 249, 0.16) 0%, transparent 66%);
+   --glow-node: 0 0 12px #1f8fff;
+   --glow-line: drop-shadow(0 0 5px rgba(57, 160, 255, 0.8));
+   --glow-card: 0 0 26px rgba(1, 105, 249, 0.16), inset 0 0 24px rgba(1, 105, 249, 0.05);
+   --glow-card-rim: inset 0 -75px 85px -38px rgba(1, 105, 249, 0.42), inset 0 -3px 18px -2px rgba(140, 190, 255, 0.6), 0 24px 64px -28px rgba(1, 105, 249, 0.32);
+   --glow-cta: 0 16px 36px rgba(1, 105, 249, 0.4);
+
+   // ---- Background recipes ----
+   --bg-hero-navy: radial-gradient(ellipse 80% 70% at 50% 36%, #0e2b5c 0%, #0a1c47 38%, #071534 70%, #050d22 100%);
+   --bg-section-navy: radial-gradient(ellipse 95% 75% at 50% 18%, #0e2249 0%, #0a1838 48%, #050d22 100%);
+   --grid-blueprint: linear-gradient(rgba(86, 150, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(86, 150, 255, 0.06) 1px, transparent 1px);
+   --grid-blueprint-size: 96px 96px;
+
+   // ---- Mono eyebrow label ----
+   --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+   --label-tracking: 0.16em;
+   --label-tracking-tight: 0.12em;
+
+   // ---- Frosted glass on navy ----
+   --glass-navy-fill: rgba(16, 40, 92, 0.32);
+   --glass-navy-blur: blur(16px);
+   --glass-module-fill: rgba(16, 40, 92, 0.45);
+
+   // ---- Radii (landing layer) ----
+   --radius-module: 22px;
+   --radius-card-lg: 18px;
+   --radius-panel-lg: 24px;
+   --radius-pill: 20px;
+   --radius-card: 14px;
+   --radius-chip: 30px;
+   --radius-sm: 4px;
+   --radius-round: 999px;
+
+   // ---- Motion ----
+   --ease-bounce: cubic-bezier(0.34, 2.56, 0.64, 1);
+   --ease-smooth: cubic-bezier(0.2, 0.6, 0.2, 1);
+   --dur-fast: 0.3s;
+   --dur-base: 0.4s;
+   --dur-bounce: 0.6s;
+   --hover-scale: 1.03;
+
+   // ---- Semantic aliases ----
+   --surface-navy: var(--navy-900);
+   --surface-navy-alt: var(--navy-850);
+   --eyebrow-color: var(--tech-blue-400);
+   --data-accent: var(--tech-blue-500);
+}

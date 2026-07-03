@@ -1,0 +1,22 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.blog_archive_header {
+   display: flex;
+   flex-direction: column;
+   row-gap: 30px;
+
+   @include desktop {
+      row-gap: 24px;
+   }
+
+   @include tablet {
+      row-gap: 16px;
+   }
+
+   &_title {
+      @include h1;
+      color: $black;
+   }
+}

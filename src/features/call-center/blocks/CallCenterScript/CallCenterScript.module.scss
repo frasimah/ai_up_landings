@@ -1,0 +1,165 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 08c — Скрипт. Ported from "Лендинг AI-UP.dc.html" §8c. Static two columns.
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 120px 0 130px;
+   background: var(--navy-850);
+   color: #fff;
+
+   @include tablet { padding: 72px 0 80px; }
+}
+
+.inner {
+   max-width: 1240px;
+   margin: 0 auto;
+   padding: 0 40px;
+
+   @include tablet { padding: 0 16px; }
+}
+
+.head {
+   margin-bottom: 56px;
+
+   @include tablet { margin-bottom: 36px; }
+}
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+   margin-bottom: 18px;
+
+   span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0 0 12px;
+}
+
+.lead {
+   margin: 0;
+   max-width: 620px;
+   font-size: 20px;
+   line-height: 28px;
+   color: rgba(255, 255, 255, .6);
+
+   @include tablet { font-size: 17px; line-height: 24px; }
+}
+
+.grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 40px;
+   align-items: start;
+
+   @media (max-width: 920px) { grid-template-columns: 1fr; gap: 28px; }
+}
+
+.colLabel {
+   font-size: 18px;
+   font-weight: 500;
+   color: #fff;
+   margin-bottom: 18px;
+}
+
+.list {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+   margin-bottom: 36px;
+}
+
+.row {
+   display: flex;
+   align-items: center;
+   gap: 14px;
+   padding: 16px 20px;
+   border: 1px solid rgba(255, 255, 255, .08);
+   border-radius: 14px;
+   background: rgba(255, 255, 255, .025);
+   font-size: 17px;
+   color: rgba(255, 255, 255, .84);
+}
+
+.chk {
+   flex-shrink: 0;
+   width: 30px;
+   height: 30px;
+   border-radius: 50%;
+   border: 1px solid rgba(86, 150, 255, .4);
+   background: rgba(255, 255, 255, .04);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.outlineBtn {
+   display: inline-flex;
+   align-items: center;
+   gap: 10px;
+   padding: 15px 30px;
+   border-radius: 14px;
+   border: 1px solid rgba(86, 150, 255, .5);
+   background: rgba(1, 105, 249, .12);
+   color: var(--tech-blue-300);
+   font-family: inherit;
+   font-size: 16px;
+   font-weight: 600;
+   cursor: pointer;
+   transition: all .3s;
+
+   @include hover { background: rgba(1, 105, 249, .22); }
+}
+
+.card {
+   border: 1px solid rgba(86, 150, 255, .2);
+   border-radius: 20px;
+   background: rgba(16, 40, 92, .3);
+   padding: 32px 34px;
+
+   @include tablet { padding: 26px 24px; }
+}
+
+.cardLabel {
+   font-size: 16px;
+   color: rgba(255, 255, 255, .6);
+   margin-bottom: 18px;
+}
+
+.checks {
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+}
+
+.check {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   font-size: 16px;
+   color: rgba(255, 255, 255, .78);
+
+   span { width: 6px; height: 6px; border-radius: 50%; background: var(--tech-blue-400); flex-shrink: 0; }
+}
+
+.note {
+   margin-top: 24px;
+   padding: 18px 20px;
+   border-radius: 14px;
+   background: rgba(1, 105, 249, .1);
+   border: 1px solid rgba(86, 150, 255, .25);
+   font-size: 15px;
+   line-height: 22px;
+   color: rgba(255, 255, 255, .7);
+}

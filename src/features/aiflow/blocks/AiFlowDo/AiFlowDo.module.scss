@@ -1,0 +1,45 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_do {
+   @include mt;
+
+   &_wrap {
+      &_title {
+         text-align: center;
+         max-width: 900px;
+         margin: 0 auto;
+
+         @include tablet {
+            margin: unset;
+            text-align: left;
+         }
+      }
+
+      &_text {
+         margin-top: fl(50, 40);
+         @include largeText;
+         text-align: center;
+         color: $grey;
+         max-width: 900px;
+         margin-left: auto;
+         margin-right: auto;
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            text-align: left;
+         }
+      }
+
+      &_btn {
+         display: flex;
+         justify-content: center;
+         margin-top: 24px;
+      }
+   }
+}

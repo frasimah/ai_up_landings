@@ -1,0 +1,190 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.referral_bonus {
+   @include mt;
+   margin-bottom: 120px;
+
+   @include desktop {
+      margin-bottom: 80px;
+   }
+
+   @include tablet {
+      margin-bottom: 80px;
+   }
+
+   &_wrap {
+      &_list {
+         row-gap: fl(40, 30);
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            row-gap: 30px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            row-gap: 7px;
+            margin-top: 24px;
+         }
+
+         &_item {
+            display: flex;
+            column-gap: fl(20, 16);
+            padding: fl(40, 30);
+            border-radius: 14px;
+            background: #F6F6F6;
+            align-items: center;
+            height: 100%;
+
+            @include desktop {
+               padding: 30px;
+               column-gap: 16px;
+            }
+
+            @include tablet {
+               flex-direction: column;
+               border-radius: 8px;
+               padding: 20px;
+            }
+
+            &_content {
+               display: flex;
+               flex-direction: column;
+               row-gap: fl(18, 14);
+
+               @include desktop {
+                  row-gap: 14px
+               }
+
+               @include tablet {
+                  row-gap: 6px;
+                  width: 100%;
+               }
+
+               &_title {
+                  @include h3;
+                  color: $black;
+               }
+
+               &_text {
+                  @include mediumText;
+                  color: $black;
+               }
+            }
+
+            &_img {
+               display: flex;
+               flex-direction: column;
+               justify-content: center;
+               align-items: flex-start;
+               width: 100%;
+               max-width: fl(350, 250);
+               flex-shrink: 0;
+               position: relative;
+               row-gap: fl(30, 20);
+               height: 100%;
+
+               @include desktop {
+                  row-gap: 20px;
+                  max-width: 250px;
+               }
+
+               @include tablet {
+                  max-width: 240px;
+                  height: auto;
+                  margin-top: 20px;
+                  flex: 1 1 auto;
+               }
+
+               &_2 {
+                  @include tablet {
+                     max-width: 500px;
+                  }
+               }
+
+               &_cloud {
+                  display: inline-flex;
+                  justify-content: center;
+                  align-items: center;
+                  padding: fl(24, 16) fl(30, 20);
+                  border-radius: fl(14, 10);
+                  min-width: fl(222, 180);
+                  @include largeText;
+                  color: $blue;
+
+                  @include desktop {
+                     padding: 16px 20px;
+                     border-radius: 10px;
+                     min-width: 180px;
+                  }
+
+                  @include tablet {
+                     padding: 12px;
+                     min-width: 140px;
+                  }
+
+                  &_1 {
+                     background: #D9E3FF;
+                  }
+
+                  &_2 {
+                     background: #0169F9;
+                     color: $white;
+                     margin-left: auto;
+                  }
+               }
+
+               &_icon {
+                  display: flex;
+                  width: fl(50, 40);
+                  height: fl(50, 40);
+                  flex-shrink: 0;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  z-index: 1;
+                  animation: rotate 5s linear infinite;
+                  transform-origin: 0% 0%;
+
+                  @include desktop {
+                     width: 40px;
+                     height: 40px;
+                  }
+
+                  @include tablet {
+                     width: 35px;
+                     height: 35px;
+                  }
+
+                  @keyframes rotate {
+                     from {
+                        transform: rotate(0deg) translate(-50%, -50%);
+                     }
+
+                     to {
+                        transform: rotate(-360deg) translate(-50%, -50%);
+                     }
+                  }
+
+                  svg {
+                     width: 100%;
+                     height: 100%;
+                  }
+               }
+
+               &_big_cloud {
+                  position: absolute !important;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  z-index: 2;
+                  width: max-content !important;
+               }
+            }
+         }
+      }
+   }
+}

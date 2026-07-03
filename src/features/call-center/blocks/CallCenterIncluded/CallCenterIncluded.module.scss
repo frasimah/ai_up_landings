@@ -1,0 +1,314 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Section 09 — «Что входит в работу КЦ». Glowing torus portal + connector lines + 4 cards.
+// Replicated from "Что входит в работу КЦ.dc.html"; bg adapted to navy to match neighbours.
+
+// Keyframes are local (module-scoped) and referenced only from classes in this file,
+// so the scoped names line up. (Driving them from inline styles fails — the raw global
+// name never resolves to the scoped keyframe.)
+@keyframes kc-orb-pulse { 0%, 100% { opacity: .92; } 50% { opacity: 1; } }
+@keyframes kc-glow-pulse { 0%, 100% { opacity: .78; } 50% { opacity: 1; } }
+@keyframes kc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kc-fade-up { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes kc-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes kc-flow { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes kc-ripple {
+   0% { transform: translate(-50%, 50%) scale(.55); opacity: 0; }
+   12% { opacity: .5; }
+   100% { transform: translate(-50%, 50%) scale(1.7); opacity: 0; }
+}
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 0;
+   overflow: hidden;
+   background: radial-gradient(ellipse 90% 70% at 50% 18%, #0c1d40 0%, #070f24 45%, #050d22 100%);
+   color: #fff;
+   isolation: isolate;
+}
+
+.stageWrap {
+   position: relative;
+   width: 100%;
+   margin: 0 auto;
+   overflow: hidden;
+
+   @media (max-width: 768px) { display: none; } // replaced by the mobile slider
+}
+
+// ── Mobile slider (≤768px) ───────────────────────────────────────────────
+.mobile {
+   display: none;
+
+   @media (max-width: 768px) {
+      display: block;
+      padding: 56px 0 60px;
+   }
+}
+
+.mHeader {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 12px;
+   text-align: center;
+   padding: 0 16px;
+   margin-bottom: 26px;
+}
+
+.mTitle {
+   @include sectionTitle;
+   margin: 0;
+}
+
+.slider {
+   display: flex;
+   gap: 14px;
+   overflow-x: auto;
+   scroll-snap-type: x mandatory;
+   // iOS Safari: inset the snapport to match the side padding, or mandatory
+   // snap can pin the scroller to the first slide (see CallCenterPositioning).
+   scroll-padding: 0 16px;
+   -webkit-overflow-scrolling: touch;
+   padding: 4px 16px 18px;
+   scrollbar-width: none;
+
+   &::-webkit-scrollbar { display: none; }
+}
+
+.slide {
+   scroll-snap-align: center;
+   flex: 0 0 82%;
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+   padding: 24px 22px;
+   border-radius: 14px;
+   background: rgba(255, 255, 255, .04);
+   border: 1px solid rgba(1, 105, 249, .5);
+   box-shadow: 0 0 26px rgba(1, 105, 249, .14), inset 0 0 24px rgba(1, 105, 249, .05);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+}
+
+.stage {
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform-origin: top center;
+   width: 1600px;
+   // 920 of drawing + 90px of headroom so the bottom ground rings aren't clipped.
+   height: 1010px;
+}
+
+.grid {
+   position: absolute;
+   inset: 0;
+   background-image:
+      linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+   background-size: 80px 80px;
+   mask-image: radial-gradient(ellipse 75% 80% at 50% 60%, #000 25%, transparent 78%);
+   pointer-events: none;
+}
+
+.header {
+   position: absolute;
+   top: 70px;
+   left: 0;
+   right: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
+   z-index: 5;
+}
+
+.eyebrow {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-family: var(--font-mono);
+   font-size: 14px;
+   letter-spacing: var(--label-tracking);
+   color: var(--tech-blue-400);
+   text-transform: uppercase;
+}
+
+.eyebrowDot {
+   width: 7px;
+   height: 7px;
+   border-radius: 50%;
+   background: var(--blue, #0169f9);
+   flex-shrink: 0;
+}
+
+.title {
+   @include sectionTitle;
+   margin: 0;
+}
+
+.pool {
+   position: absolute;
+   left: 50%;
+   bottom: 96px;
+   transform: translateX(-50%);
+   width: 820px;
+   height: 330px;
+   background: radial-gradient(ellipse 50% 58% at 50% 62%, rgba(1, 105, 249, .30) 0%, rgba(1, 105, 249, .08) 46%, transparent 70%);
+   filter: blur(38px);
+   pointer-events: none;
+   z-index: 1;
+   animation: kc-glow-pulse 6s ease-in-out infinite;
+}
+
+.lines {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 1600px;
+   height: 920px; // keep native size so the taller stage doesn't vertically stretch the paths
+   z-index: 2;
+   pointer-events: none;
+}
+
+// Connector-line entrance draw — gated on .run (scroll reveal). Final state visible (both).
+.drawGroup {
+   opacity: 0;
+   stroke-dasharray: 1;
+
+   &.run {
+      opacity: 1;
+      animation: kc-draw 1s cubic-bezier(.2, .6, .2, 1) .2s both;
+   }
+}
+
+// Always-on bright dash flowing along the same paths. Dasharray on the group (inherited);
+// the animation lives on each path so the four lines can be phase-offset (no synchronized rush).
+.flow {
+   stroke-dasharray: .16 .84;
+}
+
+// 14s period = slow, delicate drift; staggered per-path delays set inline.
+.flowPath {
+   animation: kc-flow 14s linear infinite;
+}
+
+// End-of-line dots fade in on reveal.
+.dots {
+   opacity: 0;
+
+   &.run {
+      animation: kc-fade .6s ease 1s both;
+   }
+}
+
+// Concentric ground ripple (always on; --rd sets the stagger delay).
+.rippleEl {
+   position: absolute;
+   left: 50%;
+   bottom: 168px;
+   transform: translate(-50%, 50%);
+   width: 480px;
+   height: 150px;
+   border-radius: 50%;
+   border: 1.5px solid rgba(125, 180, 255, .55);
+   pointer-events: none;
+   z-index: 1;
+   opacity: 0;
+   animation: kc-ripple 5s cubic-bezier(.2, .6, .2, 1) var(--rd, 0s) infinite;
+}
+
+// Frosted card — fade-up on reveal (--cd sets the per-card delay).
+.card {
+   position: absolute;
+   z-index: 4;
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+   padding: 26px 28px;
+   border-radius: 14px;
+   background: rgba(255, 255, 255, .035);
+   border: 1px solid rgba(1, 105, 249, .5);
+   box-shadow: 0 0 26px rgba(1, 105, 249, .16), inset 0 0 24px rgba(1, 105, 249, .05);
+   backdrop-filter: blur(12px);
+   -webkit-backdrop-filter: blur(12px);
+   opacity: 0;
+
+   &.run {
+      animation: kc-fade-up .7s cubic-bezier(.2, .6, .2, 1) var(--cd, 0s) both;
+   }
+}
+
+.torus {
+   position: absolute;
+   left: 50%;
+   bottom: 168px;
+   transform: translate(-50%, 50%);
+   width: 460px;
+   height: 220px;
+   z-index: 3;
+   pointer-events: none;
+   animation: kc-orb-pulse 6s ease-in-out infinite;
+}
+
+.torusPool {
+   position: absolute;
+   left: 50%;
+   bottom: 6px;
+   transform: translateX(-50%);
+   width: 380px;
+   height: 90px;
+   background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(150, 195, 255, .45), rgba(1, 105, 249, .22) 40%, transparent 68%);
+   filter: blur(9px);
+}
+
+// A single glowing elliptical ring (annulus) — a wide-short ellipse with the
+// hole punched through by a hard-edged radial-gradient mask so the centre is
+// genuinely transparent/dark. The mask centre sits slightly ABOVE the box
+// centre so the band reads thin at the top / thick at the bottom — the
+// rim-lit tilt of a ring seen at a shallow angle.
+.torusRing {
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 68%;
+   border-radius: 50%;
+   background: linear-gradient(180deg, rgba(90, 160, 255, .5) 0%, rgba(175, 215, 255, .98) 100%);
+   -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, transparent 0%, transparent 52%, #000 64%, #000 100%);
+   mask-image: radial-gradient(ellipse 50% 50% at 50% 46%, transparent 0%, transparent 52%, #000 64%, #000 100%);
+}
+
+.cardHead {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+}
+
+.cardCheck {
+   width: 30px;
+   height: 30px;
+   border-radius: 6px;
+   background: var(--blue, #0169f9);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-shrink: 0;
+}
+
+.cardTitle {
+   @include h3;
+}
+
+.cardDesc {
+   margin: 0;
+   font-size: 16px;
+   line-height: 24px;
+   font-weight: 400;
+   color: rgba(255, 255, 255, .62);
+}

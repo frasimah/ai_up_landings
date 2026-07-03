@@ -1,0 +1,15 @@
+<svg width="409" height="348" viewBox="0 0 409 348" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="dots-bg-pattern" x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="#E9E9E9" />
+    </pattern>
+    <radialGradient id="dots-bg-fade" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(204.5 174) rotate(90) scale(195 205)">
+      <stop stop-color="white" />
+      <stop offset="1" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+    <mask id="dots-bg-mask">
+      <rect width="409" height="348" fill="url(#dots-bg-fade)" />
+    </mask>
+  </defs>
+  <rect width="409" height="348" fill="url(#dots-bg-pattern)" mask="url(#dots-bg-mask)" />
+</svg>

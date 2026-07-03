@@ -1,0 +1,136 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.home_rec {
+   @include mt;
+
+   @include tablet {
+      background: #2B2B2B;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      margin-bottom: -60px;
+   }
+
+   &_wrap {
+      &_title {
+         @include tablet {
+            >* {
+               color: $white !important;
+            }
+         }
+      }
+   }
+
+   &_block {
+      display: flex;
+      justify-content: space-between;
+      margin-top: fl(50, 40);
+      border-radius: 10px;
+      background: #2B2B2B;
+      padding: 40px;
+      column-gap: 16px;
+
+      @include desktop {
+         margin-top: 40px;
+         padding: 30px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+         padding: 0;
+         background: transparent;
+         flex-direction: column;
+         row-gap: 20px;
+      }
+
+      &_left {
+         display: flex;
+         column-gap: fl(20, 16);
+         align-items: flex-end;
+
+         @include desktop {
+            column-gap: 16px;
+         }
+
+         @include tablet {
+            column-gap: 30px;
+            align-items: center;
+         }
+
+         &_num {
+            color: var(--White, #FFF);
+            font-family: Gilroy;
+            font-size: fl(120, 100);
+            font-style: normal;
+            font-weight: 500;
+            line-height: fl(120, 100);
+
+            @include desktop {
+               font-size: 100px;
+               line-height: 100px;
+            }
+         }
+
+         &_text {
+            @include mediumText;
+            color: $white;
+            margin-bottom: fl(20, 8);
+            text-wrap: balance;
+
+            @include desktop {
+               margin-bottom: 8px;
+            }
+
+            @include tablet {
+               margin-bottom: 0;
+            }
+         }
+      }
+
+      &_right {
+         display: flex;
+         align-items: center;
+         column-gap: fl(20, 16);
+         width: 100%;
+         max-width: fl(1090, 800);
+
+         @include desktop {
+            max-width: 750px;
+            column-gap: 16px;
+         }
+
+         @include tablet {
+            column-gap: 7px;
+            flex-wrap: wrap;
+            row-gap: 7px;
+         }
+
+         &_it {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            border: 1px solid #777;
+            height: 100%;
+            width: 100%;
+            max-width: 33.3333333333%;
+            transform-origin: 50% 50%;
+            will-change: transform;
+            transition: .4s;
+
+            @include hover {
+               transform: scale(0.99);
+               border-color: $blue;
+            }
+
+            @include tablet {
+               min-height: 120px;
+               max-width: unset;
+               width: auto;
+               flex: 1 1 calc(50% - 3.5px);
+            }
+         }
+      }
+   }
+}

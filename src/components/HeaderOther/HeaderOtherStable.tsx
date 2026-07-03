@@ -1,0 +1,144 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { SITE_ROUTES } from "@/lib/routes";
+import styles from "./HeaderOther.module.scss";
+import HeaderAuth from "../Header/HeaderAuth";
+import HeaderTopBanner from "../HeaderTopBanner/HeaderTopBanner";
+
+const navItems = [
+   { href: SITE_ROUTES.howWork, label: "Как это работает" },
+   { href: SITE_ROUTES.callCenter, label: "Колл-центр" },
+   { href: SITE_ROUTES.cost, label: "Стоимость услуг" },
+   { href: SITE_ROUTES.knowledgeBase, label: "База знаний" },
+   { href: SITE_ROUTES.blog, label: "Блог" },
+] as const;
+
+function isNavItemActive(pathname: string, href: string) {
+   if (href === SITE_ROUTES.home) {
+      return pathname === href;
+   }
+
+   return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function HeaderOtherStable() {
+   const headerRef = useRef<HTMLElement | null>(null);
+   const [isActiveBurger, setActiveBurger] = useState(false);
+   const [isTopBannerVisible, setIsTopBannerVisible] = useState(true);
+   const [topBannerHeight, setTopBannerHeight] = useState(0);
+   const pathname = usePathname();
+
+   useEffect(() => {
+      const headerEl = headerRef.current;
+      if (!headerEl) return;
+
+      let frameId = 0;
+
+      const syncHeaderState = () => {
+         headerEl.classList.toggle(styles.active, window.scrollY > 100);
+         frameId = 0;
+      };
+
+      const handleScroll = () => {
+         if (frameId) return;
+         frameId = window.requestAnimationFrame(syncHeaderState);
+      };
+
+      syncHeaderState();
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      return () => {
+         window.removeEventListener("scroll", handleScroll);
+
+         if (frameId) {
+            window.cancelAnimationFrame(frameId);
+         }
+      };
+   }, []);
+
+   useEffect(() => {
+      const frameId = window.requestAnimationFrame(() => {
+         setActiveBurger(false);
+      });
+
+      return () => {
+         window.cancelAnimationFrame(frameId);
+      };
+   }, [pathname]);
+
+   return (
+      <header
+         className={`${styles.header} ${isTopBannerVisible ? styles.withBanner : ""}`}
+         style={{ "--top-banner-height": `${topBannerHeight}px` } as CSSProperties}
+         ref={headerRef}
+      >
+         <HeaderTopBanner
+            onHeightChange={setTopBannerHeight}
+            onVisibilityChange={setIsTopBannerVisible}
+         />
+         <div className="container">
+            <div className={styles.header_wrap}>
+               <Link href={SITE_ROUTES.home} prefetch={false} className={`${styles.header_wrap_logo} ${isActiveBurger ? styles.active : ""}`}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width={66} height={30} viewBox="0 0 66 30" fill="none">
+                     <path d="M31.7782 6.9509C30.7701 6.9509 29.8917 6.618 29.1428 5.95221C28.394 5.25978 28.0195 4.43419 28.0195 3.47545C28.0195 2.5167 28.394 1.70444 29.1428 1.03864C29.8917 0.346214 30.7701 0 31.7782 0C32.8438 0 33.7367 0.346214 34.4567 1.03864C35.2056 1.70444 35.58 2.5167 35.58 3.47545C35.58 4.43419 35.2056 5.25978 34.4567 5.95221C33.7367 6.618 32.8438 6.9509 31.7782 6.9509ZM28.8404 18.4809V10.2266H34.7592V18.4809H28.8404Z" fill="#080808" />
+                     <path d="M0 29.6664L12.4256 1.80469L17.6638 1.80469L30.13 29.6664H23.9578L21.156 23.3092H8.8522L6.09097 29.6664H0ZM15.0244 9.29988L11.045 18.3255H18.9632L15.0244 9.29988Z" fill="#080808" />
+                     <path d="M63.1194 2.36903C65.0379 3.86904 65.9971 5.74405 65.9971 7.99405C65.9971 10.2441 65.0379 12.1301 63.1194 13.6522C61.201 15.1522 58.7962 15.9022 55.905 15.9022H52.2168H46.3398V0.0859375L55.905 0.0859375C58.7962 0.0859375 61.201 0.84697 63.1194 2.36903ZM59.0664 10.4426C59.877 9.80289 60.2823 8.9867 60.2823 7.99405C60.2823 7.0014 59.877 6.18522 59.0664 5.54552C58.2558 4.90581 57.175 4.58596 55.824 4.58596H52.2168V11.4022H55.824C57.175 11.4022 58.2558 11.0823 59.0664 10.4426Z" fill="#080808" />
+                     <path d="M52.2168 15.9022H46.3398V18.4809H52.2168V15.9022Z" fill="#080808" />
+                     <path d="M40.5149 29.9985C37.0342 29.9985 34.2147 29.0722 32.0561 27.2196C29.8976 25.367 28.8184 22.9123 28.8184 19.8555H34.6869L34.6869 19.9249C34.6869 21.546 35.213 22.8196 36.2653 23.7459C37.3176 24.6722 38.7341 25.1354 40.5149 25.1354C42.2957 25.1354 43.7122 24.6722 44.7645 23.7459C45.8167 22.8196 46.3429 21.546 46.3429 19.9249L46.3429 19.8555H52.2114C52.2114 22.8891 51.1186 25.3438 48.9331 27.2196C46.7476 29.0722 43.9415 29.9985 40.5149 29.9985Z" fill="#080808" />
+                  </svg>
+               </Link>
+               <nav
+                  className={`${styles.header_wrap_nav} ${isActiveBurger ? styles.active : ""}`}
+                  onClickCapture={() => setActiveBurger(false)}
+               >
+                  <ul>
+                     {navItems.map((item) => {
+                        const isActive = isNavItemActive(pathname, item.href);
+
+                        return (
+                           <li key={item.href}>
+                              <Link
+                                 href={item.href}
+                                 prefetch={false}
+                                 className={isActive ? styles.navLinkActive : undefined}
+                                 aria-current={isActive ? "page" : undefined}
+                              >
+                                 {item.label}
+                              </Link>
+                           </li>
+                        );
+                     })}
+                  </ul>
+                  <div className={styles.header_wrap_nav_footer}>
+                     <Image
+                        className={styles.header_wrap_nav_footer_logo}
+                        src="/icons/sk-footer.svg"
+                        alt="Участник Сколково"
+                        width={110}
+                        height={32}
+                     />
+                  </div>
+               </nav>
+               <div className={styles.header_wrap_right}>
+                  <HeaderAuth loginButtonsNoBorder />
+                  <button
+                     type="button"
+                     aria-label="Меню"
+                     aria-expanded={isActiveBurger}
+                     className={`${styles.header_wrap_right_burger} ${isActiveBurger ? styles.active : ""}`}
+                     onClick={() => setActiveBurger((value) => !value)}
+                  >
+                     <span></span>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </header>
+   );
+}
+
+export default HeaderOtherStable;

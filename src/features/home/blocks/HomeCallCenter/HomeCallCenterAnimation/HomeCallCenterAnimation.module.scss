@@ -1,0 +1,413 @@
+@use 'sass:math';
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_call_wrap_right {
+   width: 100%;
+   height: auto;
+   aspect-ratio: 47/39;
+   overflow: hidden;
+   position: relative;
+
+
+   @include tablet {
+      margin-top: 50px;
+      overflow: visible;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+   }
+
+   @include mobile {
+      max-width: 450px;
+      overflow: hidden;
+      margin-top: 42px;
+   }
+
+   &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(0deg, rgba(43, 43, 43, 0.00) 0%, #2B2B2B 82.3%);
+      position: absolute;
+      top: -20px;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+
+      @include tablet {
+         height: 35px;
+         top: -5px;
+      }
+   }
+
+   &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(180deg, rgba(43, 43, 43, 0.00) 0%, #2B2B2B 82.3%);
+      position: absolute;
+      bottom: -20px;
+      user-select: none;
+      pointer-events: none;
+
+      @include tablet {
+         height: 35px;
+         bottom: -5px;
+      }
+   }
+
+   &_bg {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      pointer-events: none;
+      position: absolute;
+      top: 27%;
+
+      @include desktop {
+         top: 20%;
+      }
+
+      @include tablet {
+         top: 30%;
+      }
+
+      &_circle {
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         border-radius: 50%;
+         border: 2px dashed $grey;
+         width: 500px;
+         aspect-ratio: 1/1;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+
+
+         @for $i from 1 through 9 {
+            &:nth-child(#{$i}) {
+               width: #{183 + ($i - 1) * 142}px;
+               height: #{183 + ($i - 1) * 142}px;
+               opacity: #{1 - ($i - 1) * math.div(1 - 0.3, 7 - 1)};
+
+               @include desktop {
+                  width: #{150 + ($i - 1) * 130}px;
+                  height: #{150 + ($i - 1) * 130}px;
+                  opacity: #{1 - ($i - 1) * math.div(1 - 0.3, 7 - 1)};
+               }
+
+               @include tablet {
+                  width: #{120 + ($i - 1) * 110}px;
+                  height: #{120 + ($i - 1) * 110}px;
+                  opacity: #{1 - ($i - 1) * math.div(1 - 0.3, 7 - 1)};
+               }
+
+               @include mobile {
+                  width: #{100 + ($i - 1) * 90}px;
+                  height: #{100 + ($i - 1) * 90}px;
+                  opacity: #{1 - ($i - 1) * math.div(1 - 0.3, 7 - 1)};
+               }
+            }
+         }
+      }
+
+      &_phone {
+         display: flex;
+         width: fl(50);
+         height: fl(70, 57);
+         flex-shrink: 0;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+
+         @include desktop {
+            width: 50px;
+            height: 57px;
+         }
+
+         @include tablet {
+            width: 40px;
+            height: 47px;
+         }
+
+         @include mobile {
+            width: 30px;
+            height: 37px;
+         }
+
+         img {
+            width: 100%;
+            height: 100%;
+         }
+      }
+   }
+
+   &_block {
+      display: inline-flex;
+      flex-direction: column;
+      row-gap: fl(20, 16);
+      border-radius: 14px;
+      background-color: rgba(255, 255, 255, 0.10);
+      backdrop-filter: blur(13px);
+      padding: fl(40, 30);
+      position: absolute;
+      top: fl(210, 145);
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
+
+      @include desktop {
+         row-gap: 16px;
+         top: 145px;
+         padding: 30px;
+      }
+
+      @include tablet {
+         border-radius: 10px;
+         padding: 20px;
+         top: 150px;
+      }
+
+      @include mobile {
+         top: 70px;
+      }
+
+
+
+      &_head {
+         display: flex;
+         align-items: center;
+         column-gap: fl(20, 16);
+
+         @include desktop {
+            column-gap: 16px;
+         }
+
+         @include tablet {
+            column-gap: 12px;
+         }
+
+         &_title {
+            @include h2;
+            color: $white;
+         }
+
+         &_icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fl(44, 36);
+            height: fl(44, 36);
+            flex-shrink: 0;
+            transform: translateY(2px);
+
+            @include desktop {
+               width: 36px;
+               height: 36px;
+            }
+
+            @include tablet {
+               width: 26px;
+               height: 26px;
+            }
+
+            svg {
+               width: 100%;
+               height: 100%;
+            }
+         }
+      }
+
+      &_bottom {
+         display: flex;
+         align-items: center;
+         column-gap: fl(14, 10);
+
+         @include desktop {
+            column-gap: 10px;
+         }
+
+         @include tablet {
+            column-gap: 8px;
+         }
+
+         &.active {
+            .home_call_wrap_right_block_bottom_check {
+               background: #34C759;
+            }
+
+            .home_call_wrap_right_block_bottom_check_circle {
+               left: calc(100% - 3px);
+               transform: translateX(-100%);
+            }
+         }
+
+         &_check {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50px;
+            background: $grey;
+            width: fl(74, 65);
+            height: fl(44, 35);
+            position: relative;
+            transition: .6s;
+
+            @include desktop {
+               width: 65px;
+               height: 35px;
+            }
+
+            @include tablet {
+               width: 45px;
+               height: 25px;
+            }
+
+            &_circle {
+               display: inline-flex;
+               justify-content: center;
+               align-items: center;
+               border-radius: 50%;
+               background: $white;
+               box-shadow: 0 0 0 2.234px rgba(0, 0, 0, 0.04);
+               width: fl(39, 30);
+               height: calc(100% - 6px);
+               aspect-ratio: 1/1;
+               position: absolute;
+               left: 3px;
+               transition: .6s;
+
+               @include desktop {
+                  width: 30px;
+               }
+
+               @include tablet {
+                  width: 20px;
+               }
+            }
+         }
+
+         &_text {
+            @include h3;
+            color: $white;
+         }
+      }
+   }
+
+   &_animation {
+      &_item {
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         column-gap: fl(10, 8);
+         position: absolute;
+         border-radius: 50px;
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(25px);
+         padding: fl(6, 4) fl(14, 12) fl(6, 4) fl(6, 4);
+         will-change: transform, opacity, scale;
+         transform: translateZ(0) scale(0.5);
+         opacity: 0;
+
+         @include desktop {
+            column-gap: 8px;
+            padding: 4px 12px 4px 4px;
+         }
+
+         @include tablet {
+            column-gap: 6px;
+            padding: 3px 12px 3px 3px;
+         }
+
+
+         &_icon {
+            display: flex;
+            flex-shrink: 0;
+            width: fl(30, 26);
+            height: fl(30, 26);
+
+            @include desktop {
+               width: 26px;
+               height: 26px;
+            }
+
+            @include tablet {
+               width: 20px;
+               height: 20px;
+            }
+
+            svg {
+               width: 100%;
+               height: 100%;
+            }
+         }
+
+         &_title {
+            @include smallText;
+            color: $white;
+            text-align: center;
+         }
+
+         &:nth-child(1) {
+            top: 21%;
+            left: 7%;
+
+            @include mobile {
+               top: 8%;
+               left: 4px;
+            }
+         }
+
+         &:nth-child(2) {
+            top: 14%;
+            left: 53.5%;
+
+            @include mobile {
+               top: 4%;
+               left: 58%;
+            }
+         }
+
+         &:nth-child(3) {
+            bottom: 28.5%;
+            left: 7.2%;
+
+            @include mobile {
+               bottom: 18%;
+               left: 4%;
+            }
+         }
+
+         &:nth-child(4) {
+            bottom: 35%;
+            right: 7.2%;
+
+            @include mobile {
+               bottom: 20%;
+               right: 4%;
+            }
+         }
+
+         &:nth-child(5) {
+            bottom: 11%;
+            right: 9.5%;
+
+            @include mobile {
+               display: none;
+            }
+         }
+      }
+   }
+}

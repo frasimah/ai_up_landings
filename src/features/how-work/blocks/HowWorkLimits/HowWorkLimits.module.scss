@@ -1,0 +1,123 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.how_work_limits {
+   @include mt;
+
+   &_wrap {
+      &_content {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(20, 16);
+
+         @include desktop {
+            row-gap: 16px;
+         }
+
+         &_title {
+            @include h2;
+            color: $black;
+         }
+
+         &_text {
+            @include largeText;
+            color: $black;
+         }
+      }
+
+      &_img {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         box-sizing: border-box;
+         width: 100%;
+         height: auto;
+         border-radius: 14px;
+         background: #F6F6F6;
+         border-radius: 14px;
+         background: linear-gradient(90deg, #C2D1F6 -2.44%, #FFCF95 100%);
+         position: relative;
+         overflow: hidden;
+         aspect-ratio: 1213/548;
+
+         @include desktop {}
+
+         @include tablet {
+            margin-top: 24px;
+            border-radius: 10px;
+         }
+
+         @include mobile {
+            aspect-ratio: 16/12;
+         }
+
+         &_media {
+            position: relative;
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+            flex: 0 1 auto;
+            box-sizing: border-box;
+            padding: fl(60, 40);
+
+            @include desktop {
+               padding: 40px;
+            }
+
+            @include tablet {
+               padding: 20px;
+            }
+
+            img {
+               display: block;
+               width: auto;
+               height: 100%;
+               max-width: 100%;
+               max-height: 100%;
+               max-height: 430px;
+               position: relative;
+
+               @include tablet {
+                  max-width: 500px;
+               }
+            }
+         }
+
+         &_circle {
+            display: none;
+            position: absolute;
+            border-radius: 609.446px;
+            filter: blur(191.75669860839844px);
+            bottom: 0;
+            width: 609.446px;
+            height: 609.446px;
+            aspect-ratio: 1/1;
+
+            @include tablet {
+               display: none;
+            }
+
+            &:nth-child(2) {
+               background: #C2D1F6;
+               left: 0;
+            }
+
+            &:nth-child(3) {
+               background: #F6F0E4;
+               left: 30%;
+            }
+
+            &:nth-child(4) {
+               background: #FFCF95;
+               right: -100px;
+            }
+         }
+      }
+   }
+}

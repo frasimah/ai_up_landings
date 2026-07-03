@@ -1,0 +1,240 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Reusable CTA-баннер. Figma Frame 9425 / 9495.
+// Banner ~1840 wide on 1920 page → ~40px gutters; h368; r14; blue gradient + glow (left or right).
+
+.section {
+   position: relative;
+   width: 100%;
+   padding: 40px 0;
+   background: #050d22;
+}
+
+.banner {
+   position: relative;
+   max-width: 1840px;
+   margin: 0 auto;
+   min-height: 368px;
+   padding: 80px;
+   border-radius: 14px;
+   overflow: hidden;
+   background:
+      radial-gradient(ellipse 60% 130% at 22% 50%, #2e7bff 0%, #1357d6 32%, #0a3aa0 60%, #062a6e 100%);
+   opacity: 0;
+   transform: translateY(28px);
+   transition: opacity .7s var(--ease-smooth, ease), transform .7s var(--ease-smooth, ease);
+
+   @include tablet { padding: 40px 24px; min-height: 0; }
+
+   &.glowRight {
+      background:
+         radial-gradient(ellipse 65% 130% at 78% 60%, #2e7bff 0%, #1357d6 32%, #0a3aa0 60%, #062a6e 100%);
+   }
+}
+
+.in {
+   opacity: 1;
+   transform: translateY(0);
+}
+
+.glow {
+   position: absolute;
+   left: 8%;
+   top: 50%;
+   transform: translateY(-50%);
+   width: 620px;
+   height: 620px;
+   border-radius: 50%;
+   background: radial-gradient(circle, rgba(150, 200, 255, .55) 0%, rgba(90, 160, 255, .18) 40%, transparent 70%);
+   filter: blur(10px);
+   pointer-events: none;
+
+   .glowRight & { left: auto; right: 6%; }
+}
+
+.title {
+   @include sectionTitle;
+   position: relative;
+   z-index: 2;
+   margin: 0;
+   max-width: 585px;
+   color: #faf7f2;
+
+   @include tablet { max-width: 100%; }
+}
+
+.aside {
+   position: absolute;
+   z-index: 2;
+   top: 50%;
+   right: 80px;
+   transform: translateY(-50%);
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+   width: 437px;
+
+   @media (max-width: 1100px) {
+      position: static;
+      transform: none;
+      width: 100%;
+      margin-top: 28px;
+   }
+}
+
+.lead {
+   margin: 0;
+   font-size: 28px;
+   line-height: 34px;
+   font-weight: 500;
+   color: #fff;
+
+   @include tablet { font-size: 20px; line-height: 26px; }
+}
+
+.btn {
+   @include ctaPillBtn;
+   align-self: flex-start;
+}
+
+// ==========================
+// «centered» variant — Figma Frame 9520/9516 (3560:315): rounded card with a
+// vertical light-streak background (streaks texture + blue glow blended through)
+// and a centred stack (title → lead → button).
+// ==========================
+.centeredBanner {
+   position: relative;
+   max-width: 1840px;
+   margin: 0 auto;
+   min-height: 368px;
+   padding: 80px;
+   border-radius: 14px;
+   overflow: hidden;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: #060f2a;
+   // soft, slow lift-in of the whole card
+   opacity: 0;
+   transform: translateY(30px);
+   transition: opacity 1.2s cubic-bezier(.16, 1, .3, 1), transform 1.3s cubic-bezier(.16, 1, .3, 1);
+
+   @include tablet { padding: 48px 24px; min-height: 0; }
+
+   &.in { opacity: 1; transform: translateY(0); }
+}
+
+// Vertical light-streak backdrop — oversized and centred so a slow side-to-
+// side drift never reveals an edge (clipped by the card's own overflow:hidden).
+// Reads as ambient/alive rather than a static texture.
+.centeredStreaks {
+   position: absolute;
+   inset: 0 -6%;
+   background: url("/img/call-center/cta/streaks.png") center / cover no-repeat;
+   pointer-events: none;
+
+   .in & {
+      animation: cta-streaks-drift 16s ease-in-out infinite;
+   }
+}
+
+@keyframes cta-streaks-drift {
+   0%, 100% { transform: translateX(-2.5%); }
+   50% { transform: translateX(2.5%); }
+}
+
+// Bright blue light shining through the vertical slats — `screen` lifts the
+// streaks where the glow sits, recreating the «light through blinds» look.
+// Blooms in slowly, then keeps a soft, slow shimmer so the light feels alive.
+.centeredGlow {
+   position: absolute;
+   inset: 0;
+   pointer-events: none;
+   mix-blend-mode: screen;
+   opacity: 0;
+   background:
+      radial-gradient(ellipse 16% 130% at 21% 48%, rgba(120, 180, 255, .9) 0%, rgba(60, 120, 235, .35) 34%, transparent 62%),
+      radial-gradient(ellipse 16% 130% at 79% 54%, rgba(120, 180, 255, .9) 0%, rgba(60, 120, 235, .35) 34%, transparent 62%),
+      radial-gradient(ellipse 44% 80% at 50% 64%, rgba(40, 96, 205, .5) 0%, transparent 62%);
+
+   .in & {
+      animation:
+         cta-glow-bloom 2.2s cubic-bezier(.16, 1, .3, 1) forwards,
+         cta-glow-shimmer 7s ease-in-out 2.2s infinite;
+   }
+}
+
+@keyframes cta-glow-bloom {
+   0% { opacity: 0; transform: scale(.94); }
+   100% { opacity: .92; transform: scale(1); }
+}
+
+@keyframes cta-glow-shimmer {
+   0%, 100% { opacity: .78; transform: scale(1); }
+   50% { opacity: 1; transform: scale(1.045); }
+}
+
+// Gentle staggered cascade of the text and button once the card is in.
+.centeredTitle,
+.centeredLead,
+.centeredBtn {
+   opacity: 0;
+   transform: translateY(24px);
+   transition: opacity 1.1s cubic-bezier(.16, 1, .3, 1), transform 1.1s cubic-bezier(.16, 1, .3, 1);
+   will-change: opacity, transform;
+}
+
+.in {
+   .centeredTitle { opacity: 1; transform: none; transition-delay: .22s; }
+   .centeredLead { opacity: 1; transform: none; transition-delay: .36s; }
+   .centeredBtn { opacity: 1; transform: none; transition-delay: .5s; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+   .centeredBanner, .centeredStreaks, .centeredGlow,
+   .centeredTitle, .centeredLead, .centeredBtn { transition: none; animation: none; }
+}
+
+.centeredInner {
+   position: relative;
+   z-index: 2;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 40px;
+   max-width: 900px;
+
+   @include tablet { gap: 28px; }
+}
+
+.textGroup {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 20px;
+   text-align: center;
+
+   @include tablet { gap: 14px; }
+}
+
+.centeredTitle {
+   @include sectionTitle;
+   margin: 0;
+   color: #faf7f2;
+}
+
+.centeredLead {
+   margin: 0;
+   font-size: 28px;
+   line-height: 34px;
+   font-weight: 500;
+   color: #fff;
+
+   @include tablet { font-size: 18px; line-height: 24px; }
+}
+
+.centeredBtn {
+   @include ctaPillBtn;
+}

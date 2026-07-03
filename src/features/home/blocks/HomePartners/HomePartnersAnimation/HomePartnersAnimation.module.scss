@@ -1,0 +1,170 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.home_partner_right_img {
+   display: block;
+   width: 100%;
+   position: relative;
+   max-width: 42.516%;
+   padding: fl(30, 0);
+   aspect-ratio: 547/314;
+
+   @include desktop {
+      padding: 0;
+   }
+
+   @include tablet {
+      aspect-ratio: 223/125;
+      max-width: 100%;
+      max-height: 250px;
+   }
+
+   @include mobile {
+      aspect-ratio: 303/314;
+      max-height: 350px;
+   }
+
+   &_icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.02), 0 4px 160px 0 rgba(0, 0, 0, 0.08);
+      height: auto;
+      border-radius: 14px;
+      overflow: hidden;
+      transform: translateZ(0) scale(0.5);
+      will-change: transform, opacity, scale;
+      opacity: 0;
+
+      @include tablet {
+         border-radius: 10px;
+      }
+
+      &:nth-child(1) {
+         top: 50%;
+         right: fl(60, 10);
+         width: fl(115, 107);
+         z-index: -1;
+
+         @include desktop {
+            width: 107px;
+            right: 10px;
+         }
+
+         @include mobile {
+            width: 30%;
+            max-width: 120px;
+            right: 0;
+         }
+      }
+
+      &:nth-child(2) {
+         top: fl(30, 0);
+         left: fl(30, 0);
+         width: fl(127, 116);
+
+         @include desktop {
+            width: 116px;
+            top: 0;
+            left: 0;
+         }
+
+         @include mobile {
+            width: 30%;
+            max-width: 180px;
+            top: 30px;
+            left: -5px;
+         }
+      }
+
+      &:nth-child(3) {
+         top: fl(14, 10);
+         right: fl(34, 4);
+         width: fl(201, 176);
+
+         @include desktop {
+            width: 176px;
+            top: -10px;
+            right: 4px;
+         }
+
+         @include mobile {
+            max-width: 240px;
+            width: 42%;
+            right: -7px;
+            top: 50px;
+         }
+      }
+
+      &:nth-child(4) {
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         width: fl(298, 275);
+
+         @include desktop {
+            width: 275px;
+         }
+
+         @include mobile {
+            max-width: 350px;
+            width: 90%;
+         }
+      }
+
+      &:nth-child(5) {
+         left: fl(40, 4);
+         bottom: fl(40, 10);
+         width: fl(213, 186);
+         z-index: -1;
+
+         @include desktop {
+            width: 186px;
+            left: 4px;
+            bottom: 10px;
+         }
+
+         @include tablet {
+            bottom: 25px;
+         }
+
+         @include mobile {
+            width: 50%;
+            max-width: 275px;
+            bottom: 40px;
+            left: -10px;
+         }
+      }
+
+      &:nth-child(6) {
+         bottom: fl(34, 0);
+         right: fl(30, 0);
+         width: fl(222, 194);
+
+         @include desktop {
+            width: 194px;
+            row-gap: 0;
+            bottom: 0;
+         }
+
+         @include tablet {
+            bottom: 20px;
+            right: -7px;
+         }
+
+         @include mobile {
+            width: 53%;
+            max-width: 295px;
+            bottom: 30px;
+            right: -7px;
+         }
+      }
+
+      svg {
+         width: 100%;
+         height: auto;
+      }
+   }
+}

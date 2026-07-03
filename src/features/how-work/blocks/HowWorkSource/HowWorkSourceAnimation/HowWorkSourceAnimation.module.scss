@@ -1,0 +1,125 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_see_bottom_head {
+   display: flex;
+   flex-direction: column;
+   row-gap: fl(40, 30);
+   position: relative;
+   z-index: 1;
+
+   @include desktop {
+      row-gap: 30px;
+   }
+
+   @include tablet {
+      row-gap: 24px;
+   }
+
+   &_item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: fl(20, 16) fl(30, 24);
+      border-radius: 40px;
+      width: 100%;
+      @include h2;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.5);
+
+      @include desktop {
+         padding: 16px 24px;
+      }
+
+      @include tablet {
+         padding: 20px;
+         border-radius: 20px;
+         text-align: left;
+         @include h3;
+      }
+
+
+      &:nth-child(1) {
+         max-width: 585px;
+         background: $white;
+         color: $black;
+         left: 8.7%;
+
+         @include desktop {
+            left: 6%;
+         }
+
+         @include tablet {
+            left: 0;
+            max-width: 600px;
+         }
+
+         @include mobile {
+            left: 0;
+            max-width: calc(100% - 30px);
+         }
+
+         &::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2239%22%20height%3D%2240%22%20viewBox%3D%220%200%2039%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M11.8182%2024.7059C10.633%2031.7849%203.93939%2038.4314%200%2040C15.1273%2040%2024.8182%2034.902%2027.1818%2031.7647L39%2035.2941L19.5%2024.7059L13%200V4.70588V9.41177V10.5882C13%2012.9412%2013%2017.6471%2011.8182%2024.7059Z%22%20fill%3D%22white%22%2F%3E%3C%2Fsvg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            @include tablet {
+               bottom: -4px;
+               left: -8px;
+            }
+         }
+      }
+
+      &:nth-child(2) {
+         max-width: 830px;
+         background: #0169F9;
+         color: $white;
+         left: 38.15%;
+
+         @include desktop {
+            left: 27%;
+         }
+
+         @include tablet {
+            left: unset;
+            max-width: 600px;
+            margin-left: auto;
+         }
+
+         @include mobile {
+            left: unset;
+            max-width: calc(100% - 30px);
+         }
+
+         &::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            background-image: url("data:image/svg+xml,%3Csvg%20width%3D%2239%22%20height%3D%2240%22%20viewBox%3D%220%200%2039%2040%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M27.1818%2024.7059C28.367%2031.7849%2035.0606%2038.4314%2039%2040C23.8727%2040%2014.1818%2034.902%2011.8182%2031.7647L0%2035.2941L19.5%2024.7059L26%200V4.70588V9.41177V10.5882C26%2012.9412%2026%2017.6471%2027.1818%2024.7059Z%22%20fill%3D%22%230169F9%22%2F%3E%3C%2Fsvg%3E");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+
+            @include tablet {
+               bottom: -4px;
+               right: -8px;
+            }
+         }
+      }
+   }
+}

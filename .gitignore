@@ -1,0 +1,15 @@
+.DS_Store
+
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+.vercel/
+.env*
+!.env.example
+
+*.log
+*.err.log
+output/

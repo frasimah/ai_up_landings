@@ -1,0 +1,225 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.call_center_academy {
+   @include mt;
+
+   &_wrap {
+      &_title {}
+
+      &_main {
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            overflow: visible;
+         }
+
+         :global(.swiper-wrapper) {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            grid-column-gap: fl(40, 30);
+            grid-row-gap: fl(40, 30);
+
+            @include desktop {
+               grid-column-gap: 30px;
+               grid-row-gap: 30px;
+            }
+
+            @include tablet {
+               display: flex;
+               grid-template-columns: unset;
+               grid-template-rows: unset;
+               grid-column-gap: unset;
+               grid-row-gap: unset;
+            }
+         }
+
+         &_it {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            row-gap: fl(40, 30);
+
+            border-radius: fl(14, 10);
+            background: #F6F6F6;
+            padding: fl(40, 30);
+            will-change: transform, opacity;
+            transform: translateZ(0);
+
+            @include desktop {
+               padding: 30px;
+               border-radius: 10px;
+               row-gap: 30px;
+            }
+
+            @include tablet {
+               max-width: 300px;
+               height: auto;
+               padding: 20px;
+               border-radius: 4px;
+               row-gap: 10px;
+            }
+
+            &:nth-child(1) {
+               grid-area: 1 / 1 / 4 / 4;
+            }
+
+            &:nth-child(2) {
+               grid-area: 1 / 4 / 3 / 7;
+            }
+
+            &:nth-child(3) {
+               grid-area: 1 / 7 / 3 / 10;
+            }
+
+            &:nth-child(4) {
+               grid-area: 1 / 10 / 3 / 13;
+            }
+
+            &:nth-child(5) {
+               grid-area: 3 / 4 / 4 / 13;
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               flex-wrap: wrap;
+               column-gap: 30px;
+
+               @include tablet {
+                  align-items: flex-start;
+                  justify-content: space-between;
+                  flex-direction: column;
+               }
+            }
+
+            &_head {
+               display: flex;
+               flex-direction: column;
+               row-gap: fl(18, 10);
+
+               @include desktop {
+                  row-gap: 10px;
+               }
+
+               @include mobile {
+                  row-gap: 6px;
+               }
+
+               &_title {
+                  @include h3;
+                  color: $black;
+               }
+
+               &_text {
+                  display: flex;
+                  flex-direction: column;
+                  row-gap: 4px;
+                  @include mediumText;
+                  color: $black;
+
+                  @include desktop {
+                     row-gap: 3px;
+                  }
+
+                  ul {
+                     list-style-type: disc;
+                     padding-left: 25px;
+
+                     @include tablet {
+                        padding-left: 20px;
+                     }
+                  }
+               }
+            }
+
+            &_list {
+               display: flex;
+               flex-direction: column;
+               row-gap: fl(10, 7);
+
+               @include desktop {
+                  row-gap: 7px;
+               }
+
+               @include tablet {
+                  align-items: flex-start;
+               }
+
+               &_it {
+                  display: flex;
+                  align-items: center;
+                  justify-content: flex-start;
+                  text-align: center;
+                  column-gap: 10px;
+                  padding: 10px 20px fl(12, 10) fl(13, 10);
+                  border-radius: 50px;
+                  background: #FFF;
+                  @include mediumText;
+                  color: $black;
+
+                  @include desktop {
+                     padding: 10px 20px 10px 10px;
+                  }
+
+                  &_icon {
+                     display: flex;
+                     flex-shrink: 0;
+                     width: fl(28, 24);
+                     height: fl(28, 24);
+
+                     @include desktop {
+                        width: 24px;
+                        height: 24px;
+                     }
+
+                     @include tablet {
+                        width: 22px;
+                        height: 22px;
+                     }
+
+                     svg {
+                        width: 100%;
+                        height: 100%;
+                     }
+                  }
+               }
+            }
+
+            &_last {
+               display: inline-flex;
+               justify-content: center;
+               align-items: center;
+               text-align: center;
+               @include h4;
+               color: $white;
+               padding: 10px 20px 12px 20px;
+               border-radius: 50px;
+               background: #34C759;
+
+               &_icon {
+                  display: flex;
+                  width: 13px;
+                  height: 14px;
+                  flex-shrink: 0;
+                  margin-right: 12px;
+
+                  svg {
+                     width: 100%;
+                     height: 100%;
+                  }
+               }
+
+               span {
+                  display: inline-flex;
+               }
+            }
+         }
+      }
+   }
+}

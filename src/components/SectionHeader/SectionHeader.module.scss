@@ -1,0 +1,191 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.section_header {
+
+   >* {
+      &:first-child {
+         margin-top: 0px !important;
+      }
+   }
+
+   &--full {
+      width: 100%;
+      max-width: 100%;
+   }
+
+   &--small {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+
+      @include tablet {
+         max-width: 700px;
+      }
+   }
+
+   &.alignLeftMobile {
+
+      @include mobile {
+         justify-content: flex-start;
+         align-items: flex-start;
+         width: 100%;
+         max-width: 100%;
+
+         >* {
+            text-align: left !important;
+         }
+      }
+   }
+
+   &_eyebrow {
+      display: flex;
+      align-items: center;
+      column-gap: fl(14, 10);
+      @include h4;
+      color: $dark-grey;
+
+      @include desktop {
+         column-gap: 10px;
+      }
+
+      &_icon {
+         display: inline-flex;
+         width: fl(8, 6);
+         height: fl(8, 6);
+         flex-shrink: 0;
+         background: $blue;
+         border-radius: 2px;
+
+         @include desktop {
+            width: 6px;
+            height: 6px;
+         }
+
+         &.color_default {
+            background: $blue;
+         }
+
+         &.color_white {
+            background: $white;
+         }
+      }
+
+      &.eyebrow_default {
+         color: $black;
+      }
+
+      &.eyebrow_white {
+         color: $white;
+      }
+
+      &.eyebrow_gray {
+         color: $dark-grey;
+      }
+
+      &.eyebrow_full-gray {
+         color: $dark-grey;
+
+         span {
+            background: $dark-grey;
+         }
+      }
+   }
+
+   &_title {
+      @include h1;
+      margin-top: fl(24, 20);
+
+      @include desktop {
+         margin-top: 20px;
+      }
+
+      @include tablet {
+         margin-top: 12px;
+      }
+
+      &.h1 {
+         @include h1;
+
+         @include mobile {
+            @include h2
+         }
+      }
+
+      &.h2 {
+         @include h1;
+
+         @include mobile {
+            @include h2
+         }
+      }
+
+      &.title_default {
+         color: $black;
+
+         &.title_size_h1,
+         &.title_size_h2 {
+            color: $black;
+         }
+      }
+
+      &.title_white {
+         color: $white;
+
+         &.title_size_h1,
+         &.title_size_h2 {
+            color: $white;
+         }
+      }
+
+      &.title_size {
+         &_h1 {
+            @include h1;
+         }
+
+         &_h2 {
+            @include h2;
+         }
+      }
+   }
+
+   &_description {
+      @include mediumText;
+      text-wrap: balance;
+      margin-top: fl(20, 16);
+
+      @include desktop {
+         margin-top: 16px;
+      }
+
+      @include tablet {
+         margin-top: 6px;
+      }
+
+      &.description_default {
+         color: $black;
+
+         &.description_size_large {
+            color: $black;
+         }
+      }
+
+      &.description_white {
+         color: $white;
+
+         &.description_size_large {
+            color: $white;
+         }
+      }
+   }
+
+   .description_size_large {
+      @include largeText;
+   }
+}

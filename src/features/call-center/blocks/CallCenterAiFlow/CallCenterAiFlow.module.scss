@@ -1,0 +1,48 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.call_center_ai {
+   @include mt;
+
+   &_wrap {
+
+      &_bottom {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: flex-start;
+         max-width: fl(900, 700);
+         margin-left: auto;
+         margin-right: auto;
+         row-gap: fl(24, 16);
+         margin-top: fl(50, 40);
+
+         @include desktop {
+            max-width: 700px;
+            row-gap: 16px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-left: unset;
+            margin-right: unset;
+            margin-top: 24px;
+            row-gap: 12px;
+            align-items: flex-start;
+         }
+
+         &_text {
+            @include largeText;
+            color: #9C9C9C;
+            text-align: center;
+
+            @include tablet {
+               text-align: left;
+            }
+         }
+
+         &_btn {}
+      }
+   }
+}

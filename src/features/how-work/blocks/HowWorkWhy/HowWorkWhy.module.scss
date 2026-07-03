@@ -1,0 +1,100 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.how_work_why {
+   @include mt;
+
+   &_wrap {
+
+      &_list {
+         display: flex;
+         flex-wrap: wrap;
+         margin-left: calc(0px - fl(20, 15));
+         margin-right: calc(0px - fl(20, 15));
+         margin-top: fl(60, 40);
+         row-gap: fl(40, 30);
+
+         @include desktop {
+            margin-left: -15px;
+            margin-right: -15px;
+            margin-top: 40px;
+            row-gap: 30px;
+         }
+
+         @include tablet {
+            margin-left: -3.5px;
+            margin-right: -3.5px;
+            margin-top: 24px;
+            row-gap: 7px;
+         }
+
+         &_col {
+            display: block;
+            padding: 0 20px;
+            width: 100%;
+            max-width: 33.333333333%;
+
+            @include desktop {
+               padding: 0 15px
+            }
+
+            @include tablet {
+               padding: 0 3.5px;
+               max-width: 50%;
+            }
+
+            @include mobile {
+               max-width: 100%;
+            }
+         }
+
+         &_it {
+            display: flex;
+            align-items: center;
+            column-gap: fl(20, 16);
+            @include h3;
+            color: $black;
+            padding: fl(39, 29);
+            background: #F6F6F6;
+            border-radius: 10px;
+            height: 100%;
+
+            @include desktop {
+               column-gap: 16px;
+               padding: 29px;
+            }
+
+            @include tablet {
+               column-gap: 12px;
+               padding: 20px
+            }
+         }
+      }
+
+      &_message {
+         @include largeText;
+         color: #9C9C9C;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: fl(50, 40);
+         max-width: fl(900, 700);
+         text-align: center;
+
+         @include desktop {
+            margin-top: 40px;
+            max-width: 700px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+         }
+
+         @include mobile {
+            text-align: left;
+            margin-left: unset;
+            margin-right: unset;
+         }
+      }
+   }
+}

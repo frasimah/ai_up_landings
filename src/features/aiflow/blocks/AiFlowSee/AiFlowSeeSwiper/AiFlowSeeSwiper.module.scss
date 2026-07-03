@@ -1,0 +1,156 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.ai_flow_see_wrap_head_left_swiper {
+   display: flex;
+   flex-direction: column;
+   row-gap: fl(30, 20);
+
+   @include desktop {
+      row-gap: 20px;
+   }
+
+   @include tablet {
+      row-gap: 0px;
+   }
+
+   &_sw {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0px;
+
+      @include tablet {
+         overflow: visible;
+      }
+   }
+
+   &_it {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: fl(40, 30);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      @include h3;
+      color: $white;
+      height: auto;
+
+      @include desktop {
+         padding: 30px;
+      }
+
+      @include tablet {
+         padding: 20px;
+         max-width: 310px;
+         border-radius: 10px;
+      }
+   }
+
+   &_btns {
+      display: flex;
+      align-items: center;
+      column-gap: 6px;
+
+      @include tablet {
+         display: none;
+      }
+
+      &_prev:global(.swiper-button-prev) {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         width: fl(50, 40);
+         height: fl(50, 40);
+         flex-shrink: 0;
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(25px);
+         color: $white;
+         border-radius: 14px;
+         cursor: pointer;
+         position: unset;
+         margin: 0;
+         padding: 0;
+
+         @include desktop {
+            width: 40px;
+            height: 40px;
+         }
+
+         @include hoverBouce;
+
+         svg {
+            @include svgDefault;
+
+            path {
+               stroke: currentColor;
+            }
+         }
+      }
+
+      &_next:global(.swiper-button-next) {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         width: fl(50, 40);
+         height: fl(50, 40);
+         flex-shrink: 0;
+         background: rgba(255, 255, 255, 0.06);
+         backdrop-filter: blur(25px);
+         color: $white;
+         border-radius: 14px;
+         cursor: pointer;
+         position: unset;
+         margin: 0;
+         padding: 0;
+
+         @include desktop {
+            width: 40px;
+            height: 40px;
+         }
+
+         @include hoverBouce;
+
+         svg {
+            @include svgDefault;
+
+            path {
+               stroke: currentColor;
+            }
+         }
+      }
+   }
+
+   .ai_see_pagination {
+      display: none;
+
+      @include tablet {
+         display: flex;
+         justify-content: center;
+         width: 100%;
+         align-items: center;
+         position: unset;
+         margin-top: 16px;
+         column-gap: 6px;
+      }
+
+      :global(.swiper-pagination-bullet) {
+         width: 4px;
+         height: 4px;
+         border-radius: 50%;
+         background: #FFF;
+         opacity: .3;
+         margin: 0 !important;
+         transition: opacity .4s;
+      }
+
+      :global(.swiper-pagination-bullet-active) {
+         width: 6px;
+         height: 6px;
+         background: #FFF;
+         opacity: 1;
+      }
+   }
+}

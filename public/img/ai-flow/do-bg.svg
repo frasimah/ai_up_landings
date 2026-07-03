@@ -1,0 +1,44 @@
+﻿<svg width="350" height="232" viewBox="0 0 350 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="about-do-bg-dots-sm" x="-28.9764" y="-39.5" width="8.89" height="8.89" patternUnits="userSpaceOnUse">
+      <circle cx="4.445" cy="4.445" r="0.45" fill="#E9E9E9" />
+    </pattern>
+    <pattern id="about-do-bg-dots-md" x="-28.9764" y="-39.5" width="8.89" height="8.89" patternUnits="userSpaceOnUse">
+      <circle cx="4.445" cy="4.445" r="0.85" fill="#E9E9E9" />
+    </pattern>
+    <pattern id="about-do-bg-dots-lg" x="-28.9764" y="-39.5" width="8.89" height="8.89" patternUnits="userSpaceOnUse">
+      <circle cx="4.445" cy="4.445" r="1.35" fill="#E9E9E9" />
+    </pattern>
+    <pattern id="about-do-bg-dots-xl" x="-28.9764" y="-39.5" width="8.89" height="8.89" patternUnits="userSpaceOnUse">
+      <circle cx="4.445" cy="4.445" r="1.9" fill="#E9E9E9" />
+    </pattern>
+    <radialGradient id="about-do-bg-fade-md" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(175 116) rotate(90) scale(126 180)">
+      <stop offset="0.1" stop-color="white" />
+      <stop offset="0.72" stop-color="white" stop-opacity="0.98" />
+      <stop offset="1" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="about-do-bg-fade-lg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(175 116) rotate(90) scale(98 142)">
+      <stop offset="0.12" stop-color="white" />
+      <stop offset="0.68" stop-color="white" stop-opacity="0.96" />
+      <stop offset="1" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="about-do-bg-fade-xl" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(175 116) rotate(90) scale(72 108)">
+      <stop offset="0.18" stop-color="white" />
+      <stop offset="0.58" stop-color="white" stop-opacity="0.94" />
+      <stop offset="1" stop-color="white" stop-opacity="0" />
+    </radialGradient>
+    <mask id="about-do-bg-mask-md" maskUnits="userSpaceOnUse" x="-29" y="-40" width="409" height="356">
+      <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-fade-md)" />
+    </mask>
+    <mask id="about-do-bg-mask-lg" maskUnits="userSpaceOnUse" x="-29" y="-40" width="409" height="356">
+      <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-fade-lg)" />
+    </mask>
+    <mask id="about-do-bg-mask-xl" maskUnits="userSpaceOnUse" x="-29" y="-40" width="409" height="356">
+      <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-fade-xl)" />
+    </mask>
+  </defs>
+  <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-dots-sm)" opacity="0.7" />
+  <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-dots-md)" opacity="0.8" mask="url(#about-do-bg-mask-md)" />
+  <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-dots-lg)" opacity="0.9" mask="url(#about-do-bg-mask-lg)" />
+  <rect x="-29" y="-40" width="409" height="356" fill="url(#about-do-bg-dots-xl)" mask="url(#about-do-bg-mask-xl)" />
+</svg>

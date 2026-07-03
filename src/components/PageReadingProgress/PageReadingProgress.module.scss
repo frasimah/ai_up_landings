@@ -1,0 +1,27 @@
+@use "@/scss/variables" as *;
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &[data-visible="true"] {
+    opacity: 1;
+  }
+}
+
+.bar {
+  width: 100%;
+  height: 100%;
+  background: $blue;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}

@@ -1,0 +1,176 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_purchase {
+
+   @include mt;
+
+   &_wrap {
+
+      &_main {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(40, 30);
+         justify-content: space-between;
+         height: 100%;
+
+         @include desktop {
+            row-gap: 30px
+         }
+
+         @include tablet {
+            row-gap: 16px
+         }
+
+         &_title {
+            @include h3;
+            color: $black;
+            text-wrap: balance;
+         }
+
+         &_bottom {
+            display: flex;
+            flex-direction: column;
+            row-gap: fl(24, 12);
+            text-wrap: balance;
+
+            @include desktop {
+               row-gap: 16px
+            }
+
+            @include tablet {
+               row-gap: 12px
+            }
+
+            &_text {
+               @include largeText;
+               color: #9C9C9C;
+
+               @include tablet {}
+            }
+         }
+      }
+
+      &_table {
+         width: 100%;
+         border-collapse: separate;
+         border-spacing: 0;
+         overflow: hidden;
+         width: 100%;
+         max-width: 100%;
+         border-collapse: separate;
+         border-spacing: 0;
+         table-layout: fixed;
+         border-radius: 14px;
+         overflow: hidden;
+
+         @include tablet {
+            margin-top: 24px;
+            border-radius: 8px;
+         }
+
+         thead {
+            th {
+               background: #E6F1FF;
+               text-align: left;
+               padding: fl(24, 16) fl(40, 24);
+               border-right: 2px solid #FFF;
+               @include largeText;
+               color: #0169F9;
+
+               @include desktop {
+                  padding: 16px 24px;
+               }
+
+               @include tablet {
+                  padding: 14px 16px;
+               }
+
+               &:last-child {
+                  border-right: 0;
+               }
+            }
+         }
+
+         tbody {
+            td {
+               background: #ebebeb;
+               color: #191919;
+               padding: fl(22, 16) fl(40, 24);
+               border-top: 2px solid #FFF;
+               border-right: 2px solid #FFF;
+               @include mediumText;
+               color: $black;
+
+               @include desktop {
+                  padding: 16px 24px;
+               }
+
+               @include tablet {
+                  padding: 10px 16px;
+               }
+
+               &:last-child {
+                  border-right: 0;
+               }
+            }
+         }
+      }
+   }
+}
+
+.vipRow {
+
+
+   td {
+      background: rgba(255, 255, 255, 0.10) !important;
+      backdrop-filter: blur(50px);
+      position: relative;
+
+      &:nth-of-type(odd) {
+
+         &::after {
+            display: none;
+         }
+      }
+
+      // &::after {
+      //    content: 'vip';
+      //    display: block;
+      //    color: #FFF;
+      //    text-align: center;
+      //    font-size: fl(16, 14);
+      //    font-style: normal;
+      //    font-weight: 500;
+      //    line-height: fl(22, 20);
+
+      //    border-radius: 0 0 6px 6px;
+      //    background: linear-gradient(90deg, #E7BB59 0.29%, #D5A94E 41.88%, #9C6F29 99.72%);
+      //    position: absolute;
+      //    top: 0;
+      //    right: 16px;
+      //    padding: 0px fl(9, 7) 2px fl(9, 7);
+
+      //    @include desktop {
+      //       font-size: 14px;
+      //       line-height: 20px;
+      //       padding: 0 7px 2px 7px;
+      //    }
+
+      //    @include tablet {
+      //       font-size: 12px;
+      //       line-height: 18px;
+      //       right: 10px;
+      //       padding: 0 5px 2px 5px;
+      //    }
+      // }
+
+      span {
+         background: var(--Linear, linear-gradient(90deg, #FAE4B5 0%, #FDDAA6 16.05%, #EFD071 38.38%));
+         background-clip: text;
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
+      }
+   }
+}

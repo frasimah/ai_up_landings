@@ -1,0 +1,207 @@
+@use "@/scss/variables" as *;
+@use "@/scss/mixins" as *;
+@use "@/scss/media" as *;
+
+.cost_purchase {
+  @include mt;
+
+  &_wrap {
+    &_main {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(40, 30);
+      justify-content: space-between;
+      height: 100%;
+
+      @include desktop {
+        row-gap: 30px;
+      }
+
+      @include tablet {
+        row-gap: 16px;
+      }
+
+      &_title {
+        @include h3;
+        color: $black;
+        text-wrap: balance;
+      }
+
+      &_bottom {
+        display: flex;
+        flex-direction: column;
+        row-gap: fl(24, 12);
+        text-wrap: balance;
+
+        @include desktop {
+          row-gap: 16px;
+        }
+
+        @include tablet {
+          row-gap: 12px;
+        }
+
+        &_text {
+          @include largeText;
+          color: #9c9c9c;
+        }
+      }
+    }
+
+    &_table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 14px;
+      overflow: hidden;
+
+      @include tablet {
+        margin-top: 24px;
+        border-radius: 8px;
+      }
+
+      thead {
+        th {
+          background: #e6f1ff;
+          text-align: left;
+          padding: fl(24, 16) fl(40, 24);
+          border-right: 2px solid #fff;
+          @include largeText;
+          color: #0169f9;
+
+          @include desktop {
+            padding: 16px 24px;
+          }
+
+          @include tablet {
+            padding: 14px 16px;
+          }
+
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      tbody {
+        td {
+          background: #ebebeb;
+          padding: fl(22, 16) fl(40, 24);
+          border-top: 2px solid #fff;
+          border-right: 2px solid #fff;
+          @include mediumText;
+          color: $black;
+
+          @include desktop {
+            padding: 16px 24px;
+          }
+
+          @include tablet {
+            padding: 10px 16px;
+          }
+
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.vipRow {
+  td {
+    position: relative;
+    border-top: 3px solid #48372d;
+    border-right: 3px solid #48372d;
+    background-color: #4f4138 !important;
+    background-image: linear-gradient(90deg, #504339 0%, #866651 100%);
+    background-repeat: no-repeat;
+    background-size: var(--vip-fill-size, 100%) 100%;
+    color: #f6dda7;
+
+    &:last-child {
+      border-right: 0;
+    }
+
+    span {
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(90deg, #fae4b5 0%, #fdda9e 25%, #efd071 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+
+.vipRowStart {
+  td {
+    padding-top: fl(54, 34);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% + 3px);
+      height: fl(36, 28);
+      background: linear-gradient(90deg, #2d241f 0%, #6e533f 100%);
+      z-index: 1;
+    }
+
+    &:last-child::before {
+      width: 100%;
+    }
+  }
+}
+
+.vipRowEnd {
+  td {
+    &:first-child {
+      border-bottom-left-radius: 14px;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 14px;
+    }
+  }
+}
+
+.vipBadge {
+  position: absolute;
+  top: 10px;
+  left: 100%;
+  z-index: 3;
+  transform: translateX(-50%);
+  padding: 4px 11px 5px;
+  border: 1px solid rgba(164, 118, 61, 0.9);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #5b3e23 0%, #4a311b 100%);
+  box-shadow: 0 0 0 1px rgba(255, 223, 169, 0.08) inset;
+  color: #f8e3be;
+  font-size: fl(16, 13);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  -webkit-text-fill-color: #f8e3be !important;
+
+  @include tablet {
+    top: 8px;
+    padding: 4px 9px;
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

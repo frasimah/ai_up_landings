@@ -1,0 +1,524 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.ai_flow_layers_tabs {
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+   flex-direction: column;
+   margin-top: 24px;
+
+   &_buttons {
+      display: flex;
+      align-items: center;
+      border-radius: 24px;
+      border: 1px solid #0169F9;
+      padding: 7px;
+      position: relative;
+      margin: 0 auto;
+
+      @include desktop {
+         border-radius: 20px;
+      }
+
+      @include tablet {
+         border-radius: 14px;
+         padding: 6px;
+         width: 100%;
+         max-width: 50%;
+      }
+
+      @include mobile {
+         width: 100%;
+         max-width: 100%;
+
+      }
+
+      &_it {
+         display: inline-flex;
+         justify-content: center;
+         align-items: center;
+         text-align: center;
+         padding: fl(24, 20) fl(26, 20);
+         border-radius: fl(20, 16);
+         cursor: pointer;
+         position: relative;
+         z-index: 2;
+         @include mediumText;
+         color: $blue;
+
+         transition: .4s;
+
+         @include desktop {
+            border-radius: 16px;
+            padding: 20px;
+         }
+
+         @include tablet {
+            border-radius: 10px;
+            padding: 13px;
+         }
+
+         @include tablet {
+            width: 100%;
+         }
+
+         &_active {
+            color: $white;
+         }
+      }
+
+      &_cloud {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: calc(100% - 14px);
+         background: red;
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         width: calc(50% - 8px);
+         left: 7px;
+         border-radius: fl(20, 16);
+         user-select: none;
+         pointer-events: none;
+         background: $blue;
+         transition: .4s;
+
+         @include desktop {
+            border-radius: 16px;
+         }
+
+         @include tablet {
+            border-radius: 10px;
+            height: calc(100% - 12px);
+            width: calc(50% - 6px);
+            left: 6px;
+         }
+
+         &_active {
+            left: 50%;
+         }
+      }
+   }
+
+   &_layers {
+      width: 100%;
+      margin-top: fl(60, 40);
+
+      @include desktop {
+         margin-top: 40px;
+      }
+
+      @include tablet {
+         margin-top: 24px;
+      }
+
+      @include tablet {
+         overflow: visible;
+      }
+   }
+}
+
+.ai_flow_layers_tabs_first_layer {
+   width: 100%;
+   max-width: 100%;
+   flex-shrink: 0;
+
+   &_content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+
+      &_head {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(24, 16);
+         flex: 1 1 auto;
+         justify-content: flex-end;
+         margin-top: fl(40, 30);
+
+         @include desktop {
+            row-gap: 16px;
+            margin-top: 30px;
+         }
+
+         @include tablet {
+            row-gap: 12px;
+            margin-top: 24px;
+         }
+
+         &_title {
+            @include largeText;
+            color: $black;
+         }
+
+         &_list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: fl(20, 12);
+
+            @include desktop {
+               gap: 12px;
+            }
+
+            @include tablet {
+               gap: 7px;
+            }
+
+            &_it {
+               display: inline-flex;
+               justify-content: center;
+               align-items: center;
+               column-gap: 10px;
+               text-align: center;
+               padding: 10px fl(20, 16) fl(12, 10) fl(20, 16);
+               border-radius: 50px;
+               background: #F6F6F6;
+
+               @include largeText;
+               color: $black;
+
+               @include desktop {
+                  padding: 10px 16px;
+               }
+
+               &_icon {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-shrink: 0;
+                  width: fl(20, 16);
+                  height: fl(20, 16);
+
+                  @include desktop {
+                     width: 16px;
+                     height: 16px;
+                  }
+
+                  svg {
+                     width: 100%;
+                     height: 100%;
+                  }
+               }
+            }
+
+         }
+      }
+
+      &_list {
+         margin-top: fl(40, 30);
+         @include largeText;
+         color: $black;
+
+         @include desktop {
+            margin-top: 30px;
+         }
+
+         @include tablet {
+            margin-top: 16px;
+         }
+
+         ul {
+            list-style-type: disc;
+            padding-left: 25px;
+            margin-top: 5px;
+
+            li {}
+         }
+
+         &_blocks {
+            display: flex;
+            flex-wrap: nowrap;
+            margin-top: fl(24, 20);
+            column-gap: fl(40, 30);
+
+            @include desktop {
+               column-gap: 30px;
+               margin-top: 20px;
+            }
+
+            @media screen and (max-width: 1400px) {
+               column-gap: 7px;
+            }
+
+            @include tablet {
+               row-gap: 7px;
+               margin-top: 16px;
+               column-gap: 7px;
+            }
+
+            @include mobile {
+               flex-direction: column;
+            }
+
+            &_block {
+               width: 100%;
+               max-width: 50%;
+               border-radius: 14px;
+               background: #F6F6F6;
+               padding: fl(30, 24);
+
+               @include desktop {
+                  padding: 24px;
+               }
+
+               @media screen and (max-width: 1400px) {
+                  padding: 20px;
+                  border-radius: 10px;
+                  max-width: 100%;
+                  font-size: 16px;
+                  line-height: 22px;
+               }
+
+               @include tablet {
+                  padding: 20px;
+                  border-radius: 10px;
+                  max-width: 50%;
+               }
+
+               @include mobile {
+                  max-width: 100%;
+               }
+            }
+         }
+      }
+
+      &_message {
+         margin-top: fl(40, 30);
+         @include largeText;
+         color: #9C9C9C;
+
+         @include desktop {
+            margin-top: 30px;
+         }
+
+         @include tablet {
+            margin-top: 16px;
+         }
+      }
+
+      &_image {
+         width: 100%;
+         max-width: 100%;
+         height: auto;
+         border-radius: 14px;
+         background: #F6F6F6;
+
+         @include tablet {
+            margin-top: 24px;
+         }
+
+         svg {
+            g {
+               opacity: 0;
+               will-change: transform, opacity, scale;
+            }
+         }
+
+         &_second {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: fl(100, 40);
+            position: relative;
+            overflow: hidden;
+            padding: fl(145, 120) 0;
+
+            @include desktop {
+               column-gap: 40px;
+               padding: 120px 0;
+            }
+
+            @include mobile {
+               flex-direction: column;
+               row-gap: 30px;
+               padding: 30px 0;
+            }
+
+            img {
+               position: absolute;
+               top: 50%;
+               left: 50%;
+               transform: translate(-50%, -50%) rotate(0deg);
+               width: 100%;
+               height: auto;
+               animation: rotate 50s linear infinite;
+               transform-origin: 50% 50%;
+
+               @keyframes rotate {
+                  from {
+                     transform: translate(-50%, -50%) rotate(0deg);
+                  }
+
+                  to {
+                     transform: translate(-50%, -50%) rotate(360deg);
+                  }
+               }
+            }
+         }
+
+         &_block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            row-gap: fl(40, 30);
+            position: relative;
+            z-index: 1;
+
+
+            @include desktop {
+               row-gap: 30px;
+            }
+
+            @include tablet {
+               row-gap: 16px;
+            }
+
+            &_check {
+               display: flex;
+               align-items: center;
+               column-gap: fl(14, 10);
+               @include h4;
+               font-weight: 400;
+               color: $black;
+
+               @include desktop {
+                  column-gap: 10px;
+               }
+            }
+
+            &_items {
+               display: flex;
+               flex-direction: column;
+               align-items: center;
+
+               &_it {
+                  display: inline-flex;
+                  align-items: center;
+                  column-gap: fl(16, 12);
+                  color: #080808;
+                  
+                  font-size: 22px;
+                  font-weight: 400;
+                  line-height: normal;
+                  border-radius: 20px;
+                  background: #FFF;
+                  box-shadow: 0 -4px 40px 0 rgba(0, 0, 0, 0.04);
+                  padding: 12px 30px 12px 10px;
+
+                  @include desktop {
+                     column-gap: 12px;
+                     padding: 8px 20px 8px 8px;
+                     border-radius: 14px;
+                     font-size: 16px;
+                  }
+
+                  @include mobile {
+                     border-radius: 10px;
+                     background: #FFF;
+                     box-shadow: 0 4px 80px 0 rgba(0, 0, 0, 0.06), 0 4px 100px 0 rgba(0, 0, 0, 0.05);
+                     padding: 4px 12px 4px 4px;
+                     font-size: 12px;
+                  }
+
+
+                  &:nth-child(1) {
+                     transform: scale(0.6);
+
+                     @include mobile {
+                        transform: scale(0.7);
+                     }
+                  }
+
+                  &:nth-child(2) {
+                     transform: scale(0.8);
+                     margin-top: calc(0px - fl(53, 40));
+
+                     @include desktop {
+                        margin-top: -40px;
+                     }
+
+                     @include mobile {
+                        transform: scale(0.9);
+                        margin-top: -25px;
+                     }
+                  }
+
+                  &:nth-child(3) {
+                     margin-top: calc(0px - fl(45, 32));
+                     z-index: 1;
+
+                     @include desktop {
+                        margin-top: -32px;
+                     }
+
+                     @include mobile {
+                        margin-top: -20px;
+                     }
+                  }
+
+                  &_img {
+                     display: block;
+                     width: fl(70, 56);
+                     height: fl(70, 56);
+                     border-radius: fl(12, 8);
+                     flex-shrink: 0;
+
+                     @include desktop {
+                        border-radius: 8px;
+                        width: 56px;
+                        height: 56px;
+                     }
+
+                     @include mobile {
+                        border-radius: 6px;
+                        width: 44px;
+                        height: 44px;
+                     }
+
+                     img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                     }
+                  }
+
+                  span {
+                     display: block;
+                     width: fl(8, 6);
+                     height: fl(8, 6);
+                     border-radius: 2px;
+                     background: #34C759;
+                     flex-shrink: 0;
+
+                     &.red {
+                        background: #B91509;
+                     }
+
+                     @include desktop {
+                        width: 6px;
+                        height: 6px;
+                     }
+                  }
+               }
+            }
+         }
+
+         svg,
+         img {
+            width: 100%;
+            height: auto;
+         }
+      }
+   }
+
+
+}
+
+.ai_flow_layers_tabs_second_layer {
+   width: 100%;
+   max-width: 100%;
+   flex-shrink: 0;
+}

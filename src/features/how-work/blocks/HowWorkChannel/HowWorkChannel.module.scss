@@ -1,0 +1,127 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.how_work_channel {
+   @include mt;
+
+   &_wrap {
+      &_main {
+         display: flex;
+         flex-direction: column;
+         row-gap: fl(30, 20);
+         margin-top: fl(60, 40);
+
+         @include desktop {
+            row-gap: 20px;
+            margin-top: 40px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            row-gap: 16px
+         }
+
+         &_title {
+            @include h3;
+            color: $black;
+         }
+
+         &_list {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 calc(0px - fl(20, 15));
+            row-gap: 7px;
+
+            @include desktop {
+               margin: 0 -15px;
+            }
+
+            @include tablet {
+               margin: 0 -3.5px;
+            }
+
+            &_col {
+               display: block;
+               width: 100%;
+               flex: 1 0 25%;
+               padding: 0 fl(20, 15);
+               will-change: transform, opacity;
+
+               @include desktop {
+                  padding: 0 15px;
+               }
+
+               @include tablet {
+                  flex: unset;
+                  max-width: 50%;
+                  padding: 0 3.5px;
+               }
+
+               @include mobile {
+                  max-width: 100%;
+               }
+
+               &_active {
+                  .how_work_channel_wrap_main_list_it {}
+               }
+            }
+
+            &_it {
+               display: flex;
+               align-items: center;
+               column-gap: fl(20, 16);
+               @include largeText;
+               color: $black;
+               padding: fl(39, 29);
+               border: 1px dashed #9C9C9C;
+               border-radius: 10px;
+               height: 100%;
+               will-change: transform, opacity;
+
+               @include desktop {
+                  column-gap: 16px;
+                  padding: 29px;
+               }
+
+               @include tablet {
+                  column-gap: 12px;
+                  padding: 15px;
+               }
+            }
+         }
+      }
+
+      &_message {
+         display: flex;
+         align-items: center;
+         column-gap: fl(14, 12);
+         margin-top: fl(50, 40);
+         max-width: 900px;
+         margin-left: auto;
+         margin-right: auto;
+         @include largeText;
+         color: $black;
+
+         @include desktop {
+            column-gap: 12px;
+            margin-top: 40px;
+            max-width: 700px;
+         }
+
+         @include tablet {
+            margin-top: 24px;
+            margin-left: unset;
+            margin-right: unset;
+         }
+
+         p {
+            text-wrap: balance;
+
+            br {
+               display: none;
+            }
+         }
+      }
+   }
+}

@@ -1,0 +1,151 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.call_center_ai_sw {
+   margin-top: fl(60, 40);
+
+   @include desktop {
+      margin-top: 40px;
+   }
+
+   @include tablet {
+      margin-top: 24px;
+      overflow: visible;
+   }
+
+   .call_center_ai_wrap_item {
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      border-radius: 14px;
+      background: #F6F6F6;
+      row-gap: fl(20, 16);
+      height: auto;
+      justify-content: space-between;
+
+      @include desktop {
+         row-gap: 16px;
+         padding: 30px;
+      }
+
+      @include tablet {
+         padding: 20px;
+         row-gap: 12px;
+         border-radius: 4px;
+         max-width: 300px;
+      }
+
+      &_title {
+         @include h3;
+         color: $black;
+         z-index: 2;
+         position: relative;
+      }
+
+      &_img {
+         position: relative;
+         aspect-ratio: 169/120;
+
+         &_bg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            width: 110%;
+            height: 110%;
+            transform: translate(-50%, -50%);
+
+            @include tablet {
+               width: 120%;
+               height: 120%;
+            }
+
+            img {
+               width: 100%;
+               height: 100%;
+               object-fit: cover;
+            }
+         }
+
+         &_1 {
+            .buble {
+               position: absolute;
+               will-change: transform, opacity, scale;
+               opacity: 0;
+               transform: scale(0.5);
+
+               &:nth-child(1) {
+                  top: 10%;
+                  left: 60%;
+               }
+
+               &:nth-child(2) {
+                  top: 30%;
+                  left: 20%;
+               }
+
+               &:nth-child(3) {
+                  top: 50%;
+                  left: 63%;
+               }
+
+               &:nth-child(4) {
+                  top: 70%;
+                  left: 15%;
+               }
+            }
+         }
+
+         &_2 {
+            .buble {
+               position: absolute;
+               will-change: transform, opacity, scale;
+               opacity: 0;
+               transform: scale(0.5);
+
+               &:nth-child(1) {
+                  top: 35%;
+                  left: 20%;
+
+                  @include tablet {
+                     top: 30%;
+                  }
+               }
+
+               &:nth-child(2) {
+                  top: 55%;
+                  left: 60%;
+
+                  @include tablet {
+                     top: 50%;
+                  }
+               }
+            }
+         }
+
+         &_3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: fl(14, 12);
+            @include h4;
+            font-weight: 400;
+            color: $black;
+
+            @include desktop {
+               column-gap: 12px;
+            }
+
+            @include tablet {
+               column-gap: 8px;
+            }
+         }
+
+
+      }
+   }
+}

@@ -1,0 +1,213 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.about_header {
+   padding-top: fl(192, 136);
+   position: relative;
+
+   @include desktop {
+      padding-top: 136px;
+   }
+
+   @include tablet {
+      padding-top: 96px;
+   }
+
+   &_wrap {
+      &_header {}
+
+      &_head {
+         justify-content: center;
+         align-items: center;
+
+         @include mobile {
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            >* {
+               text-align: left;
+            }
+         }
+      }
+
+      &_people {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: flex-start;
+         margin-left: auto;
+         margin-right: auto;
+         width: 100%;
+         max-width: 900px;
+         margin-bottom: fl(50, 40);
+
+         @include desktop {
+            margin-bottom: 40px;
+         }
+
+         @include tablet {
+            margin-bottom: 24px;
+         }
+
+         &_item {
+            display: inline-flex;
+            align-items: center;
+            column-gap: fl(16, 12);
+            border-radius: 20px;
+            background: var(--White, #FFF);
+            box-shadow: 0 4px 80px 0 rgba(0, 0, 0, 0.06);
+            padding: fl(12, 8) fl(30, 20) fl(12, 8) fl(10, 8);
+
+            @include desktop {
+               column-gap: 12px;
+               padding: 8px 20px 8px 8px;
+               border-radius: 14px;
+            }
+
+            @include mobile {
+               border-radius: 10px;
+               background: #FFF;
+               box-shadow: 0 4px 80px 0 rgba(0, 0, 0, 0.06), 0 4px 100px 0 rgba(0, 0, 0, 0.10);
+               padding: 4px 12px 4px 4px;
+            }
+
+            &:nth-child(1) {
+               transform: scale(0.6);
+
+               @include mobile {
+                  transform: scale(0.7);
+               }
+            }
+
+            &:nth-child(2) {
+               transform: scale(0.8);
+               margin-top: calc(0px - fl(53, 40));
+
+               @include desktop {
+                  margin-top: -40px;
+               }
+
+               @include mobile {
+                  transform: scale(0.9);
+                  margin-top: -25px;
+               }
+            }
+
+            &:nth-child(3) {
+               margin-top: calc(0px - fl(45, 32));
+               z-index: 1;
+
+               @include desktop {
+                  margin-top: -32px;
+               }
+
+               @include mobile {
+                  margin-top: -20px;
+               }
+            }
+
+            &_img {
+               display: block;
+               width: fl(70, 56);
+               height: fl(70, 56);
+               border-radius: fl(12, 8);
+               flex-shrink: 0;
+
+               @include desktop {
+                  border-radius: 8px;
+                  width: 56px;
+                  height: 56px;
+               }
+
+               @include mobile {
+                  border-radius: 6px;
+                  width: 44px;
+                  height: 44px;
+               }
+
+               img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+               }
+            }
+
+            &_content {
+               display: flex;
+               align-items: center;
+               column-gap: fl(16, 12);
+
+               @include desktop {
+                  column-gap: 12px;
+               }
+
+               &_icon {
+                  display: block;
+                  width: fl(8, 6);
+                  height: fl(8, 6);
+                  border-radius: 2px;
+                  background: #34C759;
+
+                  @include desktop {
+                     width: 6px;
+                     height: 6px;
+                  }
+               }
+
+               &_text {
+                  color: #080808;
+                  
+                  font-size: fl(22, 16);
+                  font-style: normal;
+                  font-weight: 400;
+                  line-height: normal;
+
+                  @include desktop {
+                     font-size: 16px;
+                  }
+
+                  @include mobile {
+                     font-size: 12px;
+                     line-height: 18px;
+                  }
+               }
+            }
+         }
+      }
+
+      &_btn_block {
+         display: flex;
+         justify-content: center;
+         margin-top: fl(24, 16);
+
+         @include desktop {
+            margin-top: 16px;
+         }
+      }
+
+      &_btn {}
+   }
+
+   &_bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: auto;
+      user-select: none;
+      pointer-events: none;
+      z-index: -1;
+
+      @include tablet {
+         display: none;
+      }
+
+      img,
+      svg {
+         display: block;
+         width: 100%;
+         height: auto;
+      }
+   }
+}

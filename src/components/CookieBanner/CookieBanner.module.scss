@@ -1,0 +1,104 @@
+@use '@/scss/media'as *;
+@use '@/scss/variables'as *;
+@use '@/scss/mixins'as *;
+
+.banner {
+   position: fixed;
+   left: 20px;
+   bottom: 20px;
+   z-index: 101;
+   display: flex;
+   pointer-events: none;
+   width: 100%;
+   max-width: fl(900, 700);
+
+   @include desktop {
+      max-width: 700px;
+   }
+
+   @include tablet {
+      max-width: 736px;
+      left: 16px;
+   }
+
+   @include mobile {
+      max-width: calc(100% - 32px);
+   }
+}
+
+.banner__card {
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   column-gap: 24px;
+   padding: fl(24, 16) fl(30, 20);
+   border-radius: 14px;
+   background: rgba(255, 255, 255, 0.98);
+   box-shadow: 0 20px 60px rgba(8, 8, 8, 0.12);
+   pointer-events: auto;
+   backdrop-filter: blur(10px);
+   animation: cookie-banner-show 0.6s ease;
+
+   @include desktop {
+      padding: 16px 20px;
+   }
+
+   @include tablet {
+      column-gap: 16px;
+   }
+
+   @include mobile {
+      flex-direction: column;
+      row-gap: 12px;
+   }
+}
+
+.banner__text {
+   @include mediumText;
+   color: #9C9C9C;
+   text-wrap: balance;
+
+   @include mobile {
+      text-wrap: unset;
+   }
+}
+
+.banner__accent {
+   color: #4353ff;
+   transition: .4s;
+
+   @include hover {
+      opacity: .7;
+   }
+}
+
+@keyframes cookie-banner-show {
+   from {
+      opacity: 0;
+      transform: translateY(12px);
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+   }
+}
+
+.banner_btns {
+   display: flex;
+   column-gap: 10px;
+
+   @include mobile {
+      width: 100%;
+      max-width: 100%;
+   }
+
+}
+
+.banner__button {
+   @include mobile {
+      width: 100%;
+      max-width: 50%;
+   }
+}

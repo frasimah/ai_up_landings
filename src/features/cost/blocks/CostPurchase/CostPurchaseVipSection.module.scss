@@ -1,0 +1,248 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+.cost_purchase {
+  @include mt;
+
+  &_wrap {
+    &_main {
+      display: flex;
+      flex-direction: column;
+      row-gap: fl(40, 30);
+      justify-content: space-between;
+      height: 100%;
+
+      @include desktop {
+        row-gap: 30px;
+      }
+
+      @include tablet {
+        row-gap: 16px;
+      }
+
+      &_title {
+        @include h3;
+        color: $black;
+        text-wrap: balance;
+      }
+
+      &_bottom {
+        display: flex;
+        flex-direction: column;
+        row-gap: fl(24, 12);
+        text-wrap: balance;
+
+        @include desktop {
+          row-gap: 16px;
+        }
+
+        @include tablet {
+          row-gap: 12px;
+        }
+
+        &_text {
+          @include largeText;
+          color: #9c9c9c;
+        }
+      }
+    }
+
+    &_tables {
+      @include tablet {
+        margin-top: 24px;
+      }
+    }
+
+    &_table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 14px 14px 0 0;
+      overflow: hidden;
+
+      @include tablet {
+        border-radius: 8px 8px 0 0;
+      }
+
+      thead {
+        th {
+          background: #e6f1ff;
+          text-align: left;
+          padding: fl(24, 16) fl(40, 24);
+          border-right: 2px solid #fff;
+          @include largeText;
+          color: #0169f9;
+
+          @include desktop {
+            padding: 16px 24px;
+          }
+
+          @include tablet {
+            padding: 14px 16px;
+          }
+
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      tbody {
+        td {
+          background: #ebebeb;
+          padding: fl(22, 16) fl(40, 24);
+          border-top: 2px solid #fff;
+          border-right: 2px solid #fff;
+          @include mediumText;
+          color: $black;
+
+          @include desktop {
+            padding: 16px 24px;
+          }
+
+          @include tablet {
+            padding: 10px 16px;
+          }
+
+          &:last-child {
+            border-right: 0;
+          }
+        }
+      }
+
+      &_vip {
+        border-radius: 0;
+        border-spacing: 3px;
+        margin-top: -4px;
+
+        tbody {
+          td {
+            border-top: unset;
+            border-right: unset;
+
+            &:last-child {
+              border-right: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &_vip {
+      position: relative;
+      padding: 4px 3px 4px;
+      padding-right: 4px;
+      background: linear-gradient(90deg, #2f2520 0%, #7d604c 100%);
+      border-radius: 0 0 14px 14px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      @include tablet {
+        padding: 4px 3px 4px;
+        padding-right: 4px;
+        border-radius: 0 0 8px 8px;
+      }
+
+      td {
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+
+        &::after {
+          content: "";
+          position: absolute;
+          inset: 0 -55%;
+          z-index: 1;
+          pointer-events: none;
+          background: linear-gradient(110deg,
+              transparent 0%,
+              transparent 18%,
+              rgba(255, 255, 255, 0.06) 32%,
+              rgba(255, 232, 174, 0.42) 50%,
+              rgba(255, 255, 255, 0.08) 68%,
+              transparent 82%,
+              transparent 100%);
+          transform: translateX(-110%);
+          animation: vipCellShine 12s ease-in-out infinite;
+          will-change: transform;
+        }
+
+        span {
+          position: relative;
+          z-index: 2;
+        }
+      }
+    }
+  }
+}
+
+.vipRow {
+  td {
+    background: rgba(255, 255, 255, 0.10) !important;
+    backdrop-filter: blur(50px);
+    position: relative;
+
+    span {
+      background: var(--Linear, linear-gradient(90deg, #FAE4B5 0%, #FDDAA6 16.05%, #EFD071 38.38%));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  &:last-child {
+    td:first-child {
+      border-bottom-left-radius: 12px;
+
+      @include tablet {
+        border-bottom-left-radius: 6px;
+      }
+    }
+
+    td:last-child {
+      border-bottom-right-radius: 12px;
+
+      @include tablet {
+        border-bottom-right-radius: 6px;
+      }
+    }
+  }
+}
+
+@keyframes vipCellShine {
+
+  0%,
+  12% {
+    transform: translateX(-110%);
+  }
+
+  87%,
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cost_purchase_wrap_vip {
+    td::after {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

@@ -1,0 +1,96 @@
+@use "@/scss/media"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/variables"as *;
+
+.body {
+   background: $white;
+}
+
+.page {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background: $white;
+   padding-top: fl(172, 160);
+   padding-bottom: fl(180, 140);
+
+   @include desktop {
+      padding-top: 160px;
+      padding-bottom: 140px;
+   }
+
+   @include tablet {
+      padding-top: 96px;
+      padding-bottom: 60px;
+   }
+}
+
+.hero {
+   min-height: calc(100vh - 340px);
+   min-height: calc(100svh - 340px);
+   display: flex;
+   align-items: center;
+
+   @include tablet {
+      min-height: auto;
+   }
+}
+
+.heroContainer {
+   display: flex;
+   justify-content: center;
+}
+
+.heroContent {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   max-width: 1040px;
+   margin: 0 auto;
+   text-align: center;
+}
+
+.code {
+   margin: 0;
+   color: $black;
+   font-family: $gilroy;
+   font-size: clamp(5.5rem, 14vw, 9rem);
+   font-weight: 500;
+   line-height: 0.9;
+   letter-spacing: -0.06em;
+}
+
+.title {
+   @include h1;
+   color: $black;
+   margin: 18px 0 0;
+   text-wrap: balance;
+
+   @include tablet {
+      margin-top: 14px;
+   }
+}
+
+.text {
+   @include mediumText;
+   color: $dark-grey;
+   max-width: 52rem;
+   margin: 16px 0 0;
+
+   @include tablet {
+      margin-top: 12px;
+   }
+}
+
+.actions {
+   display: flex;
+   justify-content: center;
+   margin-top: 32px;
+
+   @include tablet {
+      width: 100%;
+      margin-top: 24px;
+   }
+}
