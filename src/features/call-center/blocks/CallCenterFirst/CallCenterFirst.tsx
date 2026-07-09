@@ -226,7 +226,7 @@ function CallCenterFirst() {
                ))}
             </div>
             <div className={`${styles.actions} ${styles.enter}`}>
-               <button type="button" className={styles.btnPrimary}>Заказать звонок</button>
+               <button type="button" className={styles.btnPrimary} data-lead-form>Заказать звонок</button>
                <button type="button" className={styles.btnGhost}>Написать в Telegram</button>
             </div>
             <p className={`${styles.note} ${styles.enter}`}>

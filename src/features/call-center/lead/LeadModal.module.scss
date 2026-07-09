@@ -1,0 +1,281 @@
+@use "@/scss/variables"as *;
+@use "@/scss/mixins"as *;
+@use "@/scss/media"as *;
+
+// Lead-capture popup. Visual language ported from the Figma reference
+// (node 2717:3176): centered white card over a blurred dark backdrop, 20px
+// radius, #F0F0F1 hairlines, 15px inputs. Site font (Gilroy) + our brand blue.
+// Two variants: with a package chooser (ROI, .wide) and form-only (other CTAs).
+
+// Brand tokens (our blue), so the popup matches the site — white surface but
+// our accent + button treatment, not the Figma reference #4280EF.
+$primary: #0169f9;        // --blue
+$primary-hover: #1f7dff;  // --blue-hover
+$hairline: #f0f0f1;
+$tint: #e6f1ff;           // --blue-tint
+$ink: #0d0d0d;
+
+.overlay {
+   position: fixed;
+   inset: 0;
+   z-index: 1000;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 24px 16px;
+   background: rgba(4, 10, 24, .55);
+   backdrop-filter: blur(10px);
+   -webkit-backdrop-filter: blur(10px);
+   overflow-y: auto;
+   animation: lm-fade .2s ease both;
+   // Portal renders under <body>, outside any font wrapper — pin the site font.
+   font-family: "Gilroy", sans-serif;
+}
+
+@keyframes lm-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lm-pop { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+
+.modal {
+   position: relative;
+   width: 100%;
+   max-width: 440px;
+   max-height: calc(100vh - 48px);
+   overflow-y: auto;
+   box-sizing: border-box;
+   padding: 30px 30px 28px;
+   border-radius: 20px;
+   background: #fff;
+   color: $ink;
+   box-shadow: 0 40px 90px rgba(0, 0, 0, .45);
+   animation: lm-pop .28s cubic-bezier(.2, .7, .2, 1) both;
+
+   @media (max-width: 520px) { padding: 24px 20px; border-radius: 18px; }
+
+   // With packages: wider two-column layout on desktop, fits without scrolling.
+   &.wide {
+      @media (min-width: 760px) { max-width: 760px; padding: 36px 40px 32px; }
+   }
+}
+
+// Body splits into two columns on desktop (packages | form); stacks on mobile.
+.body {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+
+   @media (min-width: 760px) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: start;
+   }
+}
+
+.colPackages, .colForm { min-width: 0; }
+
+.close {
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   width: 30px;
+   height: 30px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border: none;
+   border-radius: 9px;
+   background: #f5f5f5;
+   color: #777;
+   font-size: 20px;
+   line-height: 1;
+   cursor: pointer;
+   transition: background .2s, color .2s;
+
+   @include hover { background: #ececed; color: #333; }
+}
+
+.title {
+   margin: 0 34px 8px 0;
+   font-size: 22px;
+   font-weight: 600;
+   letter-spacing: -.01em;
+   color: $ink;
+}
+
+.subtitle {
+   margin: 0 0 20px;
+   font-size: 14px;
+   line-height: 20px;
+   color: rgba(0, 0, 0, .6);
+}
+
+.divider {
+   height: 1px;
+   background: $hairline;
+   margin: 0 0 18px;
+}
+
+.groupLabel {
+   font-size: 13px;
+   font-weight: 600;
+   color: $ink;
+   margin-bottom: 10px;
+}
+
+.packages {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.package {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   padding: 12px 14px;
+   border: 1px solid $hairline;
+   border-radius: 15px;
+   background: #fff;
+   text-align: left;
+   cursor: pointer;
+   transition: border-color .2s, background .2s;
+
+   @include hover { border-color: rgba(66, 128, 239, .5); }
+
+   &.selected { border-color: $primary; background: $tint; }
+}
+
+.radio {
+   flex-shrink: 0;
+   width: 18px;
+   height: 18px;
+   border-radius: 50%;
+   border: 2px solid #cfd3da;
+   position: relative;
+   transition: border-color .2s;
+
+   .selected & {
+      border-color: $primary;
+      &::after {
+         content: "";
+         position: absolute;
+         inset: 3px;
+         border-radius: 50%;
+         background: $primary;
+      }
+   }
+}
+
+.pkgBody { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+
+.pkgTotal {
+   display: block;
+   font-size: 15px;
+   font-weight: 600;
+   color: $ink;
+}
+
+.pkgMeta {
+   display: block;
+   font-size: 13px;
+   color: rgba(0, 0, 0, .5);
+   margin-top: 2px;
+}
+
+.pkgPrice {
+   flex-shrink: 0;
+   font-size: 13px;
+   font-weight: 600;
+   color: $primary;
+   white-space: nowrap;
+}
+
+.fields {
+   display: flex;
+   flex-direction: column;
+   gap: 14px;
+}
+
+.field {
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+
+   label { font-size: 13px; color: rgba(0, 0, 0, .6); }
+
+   input {
+      width: 100%;
+      box-sizing: border-box;
+      height: 48px;
+      padding: 0 15px;
+      border: 1px solid $hairline;
+      border-radius: 15px;
+      background: #fff;
+      color: $ink;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s;
+
+      &::placeholder { color: rgba(0, 0, 0, .3); }
+      &:focus { border-color: $primary; }
+   }
+
+   &.invalid input { border-color: #ff3c70; }
+}
+
+// Same treatment as the site's primary CTA (CallCenterFirst .btnPrimary):
+// brand blue, cta glow, hover lift with bounce easing.
+.submit {
+   width: 100%;
+   height: 50px;
+   margin-top: 20px;
+   border: none;
+   border-radius: 14px;
+   background: $primary;
+   color: #fff;
+   font-family: inherit;
+   font-size: 15px;
+   font-weight: 600;
+   cursor: pointer;
+   box-shadow: 0 16px 36px rgba(1, 105, 249, .4);
+   transition: background .3s cubic-bezier(.34, 2.56, .64, 1), transform .3s cubic-bezier(.34, 2.56, .64, 1), box-shadow .3s cubic-bezier(.34, 2.56, .64, 1);
+
+   @include hover {
+      background: $primary-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 20px 44px rgba(1, 105, 249, .5);
+   }
+
+   &:disabled { opacity: .6; cursor: default; box-shadow: none; }
+}
+
+.consent {
+   margin: 12px 0 0;
+   text-align: center;
+   font-size: 12px;
+   line-height: 17px;
+   color: rgba(0, 0, 0, .45);
+}
+
+.success {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-align: center;
+   gap: 14px;
+   padding: 18px 0 8px;
+
+   .successIcon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(52, 199, 89, .14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   h3 { margin: 0; font-size: 22px; font-weight: 600; color: $ink; }
+   p { margin: 0; font-size: 14px; line-height: 21px; color: rgba(0, 0, 0, .6); }
+}

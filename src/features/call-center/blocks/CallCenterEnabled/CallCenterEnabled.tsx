@@ -66,7 +66,7 @@ function CallCenterEnabled() {
                ))}
             </div>
             <div className={styles.cta}>
-               <button type="button" className={styles.ctaBtn}>Включить колл-центр</button>
+               <button type="button" className={styles.ctaBtn} data-lead-form>Включить колл-центр</button>
             </div>
          </div>
       </section>

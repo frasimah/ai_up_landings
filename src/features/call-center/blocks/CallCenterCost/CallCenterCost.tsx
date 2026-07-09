@@ -132,7 +132,7 @@ function CallCenterCost() {
                      </div>
                      <div className={styles.rule} />
                      <span className={styles.cpl}>CPL для вас: {t.cpl}</span>
-                     <button type="button" className={styles.cardBtn}>{t.cta}</button>
+                     <button type="button" className={styles.cardBtn} data-lead-form>{t.cta}</button>
                   </div>
                ))}
             </div>

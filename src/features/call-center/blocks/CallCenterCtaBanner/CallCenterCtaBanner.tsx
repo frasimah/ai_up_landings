@@ -44,7 +44,7 @@ function CallCenterCtaBanner({ title, lead, button, glow = "left", label, varian
                      <h2 className={styles.centeredTitle}>{title}</h2>
                      <p className={styles.centeredLead}>{lead}</p>
                   </div>
-                  <button type="button" className={styles.centeredBtn}>{button}</button>
+                  <button type="button" className={styles.centeredBtn} data-lead-form>{button}</button>
                </div>
             </div>
          </section>
@@ -58,7 +58,7 @@ function CallCenterCtaBanner({ title, lead, button, glow = "left", label, varian
             <h2 className={styles.title}>{title}</h2>
             <div className={styles.aside}>
                <p className={styles.lead}>{lead}</p>
-               <button type="button" className={styles.btn}>{button}</button>
+               <button type="button" className={styles.btn} data-lead-form>{button}</button>
             </div>
          </div>
       </section>

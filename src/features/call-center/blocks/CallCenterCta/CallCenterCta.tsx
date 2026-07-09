@@ -36,7 +36,7 @@ function CallCenterCta() {
                   <h2 className={styles.title}>Готовы посмотреть потенциал в вашей нише?</h2>
                   <p className={styles.subtitle}>Бесплатный 30-минутный аудит —<br />без обязательств</p>
                </div>
-               <button type="button" className={styles.btn}>Заказать звонок</button>
+               <button type="button" className={styles.btn} data-lead-form>Заказать звонок</button>
             </div>
          </div>
       </section>

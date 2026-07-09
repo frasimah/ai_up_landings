@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./CallCenterRoi.module.scss";
+import LeadModal, { PackageId } from "../../lead/LeadModal";
 
 // Section 09 — ROI-калькулятор.
 // Пакеты (финальные цены): 500 000 ₽ → 6 500 контактов (75 ₽/шт),
@@ -19,6 +20,11 @@ function CallCenterRoi() {
    const [contacts, setContacts] = useState(6500);
    const [check, setCheck] = useState(60000);
    const [conv, setConv] = useState(6);
+   const [modalOpen, setModalOpen] = useState(false);
+
+   // Pre-select the package whose contact tier the slider currently sits in
+   // (midpoints between 6 500 / 14 000 / 30 000).
+   const initialPkg: PackageId = contacts <= 10250 ? "start" : contacts <= 22000 ? "growth" : "max";
 
    const price = ppi(contacts);
    const serviceCost = contacts * price;
@@ -91,10 +97,12 @@ function CallCenterRoi() {
                         <div className={styles.metricValue}>{fmt(profit)} ₽</div>
                      </div>
                   </div>
-                  <button type="button" className={styles.cta}>Получить расчёт под нишу</button>
+                  <button type="button" className={styles.cta} onClick={() => setModalOpen(true)}>Получить расчёт под нишу</button>
                </div>
             </div>
          </div>
+
+         <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} initialPackage={initialPkg} />
       </section>
    );
 }

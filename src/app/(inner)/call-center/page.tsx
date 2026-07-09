@@ -18,6 +18,7 @@ import CallCenterSenior from "@/features/call-center/blocks/CallCenterSenior/Cal
 import CallCenterSources from "@/features/call-center/blocks/CallCenterSources/CallCenterSources";
 import CallCenterTimeline from "@/features/call-center/blocks/CallCenterTimeline/CallCenterTimeline";
 import CallCenterTransparency from "@/features/call-center/blocks/CallCenterTransparency/CallCenterTransparency";
+import LeadFormProvider from "@/features/call-center/lead/LeadFormProvider";
 import { buildPageMetadata, getResolvedPageData } from "@/lib/pageSeo";
 import { buildCallCenterPageStructuredData } from "@/lib/siteStructuredData";
 
@@ -59,6 +60,7 @@ export default async function CallCenter() {
       <CallCenterRoi />
       <CallCenterLegal />
       <PageSeoBottomContent html={pageData.bottomContentHtml} collapsible />
+      <LeadFormProvider />
     </main>
   );
 }
