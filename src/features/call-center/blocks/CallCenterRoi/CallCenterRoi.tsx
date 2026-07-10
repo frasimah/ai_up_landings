@@ -14,10 +14,14 @@ const ppi = (q: number) => (q <= 6500 ? 75 : q <= 14000 ? 71 : 66);
 // Стоимость услуги = цена купленного тарифа (фикс), а не контакты×ставка:
 // 500 000 ₽ → до 6 500, 1 000 000 ₽ → до 14 000, 2 000 000 ₽ → до 30 000.
 const tariff = (q: number) => (q <= 6500 ? 500000 : q <= 14000 ? 1000000 : 2000000);
+// Ползунок контактов останавливается ровно на объёмах тарифов — промежуточных
+// значений нет, иначе платишь за целый тариф, а контактов почти как в базовом.
+const TIERS = [6500, 14000, 30000];
 const fmt = (n: number) => Math.round(n).toLocaleString("ru-RU");
 
 function CallCenterRoi() {
-   const [contacts, setContacts] = useState(6500);
+   const [tierIdx, setTierIdx] = useState(0);
+   const contacts = TIERS[tierIdx];
    const [check, setCheck] = useState(60000);
    const [conv, setConv] = useState(6);
    const [modalOpen, setModalOpen] = useState(false);
@@ -51,8 +55,8 @@ function CallCenterRoi() {
                         <span className={styles.label}>Контактов в месяц</span>
                         <span className={styles.value}>{contacts.toLocaleString("ru-RU")}</span>
                      </div>
-                     <input className={styles.range} type="range" min={6500} max={30000} step={100} value={contacts} onChange={(e) => setContacts(+e.target.value)} />
-                     <div className={styles.ends}><span>6 500</span><span>30 000</span></div>
+                     <input className={styles.range} type="range" min={0} max={2} step={1} value={tierIdx} onChange={(e) => setTierIdx(+e.target.value)} />
+                     <div className={styles.ends}><span>6 500</span><span>14 000</span><span>30 000</span></div>
                   </div>
 
                   <div className={styles.control}>
