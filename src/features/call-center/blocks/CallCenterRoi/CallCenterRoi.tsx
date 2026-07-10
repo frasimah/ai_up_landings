@@ -11,6 +11,9 @@ import LeadModal, { PackageId } from "../../lead/LeadModal";
 //   1 000 000 ₽ → до 14 000 контактов → 71 ₽/контакт
 //   2 000 000 ₽ → до 30 000 контактов → 66 ₽/контакт
 const ppi = (q: number) => (q <= 6500 ? 75 : q <= 14000 ? 71 : 66);
+// Стоимость услуги = цена купленного тарифа (фикс), а не контакты×ставка:
+// 500 000 ₽ → до 6 500, 1 000 000 ₽ → до 14 000, 2 000 000 ₽ → до 30 000.
+const tariff = (q: number) => (q <= 6500 ? 500000 : q <= 14000 ? 1000000 : 2000000);
 const fmt = (n: number) => Math.round(n).toLocaleString("ru-RU");
 
 function CallCenterRoi() {
@@ -23,7 +26,7 @@ function CallCenterRoi() {
    const initialPkg: PackageId = contacts <= 6500 ? "start" : contacts <= 14000 ? "growth" : "max";
 
    const price = ppi(contacts);
-   const serviceCost = contacts * price;
+   const serviceCost = tariff(contacts);
    // ~8% контактов в среднем становятся квал. лидом; конверсия в продажу берётся уже от них.
    const quals = contacts * 0.08;
    const sales = Math.round(quals * (conv / 100));
