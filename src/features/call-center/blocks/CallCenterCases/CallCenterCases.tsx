@@ -15,11 +15,13 @@ type CaseCard = {
    tab: string;
    eyebrow: string;
    title: string;
-   render: { src: string; alt: string; w: number };
+   render?: { src: string; alt: string; w: number };
    rows: Stat[][];
    quote: string;
-   avatar: string;
-   author: string;
+   avatar?: string;
+   initials?: string;
+   author?: string;
+   href?: string;
 };
 
 const CASES: CaseCard[] = [
@@ -49,12 +51,34 @@ const CASES: CaseCard[] = [
       avatar: "/img/call-center/cases/avatar-realtor.png",
       author: "Илья Королёв, партнёр застройщика",
    },
+   {
+      tab: "Ремонт квартир",
+      eyebrow: "Кейс 3: Ремонт квартир · Москва",
+      title: "230 квал. лидов за месяц",
+      render: { src: "/img/call-center/cases/renovation.png", alt: "", w: 150 },
+      rows: [
+         [{ value: "172 400 ₽", label: "бюджет" }, { value: "2,52 млн ₽", label: "выручка" }],
+         [{ value: "2 800 ₽ → 380 ₽", label: "(×7 дешевле) CPL снизился" }, { value: "×24,7", label: "ROI" }],
+      ],
+      quote: "«Мне нужно 8–10 сделок, а при увеличении бюджета CPL вырастает до 3 500 и конверсия падает»",
+      href: "https://ai-up.ru/blog/kejs-remont-kvartir-230-kvalificirovannyh-lidov-za-mesyac-pri-cpl-380-russian-ruble",
+   },
 ];
 
 function CallCenterCases() {
    const sectionRef = useRef<HTMLElement | null>(null);
    const [shown, setShown] = useState(false);
    const [active, setActive] = useState(0);
+   const sliderRef = useRef<HTMLDivElement | null>(null);
+
+   // Desktop slider: arrows scroll the track by one card so any number of cases fits.
+   const scrollByCard = (dir: number) => {
+      const el = sliderRef.current;
+      if (!el) return;
+      const card = el.querySelector("article");
+      const step = card ? card.getBoundingClientRect().width + 24 : el.clientWidth;
+      el.scrollBy({ left: dir * step, behavior: "smooth" });
+   };
 
    useEffect(() => {
       const node = sectionRef.current;
@@ -90,7 +114,7 @@ function CallCenterCases() {
                ))}
             </div>
 
-            <div className={styles.grid}>
+            <div className={styles.grid} ref={sliderRef}>
                {CASES.map((c, i) => (
                   <article
                      key={c.title}
@@ -106,7 +130,7 @@ function CallCenterCases() {
                            </div>
                            <h3 className={styles.cardTitle}>{c.title}</h3>
                         </div>
-                        <img className={styles.render} src={c.render.src} alt={c.render.alt} style={{ width: c.render.w }} aria-hidden />
+                        {c.render && <img className={styles.render} src={c.render.src} alt={c.render.alt} style={{ width: c.render.w }} aria-hidden />}
                      </div>
 
                      <div className={styles.stats}>
@@ -124,27 +148,36 @@ function CallCenterCases() {
 
                      <div className={styles.quoteRow}>
                         <p className={styles.quote}>{c.quote}</p>
-                        <span className={styles.divider} aria-hidden />
-                        <div className={styles.person}>
-                           <span className={styles.avatar}>
-                              <img src={c.avatar} alt="" aria-hidden />
-                           </span>
-                           <span className={styles.author}>{c.author}</span>
-                        </div>
+                        {c.author && (
+                           <>
+                              <span className={styles.divider} aria-hidden />
+                              <div className={styles.person}>
+                                 <span className={styles.avatar}>
+                                    {c.initials && <span className={styles.avatarText}>{c.initials}</span>}
+                                    {c.avatar && <img className={styles.avatarImg} src={c.avatar} alt="" aria-hidden />}
+                                 </span>
+                                 <span className={styles.author}>{c.author}</span>
+                              </div>
+                           </>
+                        )}
                      </div>
 
-                     <button type="button" className={styles.readBtn}>Читать кейс</button>
+                     {c.href ? (
+                        <a href={c.href} target="_blank" rel="noopener noreferrer" className={styles.readBtn}>Читать кейс</a>
+                     ) : (
+                        <button type="button" className={styles.readBtn}>Читать кейс</button>
+                     )}
                   </article>
                ))}
             </div>
 
-            <div className={styles.nav} aria-hidden>
-               <button type="button" className={styles.navArrow} aria-label="Назад">
+            <div className={styles.nav}>
+               <button type="button" className={styles.navArrow} aria-label="Назад" onClick={() => scrollByCard(-1)}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                      <path d="M14 5l-7 7 7 7" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                </button>
-               <button type="button" className={styles.navArrow} aria-label="Вперёд">
+               <button type="button" className={styles.navArrow} aria-label="Вперёд" onClick={() => scrollByCard(1)}>
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                      <path d="M10 5l7 7-7 7" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

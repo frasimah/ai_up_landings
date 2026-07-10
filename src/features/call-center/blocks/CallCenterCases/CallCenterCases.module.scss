@@ -82,16 +82,26 @@
    color: #fff;
 }
 
+// Horizontal slider — 2 cards visible on desktop, 1 on tablet, arrows page it.
+// Any number of cases fits without breaking the layout.
 .grid {
-   display: grid;
-   grid-template-columns: 1fr 1fr;
+   display: flex;
    gap: 24px;
+   overflow-x: auto;
+   scroll-snap-type: x mandatory;
+   -webkit-overflow-scrolling: touch;
+   scrollbar-width: none;
 
-   @media (max-width: 980px) { grid-template-columns: 1fr; }
+   &::-webkit-scrollbar { display: none; }
+
+   // Phones: tabs swap a single card in place (no scroll).
+   @media (max-width: 768px) { display: block; overflow: visible; }
 }
 
 .card {
    position: relative;
+   flex: 0 0 calc((100% - 24px) / 2);
+   scroll-snap-align: start;
    display: flex;
    flex-direction: column;
    gap: 40px;
@@ -101,13 +111,16 @@
    border: 1px solid #0c2554;
    overflow: hidden;
    opacity: 0;
-   transform: translateY(30px);
-   transition: opacity .7s var(--ease-smooth, ease), transform .7s var(--ease-smooth, ease);
+   // Opacity-only entrance — transforms on scroll-snap children break WebKit snap.
+   transition: opacity .7s var(--ease-smooth, ease);
+
+   // Tablet: one card per view in the slider.
+   @media (min-width: 769px) and (max-width: 1100px) { flex-basis: 100%; }
 
    @include tablet { padding: 28px 22px; gap: 28px; }
 
    // Phones: only the active case is shown; tabs swap it (no scrolling, no jump).
-   @media (max-width: 768px) { display: none; }
+   @media (max-width: 768px) { display: none; flex-basis: auto; }
 }
 
 .cardActive {
@@ -116,7 +129,6 @@
 
 .in {
    opacity: 1;
-   transform: translateY(0);
 }
 
 .cardGrid {
@@ -282,18 +294,35 @@
 }
 
 .avatar {
+   position: relative;
    width: 50px;
    height: 50px;
    border-radius: 50%;
    overflow: hidden;
    background: #fff;
    flex-shrink: 0;
+}
 
-   img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-   }
+.avatarImg {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+// Initials — sit behind the photo, so they also cover a missing/broken avatar.
+.avatarText {
+   position: absolute;
+   inset: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: var(--blue, #0169f9);
+   color: #fff;
+   font-weight: 700;
+   font-size: 17px;
+   letter-spacing: .02em;
 }
 
 .author {
@@ -330,45 +359,54 @@
    }
 }
 
+// Exactly the hero "Написать в Telegram" ghost button (CallCenterFirst .btnGhost),
+// just centered under the cases.
 .blogBtn {
-   display: block;
+   @include mediumText;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: max-content;
    margin: 32px auto 0;
+   padding: fl(18, 14) fl(22, 18);
+   border-radius: fl(20, 14);
+   border: 1px solid rgba(255, 255, 255, .22);
+   background: rgba(255, 255, 255, .05);
+   color: #fff;
+   font-weight: 600;
+   cursor: pointer;
+   transition: all .3s var(--ease-smooth);
 
    @media (max-width: 768px) { display: none; }
-   padding: 17px 22px 19px;
-   border-radius: 20px;
-   border: 2px solid #fff;
-   background: transparent;
-   color: #fff;
-   font-size: 20px;
-   line-height: 28px;
-   font-weight: 500;
-   cursor: pointer;
-   transition: background .2s ease, color .2s ease;
+   @include desktop { padding: 14px 18px; border-radius: 14px; }
+   @include tablet { padding: 10px 16px; border-radius: 10px; }
 
-   &:hover {
-      background: #fff;
-      color: #080808;
+   @include hover {
+      background: rgba(255, 255, 255, .1);
+      border-color: rgba(255, 255, 255, .4);
    }
 }
 
+// "Читать кейс" — a light underlined text link (not a pill button): smaller, more elegant.
 .readBtn {
    align-self: flex-start;
-   padding: 17px 22px 19px;
+   display: inline-flex;
+   align-items: center;
+   padding: 0;
+   border: none;
+   background: none;
+   color: #fff;
+   font-family: inherit;
+   font-size: 16px;
+   line-height: 22px;
+   font-weight: 600;
+   text-decoration: underline;
+   text-underline-offset: 4px;
+   text-decoration-thickness: 1px;
+   cursor: pointer;
+   transition: color .2s ease;
 
    @media (max-width: 768px) { display: none; }
-   border-radius: 20px;
-   border: 1px solid #fff;
-   background: transparent;
-   color: #fff;
-   font-size: 20px;
-   line-height: 28px;
-   font-weight: 500;
-   cursor: pointer;
-   transition: background .2s ease, color .2s ease;
 
-   &:hover {
-      background: #fff;
-      color: #080808;
-   }
+   &:hover { color: var(--tech-blue-300, #9fcbff); }
 }

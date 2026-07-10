@@ -5,15 +5,12 @@ import styles from "./CallCenterRoi.module.scss";
 import LeadModal, { PackageId } from "../../lead/LeadModal";
 
 // Section 09 — ROI-калькулятор.
-// Пакеты (финальные цены): 500 000 ₽ → 6 500 контактов (75 ₽/шт),
-// 1 000 000 ₽ → 14 000 (71 ₽/шт), 2 000 000 ₽ → 30 000 (66 ₽/шт).
-// Между пакетными точками цена за контакт интерполируется линейно и
-// округляется до рубля — в опорных точках даёт ровно 75/71/66.
-const ppi = (q: number) => {
-   if (q <= 6500) return 75;
-   if (q <= 14000) return Math.round(75 - ((q - 6500) / (14000 - 6500)) * 4);
-   return Math.round(71 - ((q - 14000) / (30000 - 14000)) * 5);
-};
+// Цена за контакт задаётся ТАРИФОМ (пакетом), а не плавно по объёму — промежуточных
+// значений (72/73/74) нет, клиент покупает готовый пакет:
+//   500 000 ₽ → до 6 500 контактов → 75 ₽/контакт
+//   1 000 000 ₽ → до 14 000 контактов → 71 ₽/контакт
+//   2 000 000 ₽ → до 30 000 контактов → 66 ₽/контакт
+const ppi = (q: number) => (q <= 6500 ? 75 : q <= 14000 ? 71 : 66);
 const fmt = (n: number) => Math.round(n).toLocaleString("ru-RU");
 
 function CallCenterRoi() {
@@ -22,14 +19,13 @@ function CallCenterRoi() {
    const [conv, setConv] = useState(6);
    const [modalOpen, setModalOpen] = useState(false);
 
-   // Pre-select the package whose contact tier the slider currently sits in
-   // (midpoints between 6 500 / 14 000 / 30 000).
-   const initialPkg: PackageId = contacts <= 10250 ? "start" : contacts <= 22000 ? "growth" : "max";
+   // Pre-select the package by tariff tier (same 6 500 / 14 000 boundaries as the price).
+   const initialPkg: PackageId = contacts <= 6500 ? "start" : contacts <= 14000 ? "growth" : "max";
 
    const price = ppi(contacts);
    const serviceCost = contacts * price;
-   // ~10% контактов в среднем становятся квал. лидом; конверсия в продажу берётся уже от них.
-   const quals = contacts * 0.1;
+   // ~8% контактов в среднем становятся квал. лидом; конверсия в продажу берётся уже от них.
+   const quals = contacts * 0.08;
    const sales = Math.round(quals * (conv / 100));
    const revenue = sales * check;
    const profit = revenue - serviceCost;
@@ -42,7 +38,7 @@ function CallCenterRoi() {
             <div className={styles.head}>
                <div className={styles.eyebrow}><span />экономика</div>
                <h2 className={styles.title}>Посмотрите свою экономику за 60 секунд</h2>
-               <p className={styles.lead}>Подвигайте ползунки под свою нишу — расчёт обновляется в реальном времени. Цена за контакт зависит от объёма</p>
+               <p className={styles.lead}>Подвигайте ползунки под свою нишу — расчёт обновляется в реальном времени. Цена за контакт зависит от тарифа</p>
             </div>
 
             <div className={styles.grid}>
@@ -74,7 +70,7 @@ function CallCenterRoi() {
                      <div className={styles.ends}><span>1%</span><span>30%</span></div>
                   </div>
 
-                  <p className={styles.subnote}>Цена за контакт по объёму: {price} ₽ · квал. лидов ≈ {fmt(quals)} · продаж в месяц ≈ {fmt(sales)}</p>
+                  <p className={styles.subnote}>Тариф: {price} ₽ за контакт · из {contacts.toLocaleString("ru-RU")} контактов ≈8% в квал. лид = {fmt(quals)} · из них {conv}% в продажу = {fmt(sales)}</p>
                </div>
 
                <div className={styles.results}>
