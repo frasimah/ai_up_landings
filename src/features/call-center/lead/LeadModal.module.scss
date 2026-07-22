@@ -247,6 +247,8 @@ $ink: #0d0d0d;
       box-shadow: 0 20px 44px rgba(1, 105, 249, .5);
    }
 
+   &:active:not(:disabled) { transform: scale(.97); }
+
    &:disabled { opacity: .6; cursor: default; box-shadow: none; }
 }
 

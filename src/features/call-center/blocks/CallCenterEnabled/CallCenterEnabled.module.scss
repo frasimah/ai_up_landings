@@ -135,10 +135,12 @@
    font-weight: 600;
    cursor: pointer;
    box-shadow: 0 16px 36px rgba(1, 105, 249, .34);
-   transition: all .3s var(--ease-bounce);
+   transition: transform .3s var(--ease-bounce), background .3s var(--ease-bounce), box-shadow .3s var(--ease-bounce);
 
    @include desktop { padding: 14px 18px; border-radius: 14px; }
    @include tablet { padding: 10px 16px; border-radius: 10px; gap: 8px; }
 
    @include hover { background: var(--blue-hover); transform: translateY(-2px); }
+
+   &:active { transform: scale(.97); }
 }

@@ -154,9 +154,11 @@
    font-weight: 600;
    cursor: pointer;
    box-shadow: 0 14px 30px rgba(1, 105, 249, .34);
-   transition: all .3s var(--ease-smooth);
+   transition: transform .3s var(--ease-smooth), background .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth);
 
    @include hover { background: var(--blue-hover); }
+
+   &:active { transform: scale(.97); }
 }
 
 .consent {

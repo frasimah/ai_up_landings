@@ -495,7 +495,7 @@
    font-weight: 600;
    cursor: pointer;
    box-shadow: var(--glow-cta);
-   transition: all .3s var(--ease-bounce);
+   transition: transform .3s var(--ease-bounce), background .3s var(--ease-bounce), box-shadow .3s var(--ease-bounce);
 
    @include desktop { padding: 14px 18px; border-radius: 14px; }
    @include tablet { padding: 10px 16px; border-radius: 10px; gap: 8px; }
@@ -505,6 +505,8 @@
       transform: translateY(-2px);
       box-shadow: 0 20px 44px rgba(1, 105, 249, .5);
    }
+
+   &:active { transform: scale(.97); }
 }
 
 .btnGhost {
@@ -519,7 +521,7 @@
    color: #fff;
    font-weight: 600;
    cursor: pointer;
-   transition: all .3s var(--ease-smooth);
+   transition: transform .3s var(--ease-smooth), background .3s var(--ease-smooth), border-color .3s var(--ease-smooth);
 
    @include desktop { padding: 14px 18px; border-radius: 14px; }
    @include tablet { padding: 10px 16px; border-radius: 10px; border-width: 1px; }
@@ -528,6 +530,8 @@
       background: rgba(255, 255, 255, .1);
       border-color: rgba(255, 255, 255, .4);
    }
+
+   &:active { transform: scale(.97); }
 }
 
 .note {

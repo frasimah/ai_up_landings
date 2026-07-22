@@ -351,12 +351,14 @@
    border: 1px solid rgba(255, 255, 255, .14);
    background: #0a1126;
    cursor: pointer;
-   transition: background .2s ease, border-color .2s ease;
+   transition: transform .2s var(--ease-smooth), background .2s ease, border-color .2s ease;
 
    &:hover {
       background: #111c3c;
       border-color: rgba(255, 255, 255, .28);
    }
+
+   &:active { transform: scale(.92); }
 }
 
 // Exactly the hero "Написать в Telegram" ghost button (CallCenterFirst .btnGhost),
@@ -375,7 +377,7 @@
    color: #fff;
    font-weight: 600;
    cursor: pointer;
-   transition: all .3s var(--ease-smooth);
+   transition: transform .3s var(--ease-smooth), background .3s var(--ease-smooth), border-color .3s var(--ease-smooth);
 
    @media (max-width: 768px) { display: none; }
    @include desktop { padding: 14px 18px; border-radius: 14px; }
@@ -385,6 +387,8 @@
       background: rgba(255, 255, 255, .1);
       border-color: rgba(255, 255, 255, .4);
    }
+
+   &:active { transform: scale(.97); }
 }
 
 // "Читать кейс" — a light underlined text link (not a pill button): smaller, more elegant.

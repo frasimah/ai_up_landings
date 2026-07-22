@@ -240,10 +240,12 @@
    align-items: center;
    justify-content: center;
    cursor: pointer;
-   transition: all .25s var(--ease-smooth);
+   transition: transform .25s var(--ease-smooth), background .25s var(--ease-smooth), border-color .25s var(--ease-smooth);
 
    @include hover {
       background: rgba(1, 105, 249, .18);
       border-color: rgba(1, 105, 249, .6);
    }
+
+   &:active { transform: scale(.92); }
 }
